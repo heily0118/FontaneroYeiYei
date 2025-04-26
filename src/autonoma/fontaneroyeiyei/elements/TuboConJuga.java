@@ -18,7 +18,7 @@ public class TuboConJuga extends Tubo implements Reparable{
 
     
     @Override
-    public void repara() {
+    public void reparar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
