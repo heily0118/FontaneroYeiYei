@@ -10,5 +10,5 @@ package autonoma.fontaneroyeiyei.elements;
  */
 public interface Reparable {
     
-    public abstract void rep();
+    public abstract void reparar();
 }
