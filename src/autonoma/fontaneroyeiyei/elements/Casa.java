@@ -4,10 +4,43 @@
  */
 package autonoma.fontaneroyeiyei.elements;
 
+import java.util.List;
+
 /**
  *
- * @author USUARIO
+ * @author Mateo Quintero Morales <mateo.quinterom@autonoma.edu.co>
+ * @since 20250425
+ * @version 1.0.0
  */
+
 public class Casa {
+
+    private List<Fuga> fugas;
+
+    
+    /////////////////////////////////
+    /// Constructor
+    ////
+    
+    
+    public Casa() {
+    }
+    
+    
+    //////////////////////////////////
+    /// Metodos
+    
+    public void generarFugasAleatorias(){
+    
+    }
+    
+    public void colocarHerramientas(){}
+    
+    public boolean verificarEstadoCasa(){
+    
+    return false;}
+    
+    
+    
     
 }
