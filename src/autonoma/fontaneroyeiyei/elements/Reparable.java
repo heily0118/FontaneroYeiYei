@@ -8,6 +8,7 @@ package autonoma.fontaneroyeiyei.elements;
  *
  * @author USUARIO
  */
-public class Reparable {
+public interface Reparable {
     
+    public abstract void reparar();
 }

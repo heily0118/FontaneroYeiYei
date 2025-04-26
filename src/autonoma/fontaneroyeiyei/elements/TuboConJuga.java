@@ -6,8 +6,20 @@ package autonoma.fontaneroyeiyei.elements;
 
 /**
  *
- * @author USUARIO
+ * @author Mateo Quintero Morales <mateo.quinterom@autonoma.edu.co>
+ * @since 20250425
+ * @version 1.0.0
  */
-public class TuboConJuga {
+public class TuboConJuga extends Tubo implements Reparable{
+
+    public TuboConJuga(int posX, int posy, String estado) {
+        super(posX, posy, estado);
+    }
+
+    
+    @Override
+    public void reparar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
