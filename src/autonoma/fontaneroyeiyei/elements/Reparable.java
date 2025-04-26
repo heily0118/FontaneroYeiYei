@@ -6,7 +6,9 @@ package autonoma.fontaneroyeiyei.elements;
 
 /**
  *
- * @author USUARIO
+ * @author Mateo Quintero Morales <mateo.quinterom@autonoma.edu.co>
+ * @since 20250425
+ * @version 1.0.0
  */
 public interface Reparable {
     
