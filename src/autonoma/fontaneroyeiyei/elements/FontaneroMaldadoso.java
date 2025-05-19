@@ -5,9 +5,11 @@
 package autonoma.fontaneroyeiyei.elements;
 
 /**
- *
- * @author USUARIO
+ * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
+ * @since 20250516
+ * @version 1.0.0
  */
+
 public class FontaneroMaldadoso {
     
 }

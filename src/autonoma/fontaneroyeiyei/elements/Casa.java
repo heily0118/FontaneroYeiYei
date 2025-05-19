@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Casa {
 
-    private List<Fuga> fugas;
 
     private List<Tubo> tubos;
     
@@ -32,9 +31,7 @@ public class Casa {
     //////////////////////////////////
     /// Metodos de acceso (get)
     ///
-    public List<Fuga> getFugas() {
-        return fugas;
-    }
+   
 
     public List<Tubo> getTubos() {
         return tubos;
@@ -45,9 +42,7 @@ public class Casa {
     //////////////////////////////////
     /// Metodos de acceso (set)
     ///
-    public void setFugas(List<Fuga> fugas) {
-        this.fugas = fugas;
-    }
+  
 
     public void setTubos(List<Tubo> tubos) {
         this.tubos = tubos;

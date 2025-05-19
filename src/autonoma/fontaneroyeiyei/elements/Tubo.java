@@ -7,9 +7,11 @@ package autonoma.fontaneroyeiyei.elements;
 import java.util.List;
 
 /**
- *
- * @author USUARIO
+ * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
+ * @since 20250516
+ * @version 1.0.0
  */
+
 public abstract class Tubo {
     
     
@@ -19,8 +21,7 @@ public abstract class Tubo {
     private int posX;
     private int posy;
     private String estado;
-    private List<Fuga> fugas;
-    
+  
     
     public Tubo(int posX, int posy, String estado) {
         this.posX = posX;
@@ -36,10 +37,7 @@ public abstract class Tubo {
         return posX;
     }
 
-    public List<Fuga> getFugas() {
-        return fugas;
-    }
-
+   
     public int getPosy() {
         return posy;
     }
@@ -65,8 +63,6 @@ public abstract class Tubo {
         this.estado = estado;
     }
     
-    public void setFugas(List<Fuga> fugas) {
-        this.fugas = fugas;
-    }
+  
     
 }

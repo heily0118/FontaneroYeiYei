@@ -5,11 +5,12 @@
 package autonoma.fontaneroyeiyei.elements;
 
 /**
- *
+ * 
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
- * @since 20250425
+ * @since 20250516
  * @version 1.0.0
  */
-public class Personaje {
+
+public class GestorJuego {
     
 }
