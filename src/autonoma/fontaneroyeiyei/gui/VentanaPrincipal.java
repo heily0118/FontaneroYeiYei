@@ -27,23 +27,23 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class VentanaPrincipal extends javax.swing.JFrame {
     
       private GestorJuego juego;
-      private Clip clip;
+     // private Clip clip;
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal(GestorJuego juego) {
             initComponents();
             this.juego = juego;
-            reproducirSonido();
+            //reproducirSonido();
             setTitle("Atrapa Comida");
             setSize(800, 800);
             setLocationRelativeTo(null);
             setResizable(false);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeyei/images/Logo.jpeg")).getImage());
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/Logo.jpeg")).getImage());
 
-            ImageIcon fondo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeyei/images/PortadaJuego.jpeg"));
+            ImageIcon fondo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/PortadaJuego.jpeg"));
 
             JPanel panelFondo = new JPanel() {
                 @Override
@@ -57,8 +57,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             botonJugar.setBounds(340, 600, 120, 40);
             estiloBoton(botonJugar);  // <- Aplicar estilo
             botonJugar.addActionListener(e -> {
-                pedirNombreJugador();
-                new VentanaInformacionJuego(this, true, juego,clip).setVisible(true);
+                //pedirNombreJugador();
+                new VentanaInformacionJuego(this, true, juego).setVisible(true);
                 dispose();
             });
 
@@ -91,17 +91,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   private void pedirNombreJugador() {
-            while (true) {
-            String nombre = JOptionPane.showInputDialog(this, "Ingresa tu nombre:");
-            if (nombre != null && !nombre.trim().isEmpty()) {
-              
-                break;
-            } else {
-                JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para continuar.");
-            }
-        }
-    }
+//   private void pedirNombreJugador() {
+//            while (true) {
+//            String nombre = JOptionPane.showInputDialog(this, "Ingresa tu nombre:");
+//            if (nombre != null && !nombre.trim().isEmpty()) {
+//              
+//                break;
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para continuar.");
+//            }
+//        }
+//    }
     
   
     private void estiloBoton(JButton boton) {
@@ -114,26 +114,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
 
-    public void reproducirSonido() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                    getClass().getResource("/autonoma/demoatrapacomida/sounds/Menu.wav"));
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    
-    public void detenerSonido() {
-        if (clip != null) {
-            clip.stop();
-            clip.close();
-        }
-    }
-    
+//    public void reproducirSonido() {
+//        try {
+//            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+//                    getClass().getResource("/autonoma/demoatrapacomida/sounds/Menu.wav"));
+//            clip = AudioSystem.getClip();
+//            clip.open(audioInputStream);
+//            clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    
+//    
+//    public void detenerSonido() {
+//        if (clip != null) {
+//            clip.stop();
+//            clip.close();
+//        }
+//    }
+//    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

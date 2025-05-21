@@ -13,17 +13,17 @@ import javax.sound.sampled.Clip;
  */
 public class VentanaInformacionJuego extends javax.swing.JDialog {
     private GestorJuego juego;
-    private Clip clip;    
+   // private Clip clip;    
 
     
     /**
      * Creates new form VentanaInformacionJuego
      */
-    public VentanaInformacionJuego(java.awt.Frame parent, boolean modal,GestorJuego juego, Clip clip) {
+    public VentanaInformacionJuego(java.awt.Frame parent, boolean modal,GestorJuego juego) {
         super(parent, modal);
         initComponents();
         this.juego = juego;
-        this.juego = juego;
+       
     }
 
     /**
