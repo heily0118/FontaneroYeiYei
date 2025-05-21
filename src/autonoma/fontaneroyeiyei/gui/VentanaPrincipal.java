@@ -4,17 +4,67 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 /**
  *
  * @author USUARIO
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
+      private GestorJuego juego;
+      private Clip clip;
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
-        initComponents();
+    public VentanaPrincipal(GestorJuego juego) {
+            initComponents();
+            this.juego = juego;
+            reproducirSonido();
+            setTitle("Atrapa Comida");
+            setSize(800, 800);
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeyei/images/Logo.jpeg")).getImage());
+
+            ImageIcon fondo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeyei/images/PortadaJuego.jpeg"));
+
+            JPanel panelFondo = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            panelFondo.setLayout(null);
+            JButton botonJugar = new JButton("Jugar");
+            botonJugar.setBounds(340, 600, 120, 40);
+            estiloBoton(botonJugar);  // <- Aplicar estilo
+            botonJugar.addActionListener(e -> {
+                pedirNombreJugador();
+                new VentanaInformacionJuego(this, true, juego,clip).setVisible(true);
+                dispose();
+            });
+
+            panelFondo.add(botonJugar);
+            setContentPane(panelFondo);
+        
     }
 
     /**
@@ -41,8 +91,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   private void pedirNombreJugador() {
+            while (true) {
+            String nombre = JOptionPane.showInputDialog(this, "Ingresa tu nombre:");
+            if (nombre != null && !nombre.trim().isEmpty()) {
+              
+                break;
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para continuar.");
+            }
+        }
+    }
+    
   
+    private void estiloBoton(JButton boton) {
+        boton.setForeground(Color.WHITE); 
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setOpaque(false);           
+        boton.setContentAreaFilled(false); 
+        boton.setBorderPainted(true);     
+        boton.setFocusPainted(false);     
+    }
+
+
+    public void reproducirSonido() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                    getClass().getResource("/autonoma/demoatrapacomida/sounds/Menu.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void detenerSonido() {
+        if (clip != null) {
+            clip.stop();
+            clip.close();
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

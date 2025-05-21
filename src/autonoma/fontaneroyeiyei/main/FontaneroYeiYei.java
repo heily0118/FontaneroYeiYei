@@ -4,6 +4,9 @@
  */
 package autonoma.fontaneroyeiyei.main;
 
+import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import autonoma.fontaneroyeiyei.gui.VentanaPrincipal;
+
 /**
  *
  * @author USUARIO
@@ -14,7 +17,12 @@ public class FontaneroYeiYei {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       GestorJuego juego = new GestorJuego();
+        
+
+        
+        VentanaPrincipal ventana = new VentanaPrincipal (juego);
+        ventana.setVisible(true);
     }
     
 }

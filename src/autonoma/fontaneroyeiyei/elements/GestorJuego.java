@@ -4,6 +4,8 @@
  */
 package autonoma.fontaneroyeiyei.elements;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
@@ -12,5 +14,20 @@ package autonoma.fontaneroyeiyei.elements;
  */
 
 public class GestorJuego {
+    private ArrayList<Casa>casas;
+
+    public GestorJuego() {
+        this.casas = casas;
+    }
+
+    public ArrayList<Casa> getCasas() {
+        return casas;
+    }
+
+    public void setCasas(ArrayList<Casa> casas) {
+        this.casas = casas;
+    }
+    
+    
     
 }
