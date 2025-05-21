@@ -1,19 +1,20 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package autonoma.fontaneroyeiyei.gui;
 
 /**
  *
- * @author mateo
+ * @author USUARIO
  */
-public class VentanaNivel3 extends javax.swing.JFrame {
+public class VentanaNivel3 extends javax.swing.JDialog {
 
     /**
      * Creates new form VentanaNivel3
      */
-    public VentanaNivel3() {
+    public VentanaNivel3(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -26,7 +27,7 @@ public class VentanaNivel3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,8 +44,6 @@ public class VentanaNivel3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
+}
