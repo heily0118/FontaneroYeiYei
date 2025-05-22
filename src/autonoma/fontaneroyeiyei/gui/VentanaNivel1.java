@@ -44,13 +44,16 @@ public class VentanaNivel1 extends javax.swing.JDialog {
        
         FontaneroBueno f = new FontaneroBueno("teo");
         
-        //se limita el mapa de personaje en ese nivel para que no salga d ela parte blanca
-        f.setAlturaMax(680);
-        f.setLargoMax(545);
+        //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
+        f.setAlturaMax(530);
+        f.setAlturaMin(145);
+        
+        f.setLargoMax(680);
+        f.setLargoMin(25);
         
         
         // se pone el fontanero en el lado de la izquierda
-        f.setY(545);
+        f.setY(530);
         f.setX(25);
         
        

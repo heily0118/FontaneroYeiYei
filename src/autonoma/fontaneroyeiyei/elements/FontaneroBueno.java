@@ -29,7 +29,8 @@ public class FontaneroBueno extends Sprite{
     private int pasos = 20;
     private int alturaMax;
     private int largoMax;
-
+    private int alturaMin;
+    private int largoMin;
     
     /////////////////////////////////
     /// Constructor
@@ -61,6 +62,14 @@ public class FontaneroBueno extends Sprite{
 
     public void setLargoMax(int largoMax) {
         this.largoMax = largoMax;
+    }
+
+    public void setAlturaMin(int alturaMin) {
+        this.alturaMin = alturaMin;
+    }
+
+    public void setLargoMin(int largoMin) {
+        this.largoMin = largoMin;
     }
 
     
@@ -110,7 +119,7 @@ public class FontaneroBueno extends Sprite{
 
         public boolean limiteDeMapa(int nx, int ny) {
             // Verifica si nx y ny están dentro del rango permitido
-            if (nx < 0 || nx > largoMax - width || ny < 0 || ny > alturaMax - height) {
+            if (nx < largoMin || nx > largoMax - width || ny < alturaMin || ny > alturaMax - height) {
                 return false; // Movimiento no permitido
             }
 
