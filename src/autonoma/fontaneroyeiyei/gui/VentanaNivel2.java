@@ -4,18 +4,61 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 /**
  *
- * @author USUARIO
+ * @author Mateo Quintero <mateo.quinterom@autonoma.edu.co>
+ * @version 1.0.0
+ * @since 20250501
+ * @see autonoma.fontaneroyeiyei.elements
  */
 public class VentanaNivel2 extends javax.swing.JDialog {
 
-    /**
-     * Creates new form VentanaNivel2
-     */
-    public VentanaNivel2(java.awt.Frame parent, boolean modal) {
+    private GestorJuego juego;
+    private ImageIcon fondo;
+    private BufferedImage buffer; 
+    private boolean timerGameOverStarted;
+    private Clip clip;
+    public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego ) {
         super(parent, modal);
         initComponents();
+        
+        this.juego = juego;
+        setTitle("FontaneroYeiYei Nivel1");
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+
+        this.setSize(800,800);
+        setResizable(false);
+        this.setLocationRelativeTo(null);
+        
+        try{ 
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
+            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa2.jpeg"));
+        }catch(NullPointerException e){
+            System.out.println("Imagen no encontrada");
+            
+        }
+        JPanel panelFondo = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    ///codigo temporar
+//                    
+//                    ImageIcon personaje  = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"));
+//                    g.drawImage(personaje.getImage(), 400, 200, 100, 100, this);
+                }
+            };
+        
+        setContentPane(panelFondo);
     }
 
     /**

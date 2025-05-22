@@ -22,7 +22,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class VentanaNivel1 extends javax.swing.JDialog {
 
-    private GestorJuego gestor;
+    private GestorJuego juego;
     private ImageIcon fondo;
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
@@ -32,11 +32,11 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
 
 
-    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego gestor) {
+    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego juego) {
         super(parent, modal);
         initComponents();
 
-        this.gestor = gestor;
+        this.juego = juego;
         setTitle("FontaneroYeiYei Nivel1");
         setLocationRelativeTo(null);
         setResizable(false);
