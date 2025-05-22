@@ -90,11 +90,14 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
+                    
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
 
                     f.paint(g);
                     
                     System.out.println("se pinta el malo");
+                    g.setColor(Color.BLACK);
+                    g.fillRect(200, 250, 1000, 10);
                     fmalo.paint(g);
                 }
             };
