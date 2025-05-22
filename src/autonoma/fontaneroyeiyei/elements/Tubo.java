@@ -14,10 +14,6 @@ import java.util.List;
 
 public abstract class Tubo {
     
-    
-    ////////////////////////////////
-    /// Atributos
-    
     private int posX;
     private int posy;
     private String estado;
@@ -29,10 +25,6 @@ public abstract class Tubo {
         this.estado = estado;
     }
     
-    
-    //////////////////////////////////
-    /// Metodos de acceso (get)
-    ///
     public int getPosX() {
         return posX;
     }
@@ -46,11 +38,6 @@ public abstract class Tubo {
         return estado;
     }
 
-    
-
-    //////////////////////////////////
-    /// Metodos de acceso (set)
-    ///
     public void setPosX(int posX) {
         this.posX = posX;
     }
