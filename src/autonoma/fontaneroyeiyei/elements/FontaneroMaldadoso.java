@@ -55,7 +55,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
     public FontaneroMaldadoso(int x, int y, int width, int height, FontaneroBueno fontaneroBueno) {
         super(x, y, width, height);
         this.fontaneroBueno = fontaneroBueno;
-        this.fontaneroMaldadosoImage = new ImageIcon(getClass().getResource("/autonoma/demoatrapacomida/images/FontaneroMalo.png")).getImage();
+        this.fontaneroMaldadosoImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")).getImage();
     }
     
     /**

@@ -5,6 +5,7 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
+import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import java.awt.Color;
 import java.awt.Font;
@@ -54,18 +55,19 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         this.f = new FontaneroBueno("teo");
         
         //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
-        f.setAlturaMax(630);
-        f.setAlturaMin(145);
+        f.setAlturaMax(350);
+        f.setAlturaMin(75);
         
-        f.setLargoMax(770);
+        f.setLargoMax(880);
         f.setLargoMin(25);
         
         
         // se pone el fontanero en el lado de la izquierda
-        f.setY(545);
+        f.setY(250);
         f.setX(25);
         
-       
+        System.out.println(" se cre el malo");
+       FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785,90,80,80,f);
                 
                 
         setTitle("FontaneroYeiYei Nivel 1");
@@ -91,6 +93,9 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
 
                     f.paint(g);
+                    
+                    System.out.println("se pinta el malo");
+                    fmalo.paint(g);
                 }
             };
         
