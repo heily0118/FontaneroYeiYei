@@ -48,7 +48,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         try{ 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
-            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa1.jpeg"));
+            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa1.png"));
         }catch(NullPointerException e){
             System.out.println("Imagen no encontrada");
             
