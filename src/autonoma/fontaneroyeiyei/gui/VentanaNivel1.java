@@ -6,7 +6,10 @@ package autonoma.fontaneroyeiyei.gui;
 
 /**
  *
- * @author USUARIO
+ * @author Mateo Quintero <mateo.quinterom@autonoma.edu.co>
+ * @version 1.0.0
+ * @since 20250501
+ * @see autonoma.fontaneroyeiyei.elements
  */
 public class VentanaNivel1 extends javax.swing.JDialog {
 
