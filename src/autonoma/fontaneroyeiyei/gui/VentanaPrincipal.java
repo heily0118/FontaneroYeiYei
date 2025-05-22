@@ -19,10 +19,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 /**
- *
- * @author USUARIO
+ * 
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @since 20250516
+ * @version 1.0.0
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     
@@ -35,7 +36,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             initComponents();
             this.juego = juego;
             //reproducirSonido();
-            setTitle("Atrapa Comida");
+            setTitle("Fontanero Yei Yei");
             setSize(800, 800);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -60,13 +61,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 //pedirNombreJugador();
                 
                 
-                ///mostra como queda los niveles
-//                new VentanaNivel3(this, true, juego).setVisible(true);
-//                new VentanaNivel2(this, true, juego).setVisible(true);
-//                new VentanaNivel1(this, true, juego).setVisible(true);
 
+               new VentanaInformacionJuego(this, true, juego).setVisible(true);
 
-//                new VentanaInformacionJuego(this, true, juego).setVisible(true);
                 dispose();
             });
 

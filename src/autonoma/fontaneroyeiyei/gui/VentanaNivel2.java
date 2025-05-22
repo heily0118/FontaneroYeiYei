@@ -5,11 +5,13 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
 
 /**
  *
@@ -25,6 +27,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
+    
     public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego ) {
         super(parent, modal);
         initComponents();
@@ -58,7 +61,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                 }
             };
         
-        setContentPane(panelFondo);
+
     }
 
     /**

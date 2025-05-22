@@ -5,6 +5,7 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
  * @see autonoma.fontaneroyeiyei.gui
  */
 public class VentanaNivel3 extends javax.swing.JDialog {
+
 
     private GestorJuego juego;
     private ImageIcon fondo;
@@ -59,6 +61,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             };
         
         setContentPane(panelFondo);
+
     }
 
     /**

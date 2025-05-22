@@ -5,11 +5,19 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import java.awt.Graphics;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
- *
- * @author USUARIO
+ * 
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @since 20250516
+ * @version 1.0.0
  */
 public class VentanaInformacionJuego extends javax.swing.JDialog {
     private GestorJuego juego;
@@ -20,9 +28,77 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
      * Creates new form VentanaInformacionJuego
      */
     public VentanaInformacionJuego(java.awt.Frame parent, boolean modal,GestorJuego juego) {
-        super(parent, modal);
-        initComponents();
-        this.juego = juego;
+            super(parent, modal);
+            initComponents();
+            this.juego = juego;
+
+            setTitle("Fontanero Yei Yei");
+            setSize(800, 800);
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/Logo.jpeg")).getImage());
+
+            // Fondo
+            ImageIcon fondo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/Menu.jpeg"));
+            JPanel panelFondo = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            panelFondo.setLayout(null);
+
+            // === Botones con imagenes de casas ===
+            ImageIcon iconoNivel1 = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/casa1Fuera.png"));
+            ImageIcon iconoNivel2 = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/casa2Fuera.png"));
+            ImageIcon iconoNivel3 = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/casa3Fuera.png"));
+
+            JButton botonNivel1 = new JButton(iconoNivel1);
+            botonNivel1.setBounds(200, 550, 64, 64); // Ajustar
+            botonNivel1.setContentAreaFilled(false);
+            botonNivel1.setBorderPainted(false);
+            botonNivel1.setFocusPainted(false);
+            botonNivel1.setToolTipText("Nivel 1");
+            botonNivel1.setEnabled(true);
+
+            JButton botonNivel2 = new JButton(iconoNivel2);
+            botonNivel2.setBounds(370, 420, 64, 64); // Ajustar
+            botonNivel2.setContentAreaFilled(false);
+            botonNivel2.setBorderPainted(false);
+            botonNivel2.setFocusPainted(false);
+            botonNivel2.setToolTipText("Nivel 2");
+            botonNivel2.setEnabled(true); 
+
+            JButton botonNivel3 = new JButton(iconoNivel3);
+            botonNivel3.setBounds(530, 280, 64, 64); // Ajustar
+            botonNivel3.setContentAreaFilled(false);
+            botonNivel3.setBorderPainted(false);
+            botonNivel3.setFocusPainted(false);
+            botonNivel3.setToolTipText("Nivel 3");
+            botonNivel3.setEnabled(true); //si muetsra gris o la imagen del  nivel
+
+            // === Acciones de los botones ===
+            botonNivel1.addActionListener(e -> {
+                new VentanaNivel1(null, true, juego).setVisible(true);
+            });
+
+            botonNivel2.addActionListener(e -> {
+                new VentanaNivel2(null, true, juego).setVisible(true);
+            });
+
+            botonNivel3.addActionListener(e -> {
+                new VentanaNivel3(null, true, juego).setVisible(true);
+            });
+
+            // Agregar al panel
+            panelFondo.add(botonNivel1);
+            panelFondo.add(botonNivel2);
+            panelFondo.add(botonNivel3);
+
+            // Establecer el panel como contenido
+            setContentPane(panelFondo);
        
     }
 
