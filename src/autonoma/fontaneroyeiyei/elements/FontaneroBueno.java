@@ -7,6 +7,7 @@ package autonoma.fontaneroyeiyei.elements;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -90,7 +91,7 @@ public class FontaneroBueno extends Sprite{
     /// Metodos
     ///
 
-        public void move(int direccion) {
+        public void move(int direccion) throws IOException  {
             int nx = x;
             int ny = y;
 
@@ -112,6 +113,8 @@ public class FontaneroBueno extends Sprite{
             // Verifica si el movimiento es válido
             if (limiteDeMapa(nx, ny)) {
                 // Si es válido, actualiza x e y
+                
+
                 x = nx;
                 y = ny;            
             }
@@ -119,7 +122,11 @@ public class FontaneroBueno extends Sprite{
 
         public boolean limiteDeMapa(int nx, int ny) {
             // Verifica si nx y ny están dentro del rango permitido
+            
+            System.out.println(nx +" < "+ largoMin +" o "+ nx +" > "+ largoMax +"-"+ width +" o "+ ny +" < "+ alturaMin  +" o "+ ny +">"+ alturaMax + "-" + height);
             if (nx < largoMin || nx > largoMax - width || ny < alturaMin || ny > alturaMax - height) {
+                
+
                 return false; // Movimiento no permitido
             }
 
@@ -132,7 +139,8 @@ public class FontaneroBueno extends Sprite{
     @Override
     public void paint(Graphics g){ 
             
-        
+        System.out.println("lugar de donde se pinta");
+        System.out.println("x :"+x + "y :" + y);
         g.drawImage(jugadorImage, x, y, width, height, null);
     }
 }

@@ -6,9 +6,17 @@ package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -25,6 +33,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
     private GestorJuego juego;
     private ImageIcon fondo;
+    private FontaneroBueno f;
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
@@ -42,18 +51,18 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         ///se va indicar la siguientes posiciones para ej jugador
        
-        FontaneroBueno f = new FontaneroBueno("teo");
+        this.f = new FontaneroBueno("teo");
         
         //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
-        f.setAlturaMax(530);
+        f.setAlturaMax(630);
         f.setAlturaMin(145);
         
-        f.setLargoMax(680);
+        f.setLargoMax(770);
         f.setLargoMin(25);
         
         
         // se pone el fontanero en el lado de la izquierda
-        f.setY(530);
+        f.setY(545);
         f.setX(25);
         
        
@@ -80,6 +89,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+
                     f.paint(g);
                 }
             };
@@ -98,6 +108,11 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +128,39 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+        
+        if(evt.getKeyCode() == KeyEvent.VK_Q)
+        {
+            System.exit(0);
+        }
+        
+        if(evt.getKeyCode() == KeyEvent.VK_UP |
+           evt.getKeyCode() == KeyEvent.VK_DOWN |
+           evt.getKeyCode() == KeyEvent.VK_LEFT |
+           evt.getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+                  
+            try {
+                
+                f.move(evt.getKeyCode());
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        this.repaint();
+
+        
+        ;
+    }
+    
+    
+        
+    }//GEN-LAST:event_formKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
+
