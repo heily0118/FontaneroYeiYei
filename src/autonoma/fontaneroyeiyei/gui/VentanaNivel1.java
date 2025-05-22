@@ -4,6 +4,15 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 /**
  *
  * @author Mateo Quintero <mateo.quinterom@autonoma.edu.co>
@@ -13,12 +22,47 @@ package autonoma.fontaneroyeiyei.gui;
  */
 public class VentanaNivel1 extends javax.swing.JDialog {
 
-    /**
-     * Creates new form VentanaNivel1
-     */
-    public VentanaNivel1(java.awt.Frame parent, boolean modal) {
+    private GestorJuego gestor;
+    private ImageIcon fondo;
+    private BufferedImage buffer; 
+    private boolean timerGameOverStarted;
+    private Clip clip;
+    
+
+
+
+
+    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego gestor) {
         super(parent, modal);
         initComponents();
+        
+        
+        this.gestor = gestor;
+        setTitle("FontaneroYeiYei Nivel1");
+        setSize(800, 800);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        this.setSize(800,800);
+        setResizable(false);
+        this.setLocationRelativeTo(null);
+        
+        try{ 
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
+            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa1.jpeg"));
+        }catch(NullPointerException e){
+            System.out.println("Imagen no encontrada");
+            
+        }
+        JPanel panelFondo = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                }
+            };
     }
 
     /**

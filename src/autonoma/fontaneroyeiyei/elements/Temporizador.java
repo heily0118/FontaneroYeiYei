@@ -13,11 +13,27 @@ package autonoma.fontaneroyeiyei.elements;
  */
 public class Temporizador {
     
+    ////////////////////////////////
+    /// Atributos
+    ///
+    
     private int tiempoRestante;
 
 
     private boolean activo;
 
+    /////////////////////////////////
+    /// Constructo
+    public Temporizador(boolean activo) {
+        this.activo = activo;
+    }
+
+    
+    
+    //////////////////////////////////
+    /// Metodos
+    ///
+    
     public void iniciar(){}
 
 
