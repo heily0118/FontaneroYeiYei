@@ -73,7 +73,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         setResizable(false);
 
 
-        this.setSize(800,800);
+        this.setSize(900,465);
         setResizable(false);
         this.setLocationRelativeTo(null);
         
