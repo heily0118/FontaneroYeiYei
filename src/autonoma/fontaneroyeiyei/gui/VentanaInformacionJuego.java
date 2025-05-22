@@ -33,7 +33,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             this.juego = juego;
 
             setTitle("Fontanero Yei Yei");
-            setSize(800, 800);
+            setSize(700, 700);
             setLocationRelativeTo(null);
             setResizable(false);
             setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
