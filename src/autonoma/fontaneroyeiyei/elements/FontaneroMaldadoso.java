@@ -44,7 +44,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
     private List<Herramienta> herramientasRobadas = new ArrayList<>();
 
     /**
-     * Constructor del fontanero maldadoso.
+     * Constructor de la clase FontaneroMaldadoso.
      * 
      * @param x Es la posición X inicial
      * @param y Es la poosición Y inicial
