@@ -35,15 +35,12 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego gestor) {
         super(parent, modal);
         initComponents();
-        
-        
+
         this.gestor = gestor;
         setTitle("FontaneroYeiYei Nivel1");
-        setSize(800, 800);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
 
         this.setSize(800,800);
         setResizable(false);
@@ -61,8 +58,14 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    ///codigo temporar
+//                    
+//                    ImageIcon personaje  = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"));
+//                    g.drawImage(personaje.getImage(), 400, 200, 100, 100, this);
                 }
             };
+        
+        setContentPane(panelFondo);
     }
 
     /**
