@@ -59,8 +59,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             botonJugar.addActionListener(e -> {
                 //pedirNombreJugador();
                 
-                  new VentanaNivel2(this, true, juego).setVisible(true);
+                
+                ///mostra como queda los niveles
+//                new VentanaNivel3(this, true, juego).setVisible(true);
+//                new VentanaNivel2(this, true, juego).setVisible(true);
 //                new VentanaNivel1(this, true, juego).setVisible(true);
+
+
 //                new VentanaInformacionJuego(this, true, juego).setVisible(true);
                 dispose();
             });

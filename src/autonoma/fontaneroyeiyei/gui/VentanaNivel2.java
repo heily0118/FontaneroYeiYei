@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * @author Mateo Quintero <mateo.quinterom@autonoma.edu.co>
  * @version 1.0.0
  * @since 20250501
- * @see autonoma.fontaneroyeiyei.elements
+ * @see autonoma.fontaneroyeiyei.gui
  */
 public class VentanaNivel2 extends javax.swing.JDialog {
 
@@ -30,7 +30,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         initComponents();
         
         this.juego = juego;
-        setTitle("FontaneroYeiYei Nivel1");
+        setTitle("FontaneroYeiYei Nivel 2");
         setLocationRelativeTo(null);
         setResizable(false);
 

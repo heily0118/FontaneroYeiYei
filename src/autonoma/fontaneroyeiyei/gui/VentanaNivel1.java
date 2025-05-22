@@ -18,7 +18,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  * @author Mateo Quintero <mateo.quinterom@autonoma.edu.co>
  * @version 1.0.0
  * @since 20250501
- * @see autonoma.fontaneroyeiyei.elements
+ * @see autonoma.fontaneroyeiyei.gui
  */
 public class VentanaNivel1 extends javax.swing.JDialog {
 
@@ -37,7 +37,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         initComponents();
 
         this.juego = juego;
-        setTitle("FontaneroYeiYei Nivel1");
+        setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
 
