@@ -4,6 +4,7 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -36,7 +37,25 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
+        
         this.juego = juego;
+        
+        ///se va indicar la siguientes posiciones para ej jugador
+       
+        FontaneroBueno f = new FontaneroBueno("teo");
+        
+        //se limita el mapa de personaje en ese nivel para que no salga d ela parte blanca
+        f.setAlturaMax(680);
+        f.setLargoMax(545);
+        
+        
+        // se pone el fontanero en el lado de la izquierda
+        f.setY(545);
+        f.setX(25);
+        
+       
+                
+                
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -58,14 +77,12 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-                    ///codigo temporar
-//                    
-//                    ImageIcon personaje  = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"));
-//                    g.drawImage(personaje.getImage(), 400, 200, 100, 100, this);
+                    f.paint(g);
                 }
             };
         
         setContentPane(panelFondo);
+        
     }
 
     /**
