@@ -5,30 +5,30 @@
 package autonoma.fontaneroyeiyei.elements;
 
 /**
- *
- * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
- * @since 20250425
+ * 
+ * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
+ * @since 20250516
  * @version 1.0.0
  */
-public class LlaveIglesa extends Herramienta {
 
-   
-    @Override
+public class Sellador extends Herramienta {
+
+      @Override
     public void usarEn(Tubo tubo) {
-    
+       
         if (tubo instanceof TuboConFuga) {
             TuboConFuga tuboConFuga = (TuboConFuga) tubo;
             if (tuboConFuga.getFuga() != null && 
                 !tuboConFuga.getFuga().estaReparada() &&
-                "tuerca".equalsIgnoreCase(tuboConFuga.getFuga().getTipo())) {
-                tuboConFuga.repararConLlave();
-            }
+                "grieta".equalsIgnoreCase(tuboConFuga.getFuga().getTipo())) {
+                tuboConFuga.repararConSellador();
+           }
         }
     }
 
     @Override
     public String getNombre() {
-        return "Llave Inglesa";
+        return "Sellador";
     }
 
 }

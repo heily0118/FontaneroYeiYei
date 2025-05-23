@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Casa {
 
-    private FontaneroBueno fontanero;
     private List<Tubo> tubos;
     
     
@@ -32,13 +31,6 @@ public class Casa {
     /// Metodos de acceso (get)
     ///
 
-    public FontaneroBueno getFontanero() {
-        return fontanero;
-    }
-
-    public void setFontanero(FontaneroBueno fontanero) {
-        this.fontanero = fontanero;
-    }
    
 
     public List<Tubo> getTubos() {
@@ -68,7 +60,7 @@ public class Casa {
     
     }
     
-    public void colocarHerramientas(){}
+   
     
     public boolean verificarEstadoCasa(){
     

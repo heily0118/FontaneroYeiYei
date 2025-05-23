@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
@@ -33,7 +34,13 @@ public class FontaneroBueno extends Sprite{
     private int largoMax;
     private int alturaMin;
     private int largoMin;
+<<<<<<< HEAD
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
+=======
+    private Herramienta herramientaSeleccionada;
+
+    
+>>>>>>> 6b6a0caf66293e4d0e551b7d3ee2274996b0d5a6
     /////////////////////////////////
     /// Constructor
     ////
@@ -190,4 +197,34 @@ public class FontaneroBueno extends Sprite{
 //        this.setColor(Color.BLACK);
 //        g.fillRect(x,y, height, width);
     }
+    
+    
+   public void usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
+        Herramienta herramienta = null;
+        if (tecla == 'L' || tecla == 'l') {
+            herramienta = new LlaveIglesa();
+        } else if (tecla == 'S' || tecla == 's') {
+            herramienta = new Sellador();
+        }
+        if (herramienta == null) return;
+
+        for (Tubo tubo : tubos) {
+           
+            if (tubo instanceof TuboConFuga) {
+                TuboConFuga tuboConFuga = (TuboConFuga) tubo;
+                Fuga fuga = tuboConFuga.getFuga();
+                if (fuga != null && !fuga.estaReparada() && fuga.estaCerca(x, y)) {
+                    herramienta.usarEn(tuboConFuga);
+                    if (fuga.estaReparada()) {
+                        System.out.println("Fuga reparada con " + herramienta.getNombre());
+                       
+                    } else {
+                        System.out.println("No se pudo reparar con " + herramienta.getNombre());
+                    }
+                    break; 
+                }
+            }
+        }
+}
+
 }

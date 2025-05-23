@@ -5,104 +5,72 @@
 package autonoma.fontaneroyeiyei.elements;
 
 import java.util.List;
-
+import java.awt.Graphics;
 /**
  * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250516
  * @version 1.0.0
  */
 
-public abstract class Tubo {
+public abstract class Tubo extends Sprite{
     
-    /**
-     * Posición X del tubo en un plano.
-     */
-    private int posX;
-    
-    /**
-     * Posición Y del tubo en un plano.
-     */
-    private int posy;
     
     /**
      * Estado actual del tubo, por ejemplo: "funcionando", "dañado", "averiado".
      */
-    private String estado;
-  
-    /**
-     * Constructor de la clase Tubo.
-     * 
-     * @param posX Es la posición horizontal del tubo.
-     * @param posy Es la posición vertical del tubo.
-     * @param estado Es el estado actual del tubo.
-     */
-    public Tubo(int posX, int posy, String estado) {
-        this.posX = posX;
-        this.posy = posy;
-        this.estado = estado;
-    }
-    
-    /**
-     * Obtiene la posición X del tubo.
-     * 
-     * @return Retorna la posición X.
-     */
-    public int getPosX() {
-        return posX;
-    }
+    protected String estado;
 
     /**
-     * Obtiene la posición Y del tubo.
+     * Constructor del tubo.
      * 
-     * @return Retorna la posición Y.
+     * @param estado Estado inicial del tubo.
+     * @param x Posición X
+     * @param y Posición Y
+     * @param width Ancho del tubo
+     * @param height Alto del tubo
      */
-    public int getPosy() {
-        return posy;
+    public Tubo(String estado, int x, int y, int width, int height) {
+        super(x, y, height, width);
+        this.estado = estado;
     }
 
     /**
      * Obtiene el estado actual del tubo.
-     * 
-     * @return Es el estado del tubo.
+     * @return Estado del tubo
      */
     public String getEstado() {
         return estado;
     }
 
     /**
-     * Modifica la posición X del tubo.
-     * 
-     * @param posX Nueva posición X.
-     */
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    /**
-     * Modifica la posición Y del tubo.
-     * 
-     * @param posy Es la nueva posición Y.
-     */
-    public void setPosy(int posy) {
-        this.posy = posy;
-    }
-
-    /**
-     * Modifica el estado actual del tubo.
-     * 
-     * @param estado Es el nuevo estado del tubo.
+     * Establece el estado del tubo.
+     * @param estado Nuevo estado
      */
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     /**
      * Indica si el tubo es reparable.
-     * 
-     * @return Retorna true si el tubo es reparable o false en caso contrario.
+     * @return true si está "dañado" o "averiado", false si está "funcionando"
      */
     public boolean esReparable() {
-        return "dañado".equalsIgnoreCase(this.estado) || "averiado".equalsIgnoreCase(this.estado);
+        return "dañado".equalsIgnoreCase(estado) || "averiado".equalsIgnoreCase(estado);
+    }
+
+    /**
+     * Método de dibujo común para todos los tubos.
+     * Se puede sobrescribir si es necesario, pero sirve por defecto.
+     * 
+     * @param g Objeto gráfico
+     */
+    @Override
+    public void paint(Graphics g) {
+        if (this.isVisible() && this.getImage() != null) {
+            g.drawImage(this.getImage().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+        }
     }
     
+     public abstract boolean tieneFuga();
+
 }
