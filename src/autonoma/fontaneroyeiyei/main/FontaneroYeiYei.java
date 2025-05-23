@@ -29,14 +29,7 @@ public class FontaneroYeiYei {
         casas.get(1).iniciarEnemigo(200, 50, 80, 80);
         casas.get(2).iniciarEnemigo(300, 50, 80, 80);
 
-<<<<<<< HEAD
-      
-          casas.get(0);
-          casas.get(1);
-          casas.get(2);
-          
-=======
->>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
+
         GestorJuego juego = new GestorJuego(casas);
         VentanaPrincipal ventana = new VentanaPrincipal(juego);
         ventana.setVisible(true);

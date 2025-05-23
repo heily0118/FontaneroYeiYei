@@ -77,35 +77,11 @@ public class Casa {
         return this.width;
     }
 
-<<<<<<< HEAD
-    public void setEnemigo(FontaneroMaldadoso enemigo) {
-        this.enemigo = enemigo;
-    }
     
-    
-    
-    
-    //////////////////////////////////
-    /// Metodos
-    
-    public void generarFugasAleatorias(){
-    
-    }
     
    
-    
-    public boolean verificarEstadoCasa(){
-    
-    return false;}
-    
-
-
-    
-    
-=======
     public int getHeight() {
         return this.height;
     }
 
->>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
 }

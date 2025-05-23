@@ -85,35 +85,8 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
                 
         Casa casaNivel1 = juego.getCasaNivel1(); 
+     
 
-<<<<<<< HEAD
-        
-        
-
-
-        // crea el fontanero malo
-        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(600, 0, 80, 80, casaNivel1);
-
-        // crea el recorrido y se lo asigna
-        ArrayList<Recorrido> recorridos = new ArrayList<>();
-        Recorrido recorridoPiso2 = new Recorrido("Recorrido Piso 2", 600 ,140);
-        recorridos.add(recorridoPiso2);
-        fmalo.setInicioX(600);
-        fmalo.setX(600);
-        fmalo.setY(160);
-
-
-        Thread hiloMalo = new Thread(fmalo);
-        hiloMalo.start();
-        
-        
-//        Thread hiloMalo = new Thread(fmalo);
-//        hiloMalo.start();
-                
-        
-=======
-
->>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -130,8 +103,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
             System.out.println("Imagen no encontrada");
             
         }
-<<<<<<< HEAD
-=======
+
         JPanel panelFondo = new JPanel() {
                 @Override
                 protected void paintComponent(Graphics g) {
@@ -145,20 +117,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     f.paint(g);
                 }
             };
->>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
-        
-        
-        // crea panelFondo SIN usar fmalo todavía
-        JPanel panelFondo = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-                f.paint(g);
-                fmalo.paint(g);
-                fmalo.run();
-            }
-        };
+
         
         
         //  agrega panel al JFrame y lanza el hilo
@@ -166,9 +125,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
         Timer timer = new Timer(30, e -> panelFondo.repaint());
         timer.start();
-        
-        setContentPane(panelFondo);
-        timer.start();
+
     }
 
     /**
