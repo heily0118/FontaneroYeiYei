@@ -142,6 +142,12 @@ public class GestorJuego {
     public Casa getCasaNivel1() {
         return casas.get(0); 
     }
+     public Casa getCasaNivel2() {
+        return casas.get(1); 
+    }
+    public Casa getCasaNivel3() {
+        return casas.get(2); 
+    }
 
 
 }

@@ -4,6 +4,7 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -47,7 +49,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         
         this.f = new FontaneroBueno("teo");
         
-        
+        Casa casaNivel3= juego.getCasaNivel3(); 
         setTitle("FontaneroYeiYei Nivel 3");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -117,7 +119,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     ///codigo temporar
                     
                      f.paint(g);
-                    
+                     casaNivel3.paint(g); 
 //                    Para pintar el los bloques de hitboxs
 //                    for(HitBox h : hitBoxs){                
 //                        h.paint(g);
@@ -127,6 +129,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             };
         
         setContentPane(panelFondo);
+        Timer timer = new Timer(30, e -> panelFondo.repaint());
+        timer.start();
 
      }
 
