@@ -18,7 +18,7 @@ public class Casa {
         this.height = height;
 
         this.tubos = new ArrayList<>();
-        inicializarTubosConFugas();
+    
 
        
         int limiteIzquierdo = 0;
@@ -36,17 +36,7 @@ public class Casa {
         hiloFontanero.start();
     }
 
-    private void inicializarTubosConFugas() {
-      
-        for (int i = 0; i < 5; i++) {
-            int x = 100 + i * 100;
-            int y = 200;
-          
-            Fuga fuga = new Fuga(x + 10, y + 10, (i % 2 == 0) ? "tuerca" : "grieta");
-            TuboConFuga tubo = new TuboConFuga("malo", x, y, 60, 20, fuga);
-            tubos.add(tubo);
-        }
-    }
+   
 
 
     public List<Tubo> getTubos() {
@@ -62,8 +52,10 @@ public class Casa {
 
         serviente.paint(g);
 
-       
-        fontaneroMalo.paint(g);
+
+        if (fontaneroMalo != null) {
+            fontaneroMalo.paint(g);
+        }
     }
 
   
@@ -73,4 +65,20 @@ public class Casa {
         fontaneroMalo.setWidth(ancho);
         fontaneroMalo.setHeight(alto);
     }
+    
+     public synchronized void agregarTubo(Tubo tubo){
+        tubos.add(tubo);
+    }
+    public void eliminarFontaneroMalo(){
+        this.fontaneroMalo = null;        
+    }
+    
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
 }
