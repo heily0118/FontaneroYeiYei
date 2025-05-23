@@ -8,6 +8,7 @@ import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import autonoma.fontaneroyeiyei.elements.HitBox;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -17,6 +18,7 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
@@ -40,6 +42,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
+    private ArrayList<HitBox> hitBoxs = new ArrayList<>();
     
 
 
@@ -57,23 +60,40 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         this.f = new FontaneroBueno("teo");
         
         //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
-        f.setAlturaMax(350);
-        f.setAlturaMin(75);
-        
-        f.setLargoMax(880);
-        f.setLargoMin(25);
+        f.setAlturaMax(700);
+        f.setLargoMax(700);
         
         
         // se pone el fontanero en el lado de la izquierda
         f.setY(250);
         f.setX(25);
         
+        //se crea la hit box del nivel 
+
+                    
+        //PRIMER HITBOX
+//        HitBox SegundoPiso = new HitBox(180, 250, 530, 100);
+        HitBox SegundoPiso = new HitBox(180, 250, 100, 530);
+        
+        hitBoxs.addFirst(SegundoPiso);
+        //SEGUNDO HITBOX
+//        HitBox escalas = new HitBox(180, 250, 30, 250);
+        HitBox escalas = new HitBox(180, 250, 250, 30);
+        hitBoxs.addLast(escalas);
+        
+        f.setHitBoxs(hitBoxs);
+        
+                
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
         FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785, 90, 80, 80, casaNivel1);
+<<<<<<< HEAD
           Thread hiloMalo = new Thread(fmalo);
           hiloMalo.start();
                 
+=======
+
+>>>>>>> 1b0774c0949b4783164f9327f103c1fefebe6c0d
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -96,9 +116,15 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
                     f.paint(g);
+<<<<<<< HEAD
                     System.out.println("se pinta el malo");
                     g.setColor(Color.BLACK);
                     g.fillRect(200, 250, 1000, 10);
+=======
+                     
+//                    hitBoxs.getFirst().paint(g);
+//                    hitBoxs.getLast().paint(g);
+>>>>>>> 1b0774c0949b4783164f9327f103c1fefebe6c0d
                     fmalo.paint(g);
                 }
             };

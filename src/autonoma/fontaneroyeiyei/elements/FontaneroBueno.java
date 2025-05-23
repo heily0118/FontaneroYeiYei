@@ -4,6 +4,7 @@
  */
 package autonoma.fontaneroyeiyei.elements;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -33,9 +34,13 @@ public class FontaneroBueno extends Sprite{
     private int largoMax;
     private int alturaMin;
     private int largoMin;
+    
+    private ArrayList<HitBox> hitBoxs = new ArrayList<>();
+
     private Herramienta herramientaSeleccionada;
 
     
+
     /////////////////////////////////
     /// Constructor
     ////
@@ -76,6 +81,14 @@ public class FontaneroBueno extends Sprite{
         this.largoMin = largoMin;
     }
 
+    public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
+        this.hitBoxs = hitBoxs;
+    }
+
+
+
+    
+    
     
     //////////////////////////////////
     /// Metodos de acceso (get)
@@ -113,38 +126,76 @@ public class FontaneroBueno extends Sprite{
                     break;
             }
 
-            // Verifica si el movimiento es válido
-            if (limiteDeMapa(nx, ny)) {
-                // Si es válido, actualiza x e y
-                
+           
+                   
+                   
+               // Verifica si el movimiento es válido
+                // Primero verificamos si hay colisión
+                boolean hayColision = false;
 
-                x = nx;
-                y = ny;            
-            }
+                for (HitBox h : hitBoxs) {
+                    if (this.colisionaConhHitbox(h,nx,ny)) {
+                        hayColision = true;
+                        break; // Salimos del ciclo en cuanto detectamos una colisión
+                    }
+                }
+
+                // Si no hay colisión, verificamos si está dentro del límite del mapa
+                if (!hayColision && limiteDeMapa(nx, ny)) {
+                    // Si es válido, actualiza x e y
+                    this.x = nx;
+                    this.y = ny;
+                } else {
+                    System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los lImites"));
+                }
+            
         }
 
         public boolean limiteDeMapa(int nx, int ny) {
             // Verifica si nx y ny están dentro del rango permitido
             
-            System.out.println(nx +" < "+ largoMin +" o "+ nx +" > "+ largoMax +"-"+ width +" o "+ ny +" < "+ alturaMin  +" o "+ ny +">"+ alturaMax + "-" + height);
-            if (nx < largoMin || nx > largoMax - width || ny < alturaMin || ny > alturaMax - height) {
+            
+            if (nx < 0 || nx > largoMax - width || ny < 0 || ny > alturaMax - height) {
                 
 
                 return false; // Movimiento no permitido
             }
 
             // Si el movimiento es válido, se asignan los valores a x e y
-            this.x = nx;
-            this.y = ny;
+
             return true; // Movimiento permitido
         }
 
+        public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
+            
+//            System.out.println("Evaluando colisión: " + 
+//                   nx + " < " + h.getX() + " + " + h.getWidth() + " && " +
+//                   nx + " + " + this.getWidth() + " > " + h.getX() + " && " +
+//                   ny + " < " + h.getY() + " + " + h.getHeight() + " && " +
+//                   ny + " + " + this.getHeight() + " > " + h.getY());
+            
+            
+                if ( nx < h.getX() + h.getWidth() &&
+                nx + this.getWidth() > h.getX() &&
+                ny < h.getY() + h.getHeight() &&
+                ny + this.getHeight() > h.getY()) {
+                    return true;
+                }
+
+        
+        return false;
+    }
+        
     @Override
     public void paint(Graphics g){ 
             
         System.out.println("lugar de donde se pinta");
         System.out.println("x :"+x + "y :" + y);
         g.drawImage(jugadorImage, x, y, width, height, null);
+        
+//              HIT bOXS
+//        this.setColor(Color.BLACK);
+//        g.fillRect(x,y, height, width);
     }
     
     
