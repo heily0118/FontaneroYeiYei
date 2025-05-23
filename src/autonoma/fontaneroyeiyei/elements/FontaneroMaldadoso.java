@@ -17,6 +17,7 @@ import javax.swing.JPanel;
  * @version 1.0.0
  */
 
+<<<<<<< HEAD
 public class FontaneroMaldadoso extends SpriteMobile implements Runnable{
     
     
@@ -29,8 +30,15 @@ public class FontaneroMaldadoso extends SpriteMobile implements Runnable{
     private Image fontaneroMaldadosoImage;
     
     private Casa casa;
+=======
+public class FontaneroMaldadoso extends SpriteMobile {
+>>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
 
+    private int dx = 3;  
+    private int dy = -3; 
+    private final Casa casa;
 
+<<<<<<< HEAD
     /**
      * Constructor de la clase FontaneroMaldadoso.
      * 
@@ -47,10 +55,17 @@ public class FontaneroMaldadoso extends SpriteMobile implements Runnable{
 
     public FontaneroMaldadoso(int x, int y, int width, int height, Casa casa) {
         super(x, y, width, height);
+=======
+    public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa){
+        super(x,y,w,h);
+>>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
         this.casa = casa;
-        this.fontaneroMaldadosoImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")).getImage();
+        this.setVisible(true);            
+        this.setImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")));
+
     }
 
+<<<<<<< HEAD
     public void setInicioX(int inicioX) {
         this.inicioX = inicioX;
     }
@@ -165,3 +180,51 @@ public class FontaneroMaldadoso extends SpriteMobile implements Runnable{
         
     
    
+=======
+    /** Suelta un tubo exactamente en la posición actual */
+    private void dejarTuboConFuga(){
+        Fuga fuga = new Fuga(this.x+10, this.y+10,
+                             Math.random()<0.5?"tuerca":"grieta");
+        TuboConFuga nuevo = new TuboConFuga("malo",
+                         this.x, this.y, 60, 20, fuga);
+        casa.agregarTubo(nuevo);
+    }
+
+    @Override
+    public void run(){
+        int tubosColocados = 0;
+        long ultimoTubo = System.currentTimeMillis();
+
+        while(tubosColocados < 10){
+     
+            x += dx;
+            y += dy;
+
+            if(x<0 || x+width>casa.getWidth()){ dx = -dx; }
+            if(y<0 || y+height>casa.getHeight()){ dy = -dy; }
+
+           
+            if(System.currentTimeMillis() - ultimoTubo >= 2000){
+                dejarTuboConFuga();
+                tubosColocados++;
+                ultimoTubo = System.currentTimeMillis();
+            }
+
+            try{ Thread.sleep(20); }catch(InterruptedException e){}
+
+        }
+    
+        this.setVisible(false);        
+        casa.eliminarFontaneroMalo();    
+    }
+
+    @Override
+    public void paint(Graphics g) {
+         if (this.isVisible() && this.getImage() != null) {
+            g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
+        }
+    }
+    
+    
+}
+>>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4

@@ -86,6 +86,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
+<<<<<<< HEAD
         
         
 
@@ -110,6 +111,9 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 //        hiloMalo.start();
                 
         
+=======
+
+>>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -126,6 +130,22 @@ public class VentanaNivel1 extends javax.swing.JDialog {
             System.out.println("Imagen no encontrada");
             
         }
+<<<<<<< HEAD
+=======
+        JPanel panelFondo = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+
+                    // Pinta elementos que están dentro de Casa
+                    casaNivel1.paint(g); 
+
+                    // Pinta al fontanero bueno
+                    f.paint(g);
+                }
+            };
+>>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
         
         
         // crea panelFondo SIN usar fmalo todavía
@@ -206,7 +226,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         this.repaint();
 
         
-        ;
+        
     }
     
     

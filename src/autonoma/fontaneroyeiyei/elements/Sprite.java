@@ -10,13 +10,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import javax.swing.ImageIcon;
-
 /**
- * 
+ *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250516
  * @version 1.0.0
@@ -92,10 +87,19 @@ public abstract class Sprite {
     /**
      * Método abstracto para pintar el sprite en pantalla.
      * Debe ser implementado por las subclases.
-     * 
+     *
      * @param g objeto Graphics donde se dibuja el sprite
      */
     public abstract void paint(Graphics g);
+
+    /**
+     * Devuelve los límites rectangulares de este sprite para la detección de colisiones.
+     *
+     * @return Un objeto Rectangle que representa los límites del sprite.
+     */
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
 
     // Métodos getters y setters documentados abajo
 
@@ -150,13 +154,12 @@ public abstract class Sprite {
     public void setGraphicContainer(GraphicContainer gContainer) {
         this.gameContainer = gContainer;
     }
-    
+
     public boolean isVisible() {
-    return visible;
-}
+        return visible;
+    }
 
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-    
 }

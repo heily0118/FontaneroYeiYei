@@ -1,61 +1,83 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.fontaneroyeiyei.elements;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author Mateo Quintero Morales <mateo.quinterom@autonoma.edu.co>
- * @since 20250425
- * @version 1.0.0
- */
 
 public class Casa {
 
+    private int width;
+    private int height;
+
     private List<Tubo> tubos;
-    private FontaneroMaldadoso enemigo;
-    private Thread hiloEnemigo;
+    private Serviente serviente;
+    private FontaneroMaldadoso fontaneroMalo;
+
+    public Casa(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        this.tubos = new ArrayList<>();
     
-    
-    
-    /////////////////////////////////
-    /// Constructor
-    ////
-    
-    
-    public Casa() {
-        
-        
+
+       
+        int limiteIzquierdo = 0;
+        int limiteDerecho = width;
+
+      
+        this.serviente = new Serviente(0, height - 100, 50, 50, limiteIzquierdo, limiteDerecho);
+        this.fontaneroMalo = new FontaneroMaldadoso(0, height - 100, 50, 50, this);
+
+      
+        Thread hiloServiente = new Thread(serviente);
+        hiloServiente.start();
+
+        Thread hiloFontanero = new Thread(fontaneroMalo);
+        hiloFontanero.start();
     }
 
-    //////////////////////////////////
-    /// Metodos de acceso (get)
-    ///
-
    
+
 
     public List<Tubo> getTubos() {
         return tubos;
     }
 
-    
-    
-    //////////////////////////////////
-    /// Metodos de acceso (set)
-    ///
+
+    public void paint(Graphics g) {
+      
+        for (Tubo tubo : tubos) {
+            tubo.paint(g);
+        }
+
+        serviente.paint(g);
+
+
+        if (fontaneroMalo != null) {
+            fontaneroMalo.paint(g);
+        }
+    }
+
   
-
-    public void setTubos(List<Tubo> tubos) {
-        this.tubos = tubos;
+    public void iniciarEnemigo(int x, int y, int ancho, int alto) {
+        fontaneroMalo.setX(x);
+        fontaneroMalo.setY(y);
+        fontaneroMalo.setWidth(ancho);
+        fontaneroMalo.setHeight(alto);
     }
     
-     public FontaneroMaldadoso getEnemigo() {
-        return enemigo;
+     public synchronized void agregarTubo(Tubo tubo){
+        tubos.add(tubo);
+    }
+    public void eliminarFontaneroMalo(){
+        this.fontaneroMalo = null;        
+    }
+    
+    public int getWidth() {
+        return this.width;
     }
 
+<<<<<<< HEAD
     public void setEnemigo(FontaneroMaldadoso enemigo) {
         this.enemigo = enemigo;
     }
@@ -80,4 +102,10 @@ public class Casa {
 
     
     
+=======
+    public int getHeight() {
+        return this.height;
+    }
+
+>>>>>>> e10203d87f00bc1a0d4c5c536ac1dfbd17a484d4
 }
