@@ -10,15 +10,17 @@ package autonoma.fontaneroyeiyei.elements;
  * @since 20250425
  * @version 1.0.0
  */
-public class Herramienta {
-    private String nombre;
+public abstract class Herramienta {
 
-    public String getNombre() {
-        return nombre;
-    }
+    /**
+     * Aplica la herramienta a un tubo.
+     * 
+     * @param tubo El tubo sobre el que se aplica la herramienta.
+     */
+    public abstract void usarEn(Tubo tubo);
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
+    /**
+     * Nombre o tipo de la herramienta (opcional).
+     */
+    public abstract String getNombre();
 }

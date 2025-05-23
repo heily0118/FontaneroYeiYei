@@ -33,5 +33,7 @@ public class TuboConFuga extends Tubo {
     public Fuga getFuga() {
         return fuga;
     }
-    
+     public String getTipoFuga() {
+        return fuga.getTipo();  
+    }
 }
