@@ -65,19 +65,17 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         
         // se pone el fontanero en el lado de la izquierda
-        f.setY(250);
-        f.setX(25);
+        f.setY(160);
+        f.setX(600);
         
         //se crea la hit box del nivel 
 
                     
         //PRIMER HITBOX
-//        HitBox SegundoPiso = new HitBox(180, 250, 530, 100);
         HitBox SegundoPiso = new HitBox(180, 250, 100, 530);
         
         hitBoxs.addFirst(SegundoPiso);
         //SEGUNDO HITBOX
-//        HitBox escalas = new HitBox(180, 250, 30, 250);
         HitBox escalas = new HitBox(180, 250, 250, 30);
         hitBoxs.addLast(escalas);
         
@@ -86,7 +84,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
-        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785, 90, 80, 80, casaNivel1);
+        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(500, 90, 80, 80, casaNivel1);
 
           Thread hiloMalo = new Thread(fmalo);
           hiloMalo.start();

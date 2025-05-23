@@ -26,8 +26,8 @@ import java.awt.Graphics;
         public void paint(Graphics g) {
 
     //         PROBAR HIT BOXS
-    //        this.setColor(Color.black);
-    //        g.fillRect(this.x,this.y, this.width,this.height );
+            this.setColor(Color.black);
+            g.fillRect(this.x,this.y, this.width,this.height );
         }
  
     
