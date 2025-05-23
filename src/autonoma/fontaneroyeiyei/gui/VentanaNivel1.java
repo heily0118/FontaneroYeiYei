@@ -116,8 +116,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     f.paint(g);
 
                     System.out.println("se pinta el malo");
-                    g.setColor(Color.BLACK);
-                    g.fillRect(200, 250, 1000, 10);
 
                      
 //                    hitBoxs.getFirst().paint(g);

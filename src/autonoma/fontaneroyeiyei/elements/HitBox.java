@@ -14,19 +14,21 @@ import java.awt.Graphics;
  * @since 20250501
  * @see autonoma.fontaneroyeiyei.elements
  */
-public class HitBox extends Sprite {
 
-    public HitBox (int x, int y, int height, int width) {
-       super(x,y,height,width);
-    }
 
-    @Override
-    public void paint(Graphics g) {
-        
-//         PROBAR HIT BOXS
-//        this.setColor(Color.black);
-//        g.fillRect(this.x,this.y, this.width,this.height );
-    }
+    public class HitBox extends Sprite {
+
+        public HitBox (int x, int y, int height, int width) {
+           super(x,y,height,width);
+        }
+
+        @Override
+        public void paint(Graphics g) {
+
+    //         PROBAR HIT BOXS
+    //        this.setColor(Color.black);
+    //        g.fillRect(this.x,this.y, this.width,this.height );
+        }
  
     
 }
