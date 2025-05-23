@@ -76,19 +76,8 @@ public class Casa {
     
     return false;}
     
-     public void iniciarEnemigo(int x, int y, int width, int height) {
-        if (enemigo == null) {
-            enemigo = new FontaneroMaldadoso(x, y, width, height, this);
-            hiloEnemigo = new Thread(enemigo);
-            hiloEnemigo.start();
-        }
-    }
 
-    public void detenerEnemigo() {
-        if (enemigo != null) {
-            enemigo.detener(); 
-        }
-    }
+
     
     
 }

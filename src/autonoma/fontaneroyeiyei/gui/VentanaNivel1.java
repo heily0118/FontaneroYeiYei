@@ -9,6 +9,7 @@ import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
+import autonoma.fontaneroyeiyei.elements.Recorrido;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -39,6 +40,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private GestorJuego juego;
     private ImageIcon fondo;
     private FontaneroBueno f;
+    private FontaneroMaldadoso fmalo;
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
@@ -84,12 +86,30 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
-        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(500, 90, 80, 80, casaNivel1);
+        
+        
 
-          Thread hiloMalo = new Thread(fmalo);
-          hiloMalo.start();
+
+        // crea el fontanero malo
+        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(600, 0, 80, 80, casaNivel1);
+
+        // crea el recorrido y se lo asigna
+        ArrayList<Recorrido> recorridos = new ArrayList<>();
+        Recorrido recorridoPiso2 = new Recorrido("Recorrido Piso 2", 600 ,140);
+        recorridos.add(recorridoPiso2);
+        fmalo.setInicioX(600);
+        fmalo.setX(600);
+        fmalo.setY(160);
+
+
+        Thread hiloMalo = new Thread(fmalo);
+        hiloMalo.start();
+        
+        
+//        Thread hiloMalo = new Thread(fmalo);
+//        hiloMalo.start();
                 
-
+        
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -106,27 +126,29 @@ public class VentanaNivel1 extends javax.swing.JDialog {
             System.out.println("Imagen no encontrada");
             
         }
-        JPanel panelFondo = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-                    f.paint(g);
-
-                    System.out.println("se pinta el malo");
-
-                     
-//                    hitBoxs.getFirst().paint(g);
-//                    hitBoxs.getLast().paint(g);
-
-                    fmalo.paint(g);
-                }
-            };
         
+        
+        // crea panelFondo SIN usar fmalo todavía
+        JPanel panelFondo = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+                f.paint(g);
+                fmalo.paint(g);
+                fmalo.run();
+            }
+        };
+        
+        
+        //  agrega panel al JFrame y lanza el hilo
         setContentPane(panelFondo);
+
         Timer timer = new Timer(30, e -> panelFondo.repaint());
         timer.start();
         
+        setContentPane(panelFondo);
+        timer.start();
     }
 
     /**

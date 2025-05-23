@@ -189,8 +189,8 @@ public class FontaneroBueno extends Sprite{
     @Override
     public void paint(Graphics g){ 
             
-        System.out.println("lugar de donde se pinta");
-        System.out.println("x :"+x + "y :" + y);
+//        System.out.println("lugar de donde se pinta");
+//        System.out.println("x :"+x + "y :" + y);
         g.drawImage(jugadorImage, x, y, width, height, null);
         
 //              HIT bOXS

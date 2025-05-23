@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
@@ -16,18 +17,12 @@ import javax.swing.ImageIcon;
  * @version 1.0.0
  */
 
-public class FontaneroMaldadoso extends SpriteMobile {
+public class FontaneroMaldadoso extends SpriteMobile implements Runnable{
     
-    /** 
-     * Posición horizontal del fontanero en el escenario. 
-     */
-    private int posX;
     
-    /** 
-     * Posición vertical del fontanero en el escenario. 
-     */
-    private int posY;
     
+    private int pasos = 10;
+    private int inicioX = 0;
     /** 
      * Imagen que representa visualmente al fontanero maldadoso. 
      */
@@ -45,23 +40,33 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * @param height Es el alto del sprite
     
      */
+    
+    
+    
+
+
     public FontaneroMaldadoso(int x, int y, int width, int height, Casa casa) {
-       super(x, y, width, height);
+        super(x, y, width, height);
         this.casa = casa;
         this.fontaneroMaldadosoImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")).getImage();
     }
+
+    public void setInicioX(int inicioX) {
+        this.inicioX = inicioX;
+    }
+
+
+    
+    
+    
+    
     
     /**
      * Dibuja la imagen del fontanero maldadoso en la pantalla.
      * 
      * @param g Objeto Graphics para dibujar en pantalla
      */
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(this.fontaneroMaldadosoImage, this.x, this.y, this.width, this.height, null);
-    }
 
-    
     private void dejarTuboConFuga() {
         List<Tubo> tubos = casa.getTubos();
         if (tubos != null && !tubos.isEmpty()) {
@@ -81,33 +86,82 @@ public class FontaneroMaldadoso extends SpriteMobile {
             tubos.set(indice, tuboFuga);
         }
     }
-
-    /**
-     * Método que se ejecuta en un hilo separado.
-     * Mueve al fontanero maldadoso en dirección al fontanero bueno, paso a paso.
-     */
+    
+    
     @Override
-    public void run() {
-       long tiempoUltimaFuga = System.currentTimeMillis();
+    public void paint(Graphics g) {
+        
+        g.drawImage(this.fontaneroMaldadosoImage, this.x, this.y, this.width, this.height, null);
+    }
 
-        while (true) {
-           
-            if (System.currentTimeMillis() - tiempoUltimaFuga > 2000) {
-                dejarTuboConFuga();
-                tiempoUltimaFuga = System.currentTimeMillis();
-            }
+    
+        private void caminarRecorridosDerecha() {
 
-            try {
-                Thread.sleep(20); 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(limiteDeMapa(x + pasos , y)){
+            this.x += pasos;
             }
+            
         }
     
-    }
-      public void detener() {
-        running = false;
-    }
+        
+         private void caminarRecorridosIzquierda() {
+
+            if(limiteDeMapa(x - pasos , y)){
+                System.out.println("se va a la izquierda");
+                System.out.println(x + " - " +pasos + " = " + (x-pasos));
+                System.out.println("y :" +y);
+            this.x -= pasos;
+            }
+            
+        }
     
-  
-}
+    public boolean limiteDeMapa(int nx, int ny) {
+        // Verifica si nx y ny están dentro del rango permitido
+
+
+        if (nx < 0 || nx > 700 - width || ny < 0 || ny > 700 - height) {
+
+            System.out.println("esta afuera");
+            return false; // Movimiento no permitido
+        }
+
+        // Si el movimiento es válido, se asignan los valores a x e y
+
+        return true; // Movimiento permitido
+        }
+    
+    
+    
+    
+        @Override
+        public void run() {
+            
+            while (true) {
+                try {
+                    if (inicioX < 450) {
+                        System.out.println("es menor");
+                           caminarRecorridosDerecha();
+                        if (limiteDeMapa(x, y)) {
+                            
+                            
+                            break;
+                        }
+                    } else {
+                        System.out.println("es mayor");
+                        caminarRecorridosIzquierda();
+
+                        if (limiteDeMapa(x, y)) {
+                            break;
+                        }
+                    }
+                    Thread.sleep(5000000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        } 
+        }
+    
+        
+    
+   
