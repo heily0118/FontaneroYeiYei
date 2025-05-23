@@ -84,11 +84,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
-        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(500, 90, 80, 80, casaNivel1);
-
-          Thread hiloMalo = new Thread(fmalo);
-          hiloMalo.start();
-                
 
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
@@ -111,15 +106,12 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+
+                    // Pinta elementos que están dentro de Casa
+                    casaNivel1.paint(g); 
+
+                    // Pinta al fontanero bueno
                     f.paint(g);
-
-                    System.out.println("se pinta el malo");
-
-                     
-//                    hitBoxs.getFirst().paint(g);
-//                    hitBoxs.getLast().paint(g);
-
-                    fmalo.paint(g);
                 }
             };
         
