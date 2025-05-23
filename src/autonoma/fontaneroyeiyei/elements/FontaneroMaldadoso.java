@@ -33,15 +33,8 @@ public class FontaneroMaldadoso extends SpriteMobile {
      */
     private Image fontaneroMaldadosoImage;
     
-    /** 
-     * Referencia al fontanero bueno.
-     */
-    private FontaneroBueno fontaneroBueno;
-    
-    /** 
-     * Lista de herramientas que el fontanero maldadoso ha robado al fontanero bueno. 
-     */
-    private List<Herramienta> herramientasRobadas = new ArrayList<>();
+    private Casa casa;
+
 
     /**
      * Constructor de la clase FontaneroMaldadoso.
@@ -50,11 +43,11 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * @param y Es la poosición Y inicial
      * @param width Es el ancho del sprite
      * @param height Es el alto del sprite
-     * @param fontaneroBueno Referencia al fontanero bueno que debe seguir
+    
      */
-    public FontaneroMaldadoso(int x, int y, int width, int height, FontaneroBueno fontaneroBueno) {
-        super(x, y, width, height);
-        this.fontaneroBueno = fontaneroBueno;
+    public FontaneroMaldadoso(int x, int y, int width, int height, Casa casa) {
+       super(x, y, width, height);
+        this.casa = casa;
         this.fontaneroMaldadosoImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")).getImage();
     }
     
@@ -68,25 +61,40 @@ public class FontaneroMaldadoso extends SpriteMobile {
         g.drawImage(this.fontaneroMaldadosoImage, this.x, this.y, this.width, this.height, null);
     }
 
+    
+    private void dejarTuboConFuga() {
+        List<Tubo> tubos = casa.getTubos();
+        if (tubos != null && !tubos.isEmpty()) {
+            int indice = (int) (Math.random() * tubos.size());
+
+            
+            Tubo tuboOriginal = tubos.get(indice);
+            int x = tuboOriginal.getX();
+            int y = tuboOriginal.getY();
+            int ancho = tuboOriginal.getWidth();
+            int alto = tuboOriginal.getHeight();
+
+            
+           Tubo tuboFuga = new TuboConFuga("tuboFuga", x, y, ancho, alto, new Fuga(10, 20, "TipoDeFuga"));
+ 
+
+            tubos.set(indice, tuboFuga);
+        }
+    }
+
     /**
      * Método que se ejecuta en un hilo separado.
      * Mueve al fontanero maldadoso en dirección al fontanero bueno, paso a paso.
      */
     @Override
     public void run() {
-        while (true) {
-            if (this.fontaneroBueno != null) {
-                if (this.x < fontaneroBueno.getX()) {
-                    this.x++; 
-                } else if (this.x > fontaneroBueno.getX()) {
-                    this.x--; 
-                }
+       long tiempoUltimaFuga = System.currentTimeMillis();
 
-                if (this.y < fontaneroBueno.getY()) {
-                    this.y++;
-                } else if (this.y > fontaneroBueno.getY()) {
-                    this.y--; 
-                }
+        while (true) {
+           
+            if (System.currentTimeMillis() - tiempoUltimaFuga > 2000) {
+                dejarTuboConFuga();
+                tiempoUltimaFuga = System.currentTimeMillis();
             }
 
             try {
@@ -95,19 +103,8 @@ public class FontaneroMaldadoso extends SpriteMobile {
                 e.printStackTrace();
             }
         }
+    
     }
     
-    /**
-     * Roba una herramienta y la guarda en la lista interna de herramientas robadas.
-     * 
-     * @param herramienta Es la herramienta a robar.
-     */
-    public void robarHerramienta(Herramienta herramienta) {
-        if (herramienta != null) {
-            herramientasRobadas.add(herramienta);
-            System.out.println("¡Herramienta robada!: " + herramienta.getNombre());
-        } else {
-            System.out.println("No se pudo robar la herramienta: es nula.");
-        }
-    }
+  
 }

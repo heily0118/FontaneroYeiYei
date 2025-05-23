@@ -4,6 +4,7 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
@@ -66,9 +67,9 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         f.setY(250);
         f.setX(25);
         
-        System.out.println(" se cre el malo");
-       FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785,90,80,80,f);
-                
+        Casa casaNivel1 = juego.getCasaNivel1(); 
+
+        FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785, 90, 80, 80, casaNivel1);
                 
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);

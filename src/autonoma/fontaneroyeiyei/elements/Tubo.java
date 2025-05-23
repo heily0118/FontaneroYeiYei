@@ -71,6 +71,6 @@ public abstract class Tubo extends Sprite{
         }
     }
     
-    
+     public abstract boolean tieneFuga();
 
 }

@@ -4,8 +4,10 @@
  */
 package autonoma.fontaneroyeiyei.main;
 
+import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.gui.VentanaPrincipal;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,11 +19,16 @@ public class FontaneroYeiYei {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       GestorJuego juego = new GestorJuego();
         
+         ArrayList<Casa> casas = new ArrayList<>();
+        casas.add(new Casa());
+        casas.add(new Casa());
+        casas.add(new Casa());
 
-        
-        VentanaPrincipal ventana = new VentanaPrincipal (juego);
+      
+        GestorJuego juego = new GestorJuego(casas);
+     
+     VentanaPrincipal ventana = new VentanaPrincipal (juego);
         ventana.setVisible(true);
     }
     

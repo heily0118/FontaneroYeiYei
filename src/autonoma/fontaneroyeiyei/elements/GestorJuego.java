@@ -25,8 +25,8 @@ public class GestorJuego {
     private EscritorArchivoTextoPlano escritor;
     private final String archivoProgreso = "progreso.txt";
 
-    public GestorJuego() {
-        this.casas = new ArrayList<>();
+    public GestorJuego(ArrayList<Casa> casas) {
+        this.casas = casas;
         this.lector = new LectorArchivoTextoPlano();
         this.escritor = new EscritorArchivoTextoPlano(archivoProgreso);
         cargarNivel();
@@ -36,7 +36,10 @@ public class GestorJuego {
         
         this.fontanero = new FontaneroBueno(nombreFontanero);
        
-        this.enemigo = new FontaneroMaldadoso(10, 20, 30, 40, this.fontanero); 
+       this.enemigo = new FontaneroMaldadoso(10, 20, 30, 40, this.casas.get(0));
+
+
+
     }
 
     // Cargar nivel desde archivo progreso.txt
@@ -136,5 +139,10 @@ public class GestorJuego {
 
         fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual);
     }
+     
+    public Casa getCasaNivel1() {
+        return casas.get(0);  // si la lista casas tiene el nivel 1 en la posición 0
+    }
+
 
 }

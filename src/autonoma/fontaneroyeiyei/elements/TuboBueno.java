@@ -25,4 +25,9 @@ public class TuboBueno extends Tubo {
             g.drawImage(this.getImage().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
         }
     }
+    
+     @Override
+    public boolean tieneFuga() {
+        return false;
+    }
 }

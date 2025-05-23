@@ -46,4 +46,9 @@ public class TuboConFuga extends Tubo {
         }
     }
 
+    
+     @Override
+    public boolean tieneFuga() {
+        return true;
+    }
 }
