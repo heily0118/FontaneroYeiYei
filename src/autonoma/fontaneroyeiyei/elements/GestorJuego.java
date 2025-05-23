@@ -16,7 +16,10 @@ import java.util.List;
  */
 
 public class GestorJuego {
- private ArrayList<Casa> casas;
+   
+    private FontaneroBueno fontanero;
+    private FontaneroMaldadoso enemigo;
+    private ArrayList<Casa> casas;
     private Nivel nivel;
     private LectorArchivoTextoPlano lector;
     private EscritorArchivoTextoPlano escritor;
@@ -25,8 +28,15 @@ public class GestorJuego {
     public GestorJuego() {
         this.casas = new ArrayList<>();
         this.lector = new LectorArchivoTextoPlano();
-        this.escritor = new EscritorArchivoTextoPlano(archivoProgreso); 
+        this.escritor = new EscritorArchivoTextoPlano(archivoProgreso);
         cargarNivel();
+       
+    }
+    public void inicializarFontanero(String nombreFontanero) {
+        
+        this.fontanero = new FontaneroBueno(nombreFontanero);
+       
+        this.enemigo = new FontaneroMaldadoso(10, 20, 30, 40, this.fontanero); 
     }
 
     // Cargar nivel desde archivo progreso.txt
@@ -108,5 +118,23 @@ public class GestorJuego {
         this.casas = casas;
     }
 
+    
+     public void manejarTecla(char tecla) {
+        if (fontanero == null) {
+            System.out.println("Fontanero no inicializado, ingresa el nombre primero.");
+            return;
+        }
+
+        int indiceCasa = nivel.getNumero() - 1;
+        if (indiceCasa < 0 || indiceCasa >= casas.size()) {
+            System.out.println("Nivel fuera de rango, no hay casa para este nivel");
+            return;
+        }
+
+        Casa casaActual = casas.get(indiceCasa);
+        List<Tubo> tubosCasaActual = casaActual.getTubos();
+
+        fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual);
+    }
 
 }

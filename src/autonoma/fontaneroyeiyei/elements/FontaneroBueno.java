@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
@@ -147,7 +148,7 @@ public class FontaneroBueno extends Sprite{
     }
     
     
-   public void usarHerramientaEnTubos(char tecla, ArrayList<Tubo> tubos) {
+   public void usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
         Herramienta herramienta = null;
         if (tecla == 'L' || tecla == 'l') {
             herramienta = new LlaveIglesa();
