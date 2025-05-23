@@ -20,7 +20,7 @@ public class TuboConFuga extends Tubo {
     public TuboConFuga(String estado, int x, int y, int width, int height, Fuga fuga) {
         super(estado, x, y, width, height);
         this.fuga = fuga;
-        this.setImage(new ImageIcon("/autonoma/fontaneroyeiyei/images/TuboMalo.png")); 
+        this.setImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMalo.png"))); 
     }
 
     @Override
@@ -33,7 +33,17 @@ public class TuboConFuga extends Tubo {
     public Fuga getFuga() {
         return fuga;
     }
-     public String getTipoFuga() {
-        return fuga.getTipo();  
+
+    public void repararConLlave() {
+        if (fuga != null && !fuga.estaReparada() && "tuerca".equalsIgnoreCase(fuga.getTipo())) {
+            fuga.reparar('L');
+        }
     }
+
+    public void repararConSellador() {
+        if (fuga != null && !fuga.estaReparada() && "grieta".equalsIgnoreCase(fuga.getTipo())) {
+            fuga.reparar('S');
+        }
+    }
+
 }

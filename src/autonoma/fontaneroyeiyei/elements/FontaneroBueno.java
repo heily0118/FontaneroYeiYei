@@ -32,6 +32,8 @@ public class FontaneroBueno extends Sprite{
     private int largoMax;
     private int alturaMin;
     private int largoMin;
+    private Herramienta herramientaSeleccionada;
+
     
     /////////////////////////////////
     /// Constructor
@@ -143,4 +145,34 @@ public class FontaneroBueno extends Sprite{
         System.out.println("x :"+x + "y :" + y);
         g.drawImage(jugadorImage, x, y, width, height, null);
     }
+    
+    
+   public void usarHerramientaEnTubos(char tecla, ArrayList<Tubo> tubos) {
+        Herramienta herramienta = null;
+        if (tecla == 'L' || tecla == 'l') {
+            herramienta = new LlaveIglesa();
+        } else if (tecla == 'S' || tecla == 's') {
+            herramienta = new Sellador();
+        }
+        if (herramienta == null) return;
+
+        for (Tubo tubo : tubos) {
+           
+            if (tubo instanceof TuboConFuga) {
+                TuboConFuga tuboConFuga = (TuboConFuga) tubo;
+                Fuga fuga = tuboConFuga.getFuga();
+                if (fuga != null && !fuga.estaReparada() && fuga.estaCerca(x, y)) {
+                    herramienta.usarEn(tuboConFuga);
+                    if (fuga.estaReparada()) {
+                        System.out.println("Fuga reparada con " + herramienta.getNombre());
+                       
+                    } else {
+                        System.out.println("No se pudo reparar con " + herramienta.getNombre());
+                    }
+                    break; 
+                }
+            }
+        }
+}
+
 }

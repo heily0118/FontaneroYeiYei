@@ -13,11 +13,16 @@ package autonoma.fontaneroyeiyei.elements;
 
 public class Sellador extends Herramienta {
 
-    @Override
+      @Override
     public void usarEn(Tubo tubo) {
-        if (tubo instanceof TuboConFuga fuga && "grieta".equalsIgnoreCase(fuga.getTipoFuga())) {
-            fuga.setEstado("funcionando");
-          
+       
+        if (tubo instanceof TuboConFuga) {
+            TuboConFuga tuboConFuga = (TuboConFuga) tubo;
+            if (tuboConFuga.getFuga() != null && 
+                !tuboConFuga.getFuga().estaReparada() &&
+                "grieta".equalsIgnoreCase(tuboConFuga.getFuga().getTipo())) {
+                tuboConFuga.repararConSellador();
+           }
         }
     }
 
@@ -25,4 +30,5 @@ public class Sellador extends Herramienta {
     public String getNombre() {
         return "Sellador";
     }
+
 }

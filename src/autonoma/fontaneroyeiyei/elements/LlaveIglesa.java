@@ -12,16 +12,23 @@ package autonoma.fontaneroyeiyei.elements;
  */
 public class LlaveIglesa extends Herramienta {
 
+   
     @Override
     public void usarEn(Tubo tubo) {
-        if (tubo instanceof TuboConFuga fuga && "tuerca".equalsIgnoreCase(fuga.getTipoFuga())) {
-            fuga.setEstado("funcionando");
-            
+    
+        if (tubo instanceof TuboConFuga) {
+            TuboConFuga tuboConFuga = (TuboConFuga) tubo;
+            if (tuboConFuga.getFuga() != null && 
+                !tuboConFuga.getFuga().estaReparada() &&
+                "tuerca".equalsIgnoreCase(tuboConFuga.getFuga().getTipo())) {
+                tuboConFuga.repararConLlave();
+            }
         }
     }
 
     @Override
     public String getNombre() {
-        return "Llave";
+        return "Llave Inglesa";
     }
+
 }

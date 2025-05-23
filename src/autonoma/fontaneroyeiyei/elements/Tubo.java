@@ -70,5 +70,7 @@ public abstract class Tubo extends Sprite{
             g.drawImage(this.getImage().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
         }
     }
+    
+    
 
 }
