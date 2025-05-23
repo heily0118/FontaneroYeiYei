@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
@@ -70,6 +71,8 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
         FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785, 90, 80, 80, casaNivel1);
+          Thread hiloMalo = new Thread(fmalo);
+          hiloMalo.start();
                 
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
@@ -91,11 +94,8 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-
                     f.paint(g);
-                    
                     System.out.println("se pinta el malo");
                     g.setColor(Color.BLACK);
                     g.fillRect(200, 250, 1000, 10);
@@ -104,6 +104,8 @@ public class VentanaNivel1 extends javax.swing.JDialog {
             };
         
         setContentPane(panelFondo);
+        Timer timer = new Timer(30, e -> panelFondo.repaint());
+        timer.start();
         
     }
 

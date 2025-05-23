@@ -105,6 +105,9 @@ public class FontaneroMaldadoso extends SpriteMobile {
         }
     
     }
+      public void detener() {
+        running = false;
+    }
     
   
 }

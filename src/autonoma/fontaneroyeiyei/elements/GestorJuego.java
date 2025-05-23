@@ -18,7 +18,7 @@ import java.util.List;
 public class GestorJuego {
    
     private FontaneroBueno fontanero;
-    private FontaneroMaldadoso enemigo;
+
     private ArrayList<Casa> casas;
     private Nivel nivel;
     private LectorArchivoTextoPlano lector;
@@ -35,8 +35,7 @@ public class GestorJuego {
     public void inicializarFontanero(String nombreFontanero) {
         
         this.fontanero = new FontaneroBueno(nombreFontanero);
-       
-       this.enemigo = new FontaneroMaldadoso(10, 20, 30, 40, this.casas.get(0));
+    
 
 
 
@@ -141,7 +140,7 @@ public class GestorJuego {
     }
      
     public Casa getCasaNivel1() {
-        return casas.get(0);  // si la lista casas tiene el nivel 1 en la posición 0
+        return casas.get(0); 
     }
 
 

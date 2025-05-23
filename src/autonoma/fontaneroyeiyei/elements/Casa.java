@@ -16,6 +16,8 @@ import java.util.List;
 public class Casa {
 
     private List<Tubo> tubos;
+    private FontaneroMaldadoso enemigo;
+    private Thread hiloEnemigo;
     
     
     
@@ -25,6 +27,8 @@ public class Casa {
     
     
     public Casa() {
+        
+        
     }
 
     //////////////////////////////////
@@ -48,7 +52,13 @@ public class Casa {
         this.tubos = tubos;
     }
     
-    
+     public FontaneroMaldadoso getEnemigo() {
+        return enemigo;
+    }
+
+    public void setEnemigo(FontaneroMaldadoso enemigo) {
+        this.enemigo = enemigo;
+    }
     
     
     
@@ -66,7 +76,19 @@ public class Casa {
     
     return false;}
     
-    
+     public void iniciarEnemigo(int x, int y, int width, int height) {
+        if (enemigo == null) {
+            enemigo = new FontaneroMaldadoso(x, y, width, height, this);
+            hiloEnemigo = new Thread(enemigo);
+            hiloEnemigo.start();
+        }
+    }
+
+    public void detenerEnemigo() {
+        if (enemigo != null) {
+            enemigo.detener(); 
+        }
+    }
     
     
 }
