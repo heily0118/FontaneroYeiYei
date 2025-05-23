@@ -16,6 +16,7 @@
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
         </group>
+
         <group>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
@@ -24,5 +25,8 @@
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaPrincipal.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/HitBox.java</file>
         </group>
+
+        <group/>
+
     </open-files>
 </project-private>
