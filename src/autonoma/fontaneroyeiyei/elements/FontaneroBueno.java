@@ -34,13 +34,13 @@ public class FontaneroBueno extends Sprite{
     private int largoMax;
     private int alturaMin;
     private int largoMin;
-<<<<<<< HEAD
+    
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
-=======
+
     private Herramienta herramientaSeleccionada;
 
     
->>>>>>> 6b6a0caf66293e4d0e551b7d3ee2274996b0d5a6
+
     /////////////////////////////////
     /// Constructor
     ////

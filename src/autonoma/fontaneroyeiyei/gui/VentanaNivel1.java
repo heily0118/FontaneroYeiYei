@@ -67,7 +67,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         f.setY(250);
         f.setX(25);
         
-<<<<<<< HEAD
         //se crea la hit box del nivel 
 
                     
@@ -83,14 +82,11 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         f.setHitBoxs(hitBoxs);
         
-       FontaneroMaldadoso fmalo = new FontaneroMaldadoso(400,90,80,80,f);
                 
-=======
         Casa casaNivel1 = juego.getCasaNivel1(); 
 
         FontaneroMaldadoso fmalo = new FontaneroMaldadoso(785, 90, 80, 80, casaNivel1);
->>>>>>> 6b6a0caf66293e4d0e551b7d3ee2274996b0d5a6
-                
+
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
