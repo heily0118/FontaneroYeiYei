@@ -1,94 +1,76 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.fontaneroyeiyei.elements;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author Mateo Quintero Morales <mateo.quinterom@autonoma.edu.co>
- * @since 20250425
- * @version 1.0.0
- */
 
 public class Casa {
 
+    private int width;
+    private int height;
+
     private List<Tubo> tubos;
-    private FontaneroMaldadoso enemigo;
-    private Thread hiloEnemigo;
-    
-    
-    
-    /////////////////////////////////
-    /// Constructor
-    ////
-    
-    
-    public Casa() {
-        
-        
+    private Serviente serviente;
+    private FontaneroMaldadoso fontaneroMalo;
+
+    public Casa(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        this.tubos = new ArrayList<>();
+        inicializarTubosConFugas();
+
+       
+        int limiteIzquierdo = 0;
+        int limiteDerecho = width;
+
+      
+        this.serviente = new Serviente(0, height - 100, 50, 50, limiteIzquierdo, limiteDerecho);
+        this.fontaneroMalo = new FontaneroMaldadoso(0, height - 100, 50, 50, this);
+
+      
+        Thread hiloServiente = new Thread(serviente);
+        hiloServiente.start();
+
+        Thread hiloFontanero = new Thread(fontaneroMalo);
+        hiloFontanero.start();
     }
 
-    //////////////////////////////////
-    /// Metodos de acceso (get)
-    ///
+    private void inicializarTubosConFugas() {
+      
+        for (int i = 0; i < 5; i++) {
+            int x = 100 + i * 100;
+            int y = 200;
+          
+            Fuga fuga = new Fuga(x + 10, y + 10, (i % 2 == 0) ? "tuerca" : "grieta");
+            TuboConFuga tubo = new TuboConFuga("malo", x, y, 60, 20, fuga);
+            tubos.add(tubo);
+        }
+    }
 
-   
 
     public List<Tubo> getTubos() {
         return tubos;
     }
 
-    
-    
-    //////////////////////////////////
-    /// Metodos de acceso (set)
-    ///
+
+    public void paint(Graphics g) {
+      
+        for (Tubo tubo : tubos) {
+            tubo.paint(g);
+        }
+
+        serviente.paint(g);
+
+       
+        fontaneroMalo.paint(g);
+    }
+
   
-
-    public void setTubos(List<Tubo> tubos) {
-        this.tubos = tubos;
+    public void iniciarEnemigo(int x, int y, int ancho, int alto) {
+        fontaneroMalo.setX(x);
+        fontaneroMalo.setY(y);
+        fontaneroMalo.setWidth(ancho);
+        fontaneroMalo.setHeight(alto);
     }
-    
-     public FontaneroMaldadoso getEnemigo() {
-        return enemigo;
-    }
-
-    public void setEnemigo(FontaneroMaldadoso enemigo) {
-        this.enemigo = enemigo;
-    }
-    
-    
-    
-    
-    //////////////////////////////////
-    /// Metodos
-    
-    public void generarFugasAleatorias(){
-    
-    }
-    
-   
-    
-    public boolean verificarEstadoCasa(){
-    
-    return false;}
-    
-     public void iniciarEnemigo(int x, int y, int width, int height) {
-        if (enemigo == null) {
-            enemigo = new FontaneroMaldadoso(x, y, width, height, this);
-            hiloEnemigo = new Thread(enemigo);
-            hiloEnemigo.start();
-        }
-    }
-
-    public void detenerEnemigo() {
-        if (enemigo != null) {
-            enemigo.detener(); 
-        }
-    }
-    
-    
 }

@@ -184,7 +184,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         this.repaint();
 
         
-        ;
+        
     }
     
     
