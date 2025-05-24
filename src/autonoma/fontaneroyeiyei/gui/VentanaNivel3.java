@@ -8,6 +8,7 @@ import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
+import autonoma.fontaneroyeiyei.elements.Recorrido;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -115,6 +116,19 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         
         f.setHitBoxs(hitBoxs);
         
+        ////PONER RECORRDOS AL MALO
+        ArrayList<Recorrido> recorridos = new ArrayList<>();
+        
+        Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 600,160);
+        Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,580);
+        
+        recorridos.add(recoridoSegundoPiso);
+        recorridos.add(recoridoPrimerPiso);
+        
+        juego.getCasaNivel1().getFontaneroMalo().setRecorridos(recorridos);
+        
+        Thread hiloFontanero = new Thread(juego.getCasaNivel1().getFontaneroMalo());
+        hiloFontanero.start();
         
         
         
@@ -131,10 +145,10 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                      f.paint(g);
                      casaNivel3.paint(g); 
 //                    Para pintar el los bloques de hitboxs
-                    for(HitBox h : hitBoxs){                
-                        h.paint(g);
-                    
-                }
+//                    for(HitBox h : hitBoxs){                
+//                        h.paint(g);
+//                    
+//                }
                    
                     // Tiempo
                     int minutos = tiempoRestante / 60;

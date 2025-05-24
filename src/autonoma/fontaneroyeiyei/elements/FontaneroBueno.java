@@ -250,13 +250,6 @@ public class FontaneroBueno extends Sprite{
      */
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
         
-//        System.out.println("Valores de comparación:");
-//    System.out.println("nx: " + nx);
-//    System.out.println("ny: " + ny);
-//    System.out.println("h.getX(): " + h.getX());
-//    System.out.println("h.getY(): " + h.getY());
-//    System.out.println("h.getWidth(): " + h.getWidth());
-//    System.out.println("h.getHeight(): " + h.getHeight());
 
 
 
@@ -283,15 +276,15 @@ public class FontaneroBueno extends Sprite{
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        System.out.println("lugar de donde se pinta");
-//        System.out.println("x :"+x + "y :" + y);
+        System.out.println("lugar de donde se pinta");
+        System.out.println("x :"+x + "y :" + y);
 
-//        g.drawImage(jugadorImage, x, y, width, height, null);
+        g.drawImage(jugadorImage, x, y, width, height, null);
         
 //              HIT bOXS
-        this.setColor(Color.RED);
-        g.setColor(color);
-        g.fillRect(x,y, height, width);
+//        this.setColor(Color.RED);
+//        g.setColor(color);
+//        g.fillRect(x,y, height, width);
     }
     
     /**

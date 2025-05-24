@@ -34,12 +34,12 @@ public class Serpiente extends SpriteMobile {
     public void paint(Graphics g) {
         
         //          HIT bOXS
-        this.setColor(Color.GREEN);
-        g.setColor(color);
-        g.fillRect(x,y, height, width);
+//        this.setColor(Color.GREEN);
+//        g.setColor(color);
+//        g.fillRect(x,y, height, width);
         
         
-//        g.drawImage(servienteImage, getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(servienteImage, getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
