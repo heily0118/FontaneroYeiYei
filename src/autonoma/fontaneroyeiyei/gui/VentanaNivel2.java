@@ -223,14 +223,20 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         }
         if(evt.getKeyCode() == KeyEvent.VK_SPACE){
         
-        f.saltar(evt.getKeyCode());
+          f.saltar(evt.getKeyCode());
 
         }
+        
+           // reparar la fuga
+        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+             juego.manejarTecla(evt.getKeyChar());
+         }
         
         this.repaint();
 
         
-        ;
+        
 
         
         
