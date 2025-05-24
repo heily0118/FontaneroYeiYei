@@ -16,14 +16,28 @@ import javax.swing.JPanel;
  * @since 20250516
  * @version 1.0.0
  */
-      
- 
+
 public class FontaneroMaldadoso extends SpriteMobile {
-
-
+    
+    /**
+     * Incremento horizontal de la posición, usado para desplazamiento en X.
+     */
     private int dx = 3;  
+    
+    /**
+     * Incremento vertical de la posición, usado para desplazamiento en Y.
+     */
     private int dy = -3; 
+    
+    /**
+     * 
+     * Referencia a la casa asociada al objeto.
+     */
     private final Casa casa;
+    
+    /**
+     * Lista de áreas de colisión (hitboxes) que se utilizan para detectar colisiones con el entorno.
+     */
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
 
 
@@ -32,10 +46,8 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * 
      * @param x Es la posición X inicial
      * @param y Es la poosición Y inicial
-    
+     *
      */
-    
-
     public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa){
         super(x,y,w,h);
 
@@ -53,24 +65,38 @@ public class FontaneroMaldadoso extends SpriteMobile {
         boolean hayColision = false;
         
         for (HitBox h : hitBoxs) {
-                    if (this.colisionaConhHitbox(h,x,y)) {
-                        hayColision = true;
-                        break; // Salimos del ciclo en cuanto detectamos una colisión
-                    }
-                }
+            if (this.colisionaConhHitbox(h,x,y)) {
+                hayColision = true;
+                break; // Salimos del ciclo en cuanto detectamos una colisión
+            }
+        }
+        
         if(!hayColision){
-        Fuga fuga = new Fuga(this.x+10, this.y+10,
-                             Math.random()<0.5?"tuerca":"grieta");
-        TuboConFuga nuevo = new TuboConFuga("malo",
-                         this.x, this.y, 60, 20, fuga);
-        casa.agregarTubo(nuevo);
+            Fuga fuga = new Fuga(this.x+10, this.y+10,
+                                 Math.random()<0.5?"tuerca":"grieta");
+            TuboConFuga nuevo = new TuboConFuga("malo",
+                             this.x, this.y, 60, 20, fuga);
+            casa.agregarTubo(nuevo);
         }
     }
 
+    /**
+     * Establece la lista de hitboxes para detectar colisiones.
+     * 
+     * @param hitBoxs Es la lista de hitboxes que serán usadas para la detección de colisiones.
+     */
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
 
+    /**
+     * Verifica si las coordenadas (nx, ny) del objeto colisionan con la hitbox dada.
+     * 
+     * @param h   HitBox con la cual se verifica la colisión.
+     * @param nx  Es la nueva posición X del objeto.
+     * @param ny  Es la nueva posición Y del objeto.
+     * @return    Retorna true si hay colisión con la hitbox o false en caso contrario.
+     */
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
 
 
@@ -81,50 +107,53 @@ public class FontaneroMaldadoso extends SpriteMobile {
             return true;
         }
         
-         return false;
+        return false;
     }
     
-        @Override
-        public void run() {
-            int tubosColocados = 0;
-            long ultimoTubo = System.currentTimeMillis();
+    /**
+     * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
+     */
+    @Override
+    public void run() {
+        int tubosColocados = 0;
+        long ultimoTubo = System.currentTimeMillis();
 
-            while (tubosColocados < 10) {
-                x += dx; // Solo movimiento horizontal
+        while (tubosColocados < 10) {
+            x += dx; // Solo movimiento horizontal
 
-                // Detectar colisión con los bordes y cambiar dirección si es necesario
-                if (x < 0 || x + width > casa.getWidth()) {
-                    dx = -dx;
-                }
-
-                // Controlar el tiempo para soltar tubos
-                if (System.currentTimeMillis() - ultimoTubo >= 2000) {
-                    dejarTuboConFuga();
-                    tubosColocados++;
-                    ultimoTubo = System.currentTimeMillis();
-                }
-
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            // Detectar colisión con los bordes y cambiar dirección si es necesario
+            if (x < 0 || x + width > casa.getWidth()) {
+                dx = -dx;
             }
 
-            this.setVisible(false);
-            casa.eliminarFontaneroMalo();
+            // Controlar el tiempo para soltar tubos
+            if (System.currentTimeMillis() - ultimoTubo >= 2000) {
+                dejarTuboConFuga();
+                tubosColocados++;
+                ultimoTubo = System.currentTimeMillis();
+            }
+
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
+        this.setVisible(false);
+        casa.eliminarFontaneroMalo();
+    }
+
+    /**
+     * Dibuja el objeto en pantalla si está visible y tiene imagen asignada.
+     * 
+     * @param g Es el objeto Graphics para el dibujo.
+     */
     @Override
     public void paint(Graphics g) {
          if (this.isVisible() && this.getImage() != null) {
             g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
         }
-    }
-    
-    
-    
-    
-    
+    }    
 }
 
