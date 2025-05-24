@@ -10,6 +10,7 @@ import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
+import autonoma.fontaneroyeiyei.elements.Tubo;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
@@ -246,13 +248,17 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         if(evt.getKeyCode() == KeyEvent.VK_SPACE){
         
-        f.saltar(evt.getKeyCode());
-        
-
-
-
-        
+           f.saltar(evt.getKeyCode());
         }
+
+        // reparar la fuga
+       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+             juego.manejarTecla(evt.getKeyChar());
+         }
+
+        
+        
        
         
         this.repaint();
@@ -264,19 +270,41 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private void perderJuego() {
         
         System.out.println("Se acabó el tiempo, perdiste una vida!");
-        
+
         juegoTerminado = true;
         repaint();
 
         Timer timerGameOver = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                javax.swing.JOptionPane.showMessageDialog(VentanaNivel1.this, "¡Tiempo terminado! Has perdido.");
-                dispose();
+                Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
+                int seleccion = javax.swing.JOptionPane.showOptionDialog(
+                        VentanaNivel1.this,
+                        "¡Tiempo terminado! ¿Qué deseas hacer?",
+                        "Fin del Juego",
+                        javax.swing.JOptionPane.DEFAULT_OPTION,
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[0]
+                );
+
+                if (seleccion == 0) {
+                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
+                    nuevaListaCasas.add(new Casa(700, 700,1)); 
+                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
+
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego);
+                    dispose(); 
+                    nuevaVentana.setVisible(true); 
+                } else {
+                    dispose(); 
+                }
             }
         });
-        timerGameOver.setRepeats(false); 
-        timerGameOver.start(); 
+
+        timerGameOver.setRepeats(false);
+        timerGameOver.start();
     }
     
     private void iniciarReloj() {

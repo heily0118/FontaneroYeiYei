@@ -238,33 +238,63 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         }
         if(evt.getKeyCode() == KeyEvent.VK_SPACE){
         
-        f.saltar(evt.getKeyCode());
+           f.saltar(evt.getKeyCode());
 
         }
+        
+           // reparar la fuga
+       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+             juego.manejarTecla(evt.getKeyChar());
+         }
         
         this.repaint();
 
         
-        ;        
+              
         
     }//GEN-LAST:event_formKeyPressed
 
     private void perderJuego() {
         
         System.out.println("Se acabó el tiempo, perdiste una vida!");
-        
+
         juegoTerminado = true;
         repaint();
 
         Timer timerGameOver = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                javax.swing.JOptionPane.showMessageDialog(VentanaNivel3.this, "¡Tiempo terminado! Has perdido.");
-                dispose();
+                Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
+                int seleccion = javax.swing.JOptionPane.showOptionDialog(
+                        VentanaNivel3.this,
+                        "¡Tiempo terminado, has perdido! ¿Qué deseas hacer?",
+                        "Fin del Juego",
+                        javax.swing.JOptionPane.DEFAULT_OPTION,
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[0]
+                );
+
+                if (seleccion == 0) {
+                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
+                    nuevaListaCasas.add(new Casa(700, 700,3)); 
+                    nuevaListaCasas.add(new Casa(700, 700,3));
+                    nuevaListaCasas.add(new Casa(700, 700,3)); 
+                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
+
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego);
+                    dispose(); 
+                    nuevaVentana.setVisible(true); 
+                } else {
+                    dispose(); 
+                }
             }
         });
-        timerGameOver.setRepeats(false); 
-        timerGameOver.start(); 
+
+        timerGameOver.setRepeats(false);
+        timerGameOver.start();
     }
     
     private void iniciarReloj() {

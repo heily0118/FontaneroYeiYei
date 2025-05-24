@@ -5,7 +5,9 @@
 package autonoma.fontaneroyeiyei.elements;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -17,17 +19,36 @@ import javax.swing.JPanel;
  * @version 1.0.0
  */
 
-
-
-    
-    
- 
 public class FontaneroMaldadoso extends SpriteMobile {
+    
+    private final int maxTubos;
+    private final int tiempoEntreTubos;
+    private volatile boolean activo = true;
+    private List<Integer> pisosY; 
+    private int pisoActual = 0;
+    private boolean visible = true;
 
-
+    private FontaneroBueno fontaneroBueno;
+    
+    /**
+     * Incremento horizontal de la posición, usado para desplazamiento en X.
+     */
     private int dx = 3;  
+    
+    /**
+     * Incremento vertical de la posición, usado para desplazamiento en Y.
+     */
     private int dy = -3; 
+    
+    /**
+     * 
+     * Referencia a la casa asociada al objeto.
+     */
     private final Casa casa;
+    
+    /**
+     * Lista de áreas de colisión (hitboxes) que se utilizan para detectar colisiones con el entorno.
+     */
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
    private ArrayList<Recorrido> recorridos = new ArrayList<>();
 
@@ -37,20 +58,22 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * 
      * @param x Es la posición X inicial
      * @param y Es la poosición Y inicial
-     * @param width Es el ancho del sprite
-     * @param height Es el alto del sprite
-    
+     *
      */
-    
-
-    public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa){
-        super(x,y,w,h);
-
+    public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa, List<Integer> pisosY, FontaneroBueno fontaneroBueno, int maxTubos, int tiempoEntreTubos){
+       super(x,y,w,h);
         this.casa = casa;
-        this.setVisible(true);            
-        this.setImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")));
 
-    }
+      this.pisosY = pisosY;
+      this.fontaneroBueno = fontaneroBueno;
+      this.maxTubos = maxTubos;
+      this.tiempoEntreTubos = tiempoEntreTubos;
+      this.pisoActual = 0;
+      this.y = pisosY.get(pisoActual);
+      this.setVisible(true);
+      this.setImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")));
+   }
+
 
     /** Suelta un tubo exactamente en la posición actual */
     private void dejarTuboConFuga(){
@@ -60,23 +83,38 @@ public class FontaneroMaldadoso extends SpriteMobile {
         boolean hayColision = false;
         
         for (HitBox h : hitBoxs) {
-                    if (this.colisionaConhHitbox(h,x,y)) {
-                        hayColision = true;
-                        break; // Salimos del ciclo en cuanto detectamos una colisión
-                    }
-                }
+            if (this.colisionaConhHitbox(h,x,y)) {
+                hayColision = true;
+                break; // Salimos del ciclo en cuanto detectamos una colisión
+            }
+        }
+        
         if(!hayColision){
+<<<<<<< HEAD
         Fuga fuga = new Fuga(this.x+10, this.y+10,
                              Math.random()<0.5?"tuerca":"grieta");
         TuboConFuga nuevo = new TuboConFuga("malo",
                          this.x+50, this.y+50, 60, 20, fuga);
         casa.agregarTubo(nuevo);
+=======
+            Fuga fuga = new Fuga(this.x+10, this.y+10,
+                                 Math.random()<0.5?"tuerca":"grieta");
+            TuboConFuga nuevo = new TuboConFuga("malo",
+                             this.x, this.y, 60, 20, fuga);
+            casa.agregarTubo(nuevo);
+>>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
         }
     }
 
+    /**
+     * Establece la lista de hitboxes para detectar colisiones.
+     * 
+     * @param hitBoxs Es la lista de hitboxes que serán usadas para la detección de colisiones.
+     */
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
+<<<<<<< HEAD
     
     public void setRecorridos(ArrayList<Recorrido> recorridos) {
         
@@ -85,6 +123,17 @@ public class FontaneroMaldadoso extends SpriteMobile {
     }
     
     
+=======
+
+    /**
+     * Verifica si las coordenadas (nx, ny) del objeto colisionan con la hitbox dada.
+     * 
+     * @param h   HitBox con la cual se verifica la colisión.
+     * @param nx  Es la nueva posición X del objeto.
+     * @param ny  Es la nueva posición Y del objeto.
+     * @return    Retorna true si hay colisión con la hitbox o false en caso contrario.
+     */
+>>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
 
 
@@ -95,9 +144,10 @@ public class FontaneroMaldadoso extends SpriteMobile {
             return true;
         }
         
-         return false;
+        return false;
     }
     
+<<<<<<< HEAD
             @Override
             public void run() {
                 int tubosColocados = 0;         // Contador de tubos colocados
@@ -165,16 +215,87 @@ public class FontaneroMaldadoso extends SpriteMobile {
                 }
             }
 
+=======
+    /**
+     * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
+     */
+        @Override
+     public void run() {
+         long ultimoTubo = System.currentTimeMillis();
+
+         while (activo) {
+             if (!visible) {
+                 // Teletransportar al siguiente piso
+                 pisoActual = (pisoActual + 1) % pisosY.size();
+                 y = pisosY.get(pisoActual);
+                 visible = true;
+             }
+
+             // Movimiento horizontal
+             x += dx;
+
+             // Rebotar en los bordes de la casa
+             if (x < 0 || x + width > casa.getWidth()) {
+                 dx = -dx;
+             }
+
+             // Soltar tubo si ha pasado suficiente tiempo
+             if (System.currentTimeMillis() - ultimoTubo >= tiempoEntreTubos) {
+                 dejarTuboConFuga();
+                 visible = false;
+                 ultimoTubo = System.currentTimeMillis();
+             }
+
+             // Verificar si está cerca del fontanero bueno
+             if (cercaDelFontaneroBueno()) {
+                 visible = false;
+                 break;
+             }
+
+             try {
+                 Thread.sleep(20);
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+                 break; // Salir si el hilo fue interrumpido
+             }
+         }
+
+         this.setVisible(false);
+         casa.eliminarFontaneroMalo();
+     }
+
+
+
+    /**
+     * Dibuja el objeto en pantalla si está visible y tiene imagen asignada.
+     * 
+     * @param g Es el objeto Graphics para el dibujo.
+     */
+>>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     @Override
     public void paint(Graphics g) {
          if (this.isVisible() && this.getImage() != null) {
+             Graphics2D g2 = (Graphics2D) g;
+
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
             g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
         }
+    }  
+    
+    private boolean cercaDelFontaneroBueno() {
+        if (fontaneroBueno == null) return false;
+        int distanciaX = Math.abs(this.x - fontaneroBueno.getX());
+        int distanciaY = Math.abs(this.y - fontaneroBueno.getY());
+       
+        return distanciaX < 50 && distanciaY < 50;
     }
     
-    
-    
-    
-    
+      public void detener() {
+        activo = false;
+    }
+
 }
 

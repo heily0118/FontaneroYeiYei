@@ -4,36 +4,108 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Casa {
 
-    private int width;
-    private int height;
+/**
+ *
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @since 20250516
+ * @version 1.0.0
+ */
 
-    private List<Tubo> tubos;
-    private Serpiente serviente;
-    private FontaneroMaldadoso fontaneroMalo;
+    public class Casa {
 
-    public Casa(int width, int height) {
+        private int width;
+        private int height;
+
+        private List<Tubo> tubos;
+        private List<Serpiente> servientes;
+        private FontaneroMaldadoso fontaneroMalo;
+
+       public Casa(int width, int height, int nivel) {
         this.width = width;
         this.height = height;
 
         this.tubos = new ArrayList<>();
-    
+        this.servientes = new ArrayList<>();
 
-       
         int limiteIzquierdo = 0;
         int limiteDerecho = width;
 
-      
-        this.serviente = new Serpiente(0, height - 100, 50, 50, limiteIzquierdo, limiteDerecho);
-        this.fontaneroMalo = new FontaneroMaldadoso(0, height - 100, 50, 50, this);
+        int[] posicionesY;
+        int tiempoEntreTubos;
+        int maxTubos;
 
-      
-        Thread hiloServiente = new Thread(serviente);
-        hiloServiente.start();
+        switch (nivel) {
+            case 1:
+                posicionesY = new int[] {
+                    height - 100,
+                    height - 500
+                };
+                tiempoEntreTubos = 4000; // 4 segundos
+                maxTubos = 10;
+                break;
+            case 2:
+                posicionesY = new int[] {
+                    height - 100,
+                    height - 450
+                };
+                tiempoEntreTubos = 3000; // 3 segundos
+                maxTubos = 15;
+                break;
+            case 3:
+                posicionesY = new int[] {
+                    height - 90,
+                    height - 300,
+                    height - 510
+                };
+                tiempoEntreTubos = 2000; // 2 segundos
+                maxTubos = 20;
+                break;
+            default:
+                posicionesY = new int[] {height - 160};
+                tiempoEntreTubos = 4000;
+                maxTubos = 10;
+        }
 
+<<<<<<< HEAD
         
+=======
+        for (int i = 0; i < posicionesY.length; i++) {
+            int x = 100 + i * 150; 
+            int y = posicionesY[i];
+
+            Serpiente s = new Serpiente(x, y, 50, 50, limiteIzquierdo, limiteDerecho);
+            servientes.add(s);
+
+            Thread hiloServiente = new Thread(s);
+            hiloServiente.start();
+        }
+
+        List<Integer> pisosY = new ArrayList<>();
+        for (int pos : posicionesY) {
+            pisosY.add(pos);
+        }
+
+        int fontaneroMaloAncho = 80;
+        int fontaneroMaloAlto = 80;
+
+        this.fontaneroMalo = new FontaneroMaldadoso(
+            0, 
+            pisosY.get(0), 
+            fontaneroMaloAncho, 
+            fontaneroMaloAlto, 
+            this, 
+            pisosY, 
+            null, 
+            tiempoEntreTubos, 
+            maxTubos
+        );
+        Thread hiloFontanero = new Thread(fontaneroMalo);
+        hiloFontanero.start();
+>>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     }
+
+
 
     public FontaneroMaldadoso getFontaneroMalo() {
         return fontaneroMalo;
@@ -46,19 +118,30 @@ public class Casa {
         return tubos;
     }
 
-
+    public List<Serpiente> getServientes() {
+        return servientes;
+    }
     public void paint(Graphics g) {
       
-        for (Tubo tubo : tubos) {
-            tubo.paint(g);
-        }
+        List<TuboConFuga> copiaTubos = new ArrayList<>();
+         for (Tubo t : tubos) {
+             if (t instanceof TuboConFuga) {
+                 copiaTubos.add((TuboConFuga) t);
+             }
+         }
 
-        serviente.paint(g);
+         for (TuboConFuga tubo : copiaTubos) {
+             tubo.paint(g);
+         }
 
+         for (Serpiente s : servientes) {
+             s.paint(g);
+         }
 
-        if (fontaneroMalo != null) {
-            fontaneroMalo.paint(g);
-        }
+         if (fontaneroMalo != null) {
+             fontaneroMalo.detener();
+             fontaneroMalo.paint(g);
+         }
     }
 
   
