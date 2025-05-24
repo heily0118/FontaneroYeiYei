@@ -136,11 +136,11 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
                     // Pinta elementos que están dentro de Casa
                     casaNivel1.paint(g); 
-                    for(HitBox h : hitBoxs){
-                        
-                        h.paint(g);
-                    
-                    }
+//                    for(HitBox h : hitBoxs){
+//                        
+//                        h.paint(g);
+//                    
+//                    }
 //                    // Pinta al fontanero bueno
                     f.paint(g);
                     

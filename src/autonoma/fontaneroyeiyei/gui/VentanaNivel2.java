@@ -83,7 +83,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         
         
         // se pone el fontanero en el lado de la izquierda
-        f.setY(240);
+        f.setY(235);
         f.setX(0);
         
         //SEGUNDO PISO HITBOX
@@ -121,9 +121,9 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                     
                     //////codigo temporar
 //                    Para pintar el los bloques de hitboxs
-//                    for(HitBox h : hitBoxs){                
-//                        h.paint(g);
-//                    }
+                    for(HitBox h : hitBoxs){                
+                        h.paint(g);
+                    }
                     int minutos = tiempoRestante / 60;
                     int segundos = tiempoRestante % 60;
 
