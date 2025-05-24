@@ -291,30 +291,48 @@ public class FontaneroBueno extends Sprite{
      * @param tubos Es la lista de tubos sobre los cuales se intentará usar la herramienta.
      */
     public void usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
-        Herramienta herramienta = null;
+     Herramienta herramienta = null;
+
         if (tecla == 'L' || tecla == 'l') {
             herramienta = new LlaveIglesa();
         } else if (tecla == 'S' || tecla == 's') {
             herramienta = new Sellador();
         }
+
         if (herramienta == null) return;
 
+        System.out.println("Intentando usar herramienta: " + herramienta.getNombre());
+
+        boolean reparoAlguno = false;  
+
         for (Tubo tubo : tubos) {
-           
             if (tubo instanceof TuboConFuga) {
                 TuboConFuga tuboConFuga = (TuboConFuga) tubo;
                 Fuga fuga = tuboConFuga.getFuga();
+
                 if (fuga != null && !fuga.estaReparada() && fuga.estaCerca(x, y)) {
+                    boolean antesReparada = fuga.estaReparada();
+
                     herramienta.usarEn(tuboConFuga);
-                    if (fuga.estaReparada()) {
-                        System.out.println("Fuga reparada con " + herramienta.getNombre());
-                       
-                    } else {
-                        System.out.println("No se pudo reparar con " + herramienta.getNombre());
+
+                    if (!antesReparada && fuga.estaReparada()) {
+                     
+                        if (herramienta instanceof LlaveIglesa) {
+                            puntaje.aumentarPuntajePorLlaveInglesa();
+                        } else if (herramienta instanceof Sellador) {
+                            puntaje.aumentarPuntajePorSellador();
+                        }
+                        System.out.println("Fuga reparada con " + herramienta.getNombre() + ". Puntaje actual: " + puntaje.getPuntajeActual());
+                        reparoAlguno = true;
+                        break;  
                     }
-                    break; 
                 }
             }
         }
+
+        if (!reparoAlguno) {
+            System.out.println("No se reparó ninguna fuga, no se suma puntaje.");
+        }
     } 
+
 }
