@@ -13,6 +13,13 @@ package autonoma.fontaneroyeiyei.elements;
 
 public class Sellador extends Herramienta {
 
+    /**
+     * Usa el sellador sobre un tubo. 
+     * Si el tubo es una instancia de TuboConFuga y tiene una fuga 
+     * de tipo "grieta" que no ha sido reparada, se aplica la reparación.
+     * 
+     * @param tubo Es el tubo sobre el que se desea aplicar la herramienta.
+     */
     @Override
     public void usarEn(Tubo tubo) {
        
@@ -26,6 +33,11 @@ public class Sellador extends Herramienta {
         }
     }
 
+    /**
+     * Devuelve el nombre de la herramienta.
+     * 
+     * @return Retorna el nombre "Sellador".
+     */
     @Override
     public String getNombre() {
         return "Sellador";
