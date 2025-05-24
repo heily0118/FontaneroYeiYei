@@ -155,7 +155,7 @@ public class FontaneroBueno extends Sprite{
             // Verifica si nx y ny están dentro del rango permitido
             
             
-            if (nx < 0 || nx > largoMax - width || ny < 0 || ny > alturaMax - height) {
+            if (nx < 0 || nx > 700 - width || ny < 0 || ny > 670 - height) {
                 
 
                 return false; // Movimiento no permitido
