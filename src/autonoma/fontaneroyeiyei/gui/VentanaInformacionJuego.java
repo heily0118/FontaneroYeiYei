@@ -56,21 +56,21 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             ImageIcon iconoNivel3 = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/casa3Fuera.png"));
 
             JButton botonNivel1 = new JButton(iconoNivel1);
-            botonNivel1.setBounds(200, 550, 64, 64);
+            botonNivel1.setBounds(200, 400, 90, 100);
             botonNivel1.setContentAreaFilled(false);
             botonNivel1.setBorderPainted(false);
             botonNivel1.setFocusPainted(false);
             botonNivel1.setToolTipText("Nivel 1");
 
             JButton botonNivel2 = new JButton(iconoNivel2);
-            botonNivel2.setBounds(370, 420, 64, 64);
+            botonNivel2.setBounds(350, 200, 70, 70);
             botonNivel2.setContentAreaFilled(false);
             botonNivel2.setBorderPainted(false);
             botonNivel2.setFocusPainted(false);
             botonNivel2.setToolTipText("Nivel 2");
 
             JButton botonNivel3 = new JButton(iconoNivel3);
-            botonNivel3.setBounds(530, 280, 64, 64);
+            botonNivel3.setBounds(380, 70, 90, 64);
             botonNivel3.setContentAreaFilled(false);
             botonNivel3.setBorderPainted(false);
             botonNivel3.setFocusPainted(false);
