@@ -72,8 +72,8 @@ public class Casa {
       }
 
     
-      int fontaneroMaloAncho = 80;
-      int fontaneroMaloAlto = 80;
+      int fontaneroMaloAncho = 90;
+      int fontaneroMaloAlto = 90;
       this.fontaneroMalo = new FontaneroMaldadoso(0, posicionesY[0], fontaneroMaloAncho, fontaneroMaloAlto, this);
       Thread hiloFontanero = new Thread(fontaneroMalo);
       hiloFontanero.start();
