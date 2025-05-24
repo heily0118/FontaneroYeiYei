@@ -135,17 +135,16 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                         h.paint(g);
                     
                 }
+                   
+                    // Tiempo
                     int minutos = tiempoRestante / 60;
                     int segundos = tiempoRestante % 60;
-
                     String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
 
                     Graphics2D g3d = (Graphics2D) g;
                     g3d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
                     Font fuenteBonita = new Font("Comic Sans MS", Font.BOLD, 28);
                     g3d.setFont(fuenteBonita);
-
 
                     FontMetrics fm1 = g3d.getFontMetrics();
                     int x1 = getWidth() - fm1.stringWidth("Tiempo: 00:00") - 20;  
@@ -153,25 +152,38 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 
                     g3d.setColor(Color.BLACK);
                     g3d.drawString("Tiempo: " + tiempoFormateado, x1 + 2, y1 + 2);
-
                     g3d.setColor(Color.WHITE);
                     g3d.drawString("Tiempo: " + tiempoFormateado, x1, y1);
-                    
+
+                  
+                    String textoPuntaje = "Puntaje: " + f.getPuntaje().getPuntajeActual();
+
+                    Font fuentePuntaje = new Font("Comic Sans MS", Font.BOLD, 28);
+                    g3d.setFont(fuentePuntaje);
+                    FontMetrics fmP = g3d.getFontMetrics();
+
+                    int xP = 20;
+                    int yP = 40;
+
+                    g3d.setColor(Color.BLACK);
+                    g3d.drawString(textoPuntaje, xP + 2, yP + 2);
+                    g3d.setColor(Color.YELLOW);
+                    g3d.drawString(textoPuntaje, xP, yP);
+
+                    // Mensaje de Game Over
                     if (juegoTerminado) {
-                        Graphics2D g2d = (Graphics2D) g;
+                        g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
+                        g3d.setColor(Color.BLACK);
+                        g3d.fillRect(0, 0, getWidth(), getHeight());
 
-                        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
-                        g2d.setColor(Color.BLACK);
-                        g2d.fillRect(0, 0, getWidth(), getHeight());
-
-                        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-                        g2d.setColor(Color.RED);
-                        g2d.setFont(new Font("Arial", Font.BOLD, 60));
-                        FontMetrics fm = g2d.getFontMetrics();
+                        g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+                        g3d.setColor(Color.RED);
+                        g3d.setFont(new Font("Arial", Font.BOLD, 60));
+                        FontMetrics fm = g3d.getFontMetrics();
                         String mensaje = "GAME OVER";
                         int x = (getWidth() - fm.stringWidth(mensaje)) / 2;
                         int y = getHeight() / 2;
-                        g2d.drawString(mensaje, x, y);
+                        g3d.drawString(mensaje, x, y);
                     }
                 }
             };

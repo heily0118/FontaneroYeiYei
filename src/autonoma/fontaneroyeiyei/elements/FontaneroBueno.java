@@ -49,7 +49,7 @@ public class FontaneroBueno extends Sprite{
 
     /** Herramienta seleccionada por el jugador (ej: Llave inglesa o Sellador). */
     private Herramienta herramientaSeleccionada;
-
+    private int vida = 3;
     
     /**
      * Constructor de la clase FontaneroBueno.
