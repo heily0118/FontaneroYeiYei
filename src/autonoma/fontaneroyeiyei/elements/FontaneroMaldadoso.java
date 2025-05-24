@@ -17,97 +17,62 @@ import javax.swing.ImageIcon;
  */
 
 public class FontaneroMaldadoso extends SpriteMobile {
-    
-    /** 
-     * Posición horizontal del fontanero en el escenario. 
-     */
-    private int posX;
-    
-    /** 
-     * Posición vertical del fontanero en el escenario. 
-     */
-    private int posY;
-    
-    /** 
-     * Imagen que representa visualmente al fontanero maldadoso. 
-     */
-    private Image fontaneroMaldadosoImage;
-    
-    /** 
-     * Referencia al fontanero bueno.
-     */
-    private FontaneroBueno fontaneroBueno;
-    
-    /** 
-     * Lista de herramientas que el fontanero maldadoso ha robado al fontanero bueno. 
-     */
-    private List<Herramienta> herramientasRobadas = new ArrayList<>();
 
-    /**
-     * Constructor de la clase FontaneroMaldadoso.
-     * 
-     * @param x Es la posición X inicial
-     * @param y Es la poosición Y inicial
-     * @param width Es el ancho del sprite
-     * @param height Es el alto del sprite
-     * @param fontaneroBueno Referencia al fontanero bueno que debe seguir
-     */
-    public FontaneroMaldadoso(int x, int y, int width, int height, FontaneroBueno fontaneroBueno) {
-        super(x, y, width, height);
-        this.fontaneroBueno = fontaneroBueno;
-        this.fontaneroMaldadosoImage = new ImageIcon(getClass().getResource("/autonoma/demoatrapacomida/images/FontaneroMalo.png")).getImage();
+    private int dx = 3;  
+    private int dy = -3; 
+    private final Casa casa;
+
+    public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa){
+        super(x,y,w,h);
+        this.casa = casa;
+        this.setVisible(true);            
+        this.setImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")));
+
     }
+
+    /** Suelta un tubo exactamente en la posición actual */
+    private void dejarTuboConFuga(){
+        Fuga fuga = new Fuga(this.x+10, this.y+10,
+                             Math.random()<0.5?"tuerca":"grieta");
+        TuboConFuga nuevo = new TuboConFuga("malo",
+                         this.x, this.y, 60, 20, fuga);
+        casa.agregarTubo(nuevo);
+    }
+
+    @Override
+    public void run(){
+        int tubosColocados = 0;
+        long ultimoTubo = System.currentTimeMillis();
+
+        while(tubosColocados < 10){
+     
+            x += dx;
+            y += dy;
+
+            if(x<0 || x+width>casa.getWidth()){ dx = -dx; }
+            if(y<0 || y+height>casa.getHeight()){ dy = -dy; }
+
+           
+            if(System.currentTimeMillis() - ultimoTubo >= 2000){
+                dejarTuboConFuga();
+                tubosColocados++;
+                ultimoTubo = System.currentTimeMillis();
+            }
+
+            try{ Thread.sleep(20); }catch(InterruptedException e){}
+
+        }
     
-    /**
-     * Dibuja la imagen del fontanero maldadoso en la pantalla.
-     * 
-     * @param g Objeto Graphics para dibujar en pantalla
-     */
+        this.setVisible(false);        
+        casa.eliminarFontaneroMalo();    
+    }
+
     @Override
     public void paint(Graphics g) {
-        g.drawImage(this.fontaneroMaldadosoImage, this.x, this.y, this.width, this.height, null);
-    }
-
-    /**
-     * Método que se ejecuta en un hilo separado.
-     * Mueve al fontanero maldadoso en dirección al fontanero bueno, paso a paso.
-     */
-    @Override
-    public void run() {
-        while (true) {
-            if (this.fontaneroBueno != null) {
-                if (this.x < fontaneroBueno.getX()) {
-                    this.x++; 
-                } else if (this.x > fontaneroBueno.getX()) {
-                    this.x--; 
-                }
-
-                if (this.y < fontaneroBueno.getY()) {
-                    this.y++;
-                } else if (this.y > fontaneroBueno.getY()) {
-                    this.y--; 
-                }
-            }
-
-            try {
-                Thread.sleep(20); 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+         if (this.isVisible() && this.getImage() != null) {
+            g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
         }
     }
     
-    /**
-     * Roba una herramienta y la guarda en la lista interna de herramientas robadas.
-     * 
-     * @param herramienta Es la herramienta a robar.
-     */
-    public void robarHerramienta(Herramienta herramienta) {
-        if (herramienta != null) {
-            herramientasRobadas.add(herramienta);
-            System.out.println("¡Herramienta robada!: " + herramienta.getNombre());
-        } else {
-            System.out.println("No se pudo robar la herramienta: es nula.");
-        }
-    }
+    
 }

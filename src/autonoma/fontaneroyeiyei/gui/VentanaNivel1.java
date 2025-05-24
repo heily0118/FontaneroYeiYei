@@ -4,8 +4,11 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
+import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import autonoma.fontaneroyeiyei.elements.HitBox;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,11 +18,13 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
@@ -37,6 +42,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
+    private ArrayList<HitBox> hitBoxs = new ArrayList<>();
     
 
 
@@ -54,32 +60,43 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         this.f = new FontaneroBueno("teo");
         
         //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
-        f.setAlturaMax(630);
-        f.setAlturaMin(145);
-        
-        f.setLargoMax(770);
-        f.setLargoMin(25);
+        f.setAlturaMax(700);
+        f.setLargoMax(700);
         
         
         // se pone el fontanero en el lado de la izquierda
-        f.setY(545);
-        f.setX(25);
+        f.setY(160);
+        f.setX(600);
         
-       
+        //se crea la hit box del nivel 
+
+                    
+        //PRIMER HITBOX
+        HitBox SegundoPiso = new HitBox(180, 250, 100, 530);
+        
+        hitBoxs.addFirst(SegundoPiso);
+        //SEGUNDO HITBOX
+        HitBox escalas = new HitBox(180, 250, 250, 30);
+        hitBoxs.addLast(escalas);
+        
+        f.setHitBoxs(hitBoxs);
+        
                 
-                
+        Casa casaNivel1 = juego.getCasaNivel1(); 
+
+
         setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
 
 
-        this.setSize(900,465);
+        this.setSize(700,700);
         setResizable(false);
         this.setLocationRelativeTo(null);
         
         try{ 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
-            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa1.png"));
+            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa1.jpg"));
         }catch(NullPointerException e){
             System.out.println("Imagen no encontrada");
             
@@ -90,11 +107,17 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
 
+                    // Pinta elementos que están dentro de Casa
+                    casaNivel1.paint(g); 
+
+                    // Pinta al fontanero bueno
                     f.paint(g);
                 }
             };
         
         setContentPane(panelFondo);
+        Timer timer = new Timer(30, e -> panelFondo.repaint());
+        timer.start();
         
     }
 
@@ -153,7 +176,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         this.repaint();
 
         
-        ;
+        
     }
     
     

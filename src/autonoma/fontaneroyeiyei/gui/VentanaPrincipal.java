@@ -37,7 +37,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             this.juego = juego;
             //reproducirSonido();
             setTitle("Fontanero Yei Yei");
-            setSize(800, 800);
+            setSize(700, 700);
             setLocationRelativeTo(null);
             setResizable(false);
             setDefaultCloseOperation(EXIT_ON_CLOSE);

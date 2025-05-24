@@ -4,10 +4,17 @@
  */
 package autonoma.fontaneroyeiyei.gui;
 
+import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import autonoma.fontaneroyeiyei.elements.HitBox;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -24,40 +31,84 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 
     private GestorJuego juego;
     private ImageIcon fondo;
+    private FontaneroBueno f;
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
+    private ArrayList<HitBox> hitBoxs = new ArrayList<>();
     
     public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego ) {
         super(parent, modal);
         initComponents();
         
         this.juego = juego;
+        
+        this.f = new FontaneroBueno("teo");
+        
+        
         setTitle("FontaneroYeiYei Nivel 2");
         setLocationRelativeTo(null);
         setResizable(false);
 
 
-        this.setSize(800,800);
+        this.setSize(700,700);
         setResizable(false);
         this.setLocationRelativeTo(null);
         
         try{ 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
-            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa2.png"));
+            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa2.jpg"));
         }catch(NullPointerException e){
             System.out.println("Imagen no encontrada");
             
         }
+        
+        ///se va indicar la siguientes posiciones para ej jugador
+       
+        
+        //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
+        f.setAlturaMax(700);
+        f.setLargoMax(700);
+        
+        
+        // se pone el fontanero en el lado de la izquierda
+        f.setY(240);
+        f.setX(0);
+        
+        //SEGUNDO PISO HITBOX
+        HitBox SegundoPiso = new HitBox(0, 325,40,480);
+        HitBox SegundoPiso2 = new HitBox(625, 325,40,100);
+        
+        hitBoxs.add(SegundoPiso);
+        hitBoxs.add(SegundoPiso2);
+        
+        //ESCALAS HITBOX
+        HitBox escalas = new HitBox(480, 325, 180, 30);
+        hitBoxs.add(escalas);
+        
+        f.setHitBoxs(hitBoxs);
+        
+        
+        
+        
+        
+        
+        
+        
         JPanel panelFondo = new JPanel() {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-                    ///codigo temporar
-//                    
-//                    ImageIcon personaje  = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"));
-//                    g.drawImage(personaje.getImage(), 400, 200, 100, 100, this);
+                    
+                    f.paint(g);
+                    
+                    //////codigo temporar
+//                    Para pintar el los bloques de hitboxs
+//                    for(HitBox h : hitBoxs){                
+//                        h.paint(g);
+//                    }
+                 
                 }
             };
         
@@ -74,6 +125,11 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +144,36 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_Q)
+        {
+            System.exit(0);
+        }
+        
+        if(evt.getKeyCode() == KeyEvent.VK_UP |
+           evt.getKeyCode() == KeyEvent.VK_DOWN |
+           evt.getKeyCode() == KeyEvent.VK_LEFT |
+           evt.getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+                  
+            try {
+                
+                f.move(evt.getKeyCode());
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        this.repaint();
+
+        
+        ;
+
+        
+        
+    }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
