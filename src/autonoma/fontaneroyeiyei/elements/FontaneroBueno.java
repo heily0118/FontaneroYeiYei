@@ -32,9 +32,6 @@ public class FontaneroBueno extends Sprite{
     /** Objeto que maneja el puntaje del jugador, incluyendo aciertos e intentos. */
     private Puntaje puntaje;
 
-<<<<<<< HEAD
-
-=======
     /** Nombre del jugador. */
     private String nombre;
 
@@ -51,7 +48,6 @@ public class FontaneroBueno extends Sprite{
     private ArrayList<HitBox> hitBoxs;
 
     /** Herramienta seleccionada por el jugador (ej: Llave inglesa o Sellador). */
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     private Herramienta herramientaSeleccionada;
 
     
@@ -95,14 +91,7 @@ public class FontaneroBueno extends Sprite{
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
-<<<<<<< HEAD
 
-    
-
-
-
-=======
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     
     /**
      * Devuelve el puntaje actual del jugador.

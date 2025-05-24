@@ -34,7 +34,6 @@ import java.util.List;
         int[] posicionesY;
         int tiempoEntreTubos;
         int maxTubos;
-
         switch (nivel) {
             case 1:
                 posicionesY = new int[] {
@@ -66,10 +65,7 @@ import java.util.List;
                 tiempoEntreTubos = 4000;
                 maxTubos = 10;
         }
-
-<<<<<<< HEAD
         
-=======
         for (int i = 0; i < posicionesY.length; i++) {
             int x = 100 + i * 150; 
             int y = posicionesY[i];
@@ -102,7 +98,6 @@ import java.util.List;
         );
         Thread hiloFontanero = new Thread(fontaneroMalo);
         hiloFontanero.start();
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     }
 
 

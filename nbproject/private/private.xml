@@ -7,19 +7,6 @@
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
-<<<<<<< HEAD
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel3.java</file>
-=======
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Fuga.java</file>
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
-        </group>
-        <group>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel2.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel3.java</file>
         </group>
         <group>
@@ -40,12 +27,14 @@
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
         </group>
-
         <group>
-            <file>file:/C:/Heily/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
-            <file>file:/C:/Heily/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel2.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel3.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
         </group>
-
-        <group/>
     </open-files>
 </project-private>

@@ -90,19 +90,12 @@ public class FontaneroMaldadoso extends SpriteMobile {
         }
         
         if(!hayColision){
-<<<<<<< HEAD
         Fuga fuga = new Fuga(this.x+10, this.y+10,
                              Math.random()<0.5?"tuerca":"grieta");
         TuboConFuga nuevo = new TuboConFuga("malo",
                          this.x+50, this.y+50, 60, 20, fuga);
         casa.agregarTubo(nuevo);
-=======
-            Fuga fuga = new Fuga(this.x+10, this.y+10,
-                                 Math.random()<0.5?"tuerca":"grieta");
-            TuboConFuga nuevo = new TuboConFuga("malo",
-                             this.x, this.y, 60, 20, fuga);
-            casa.agregarTubo(nuevo);
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
+          
         }
     }
 
@@ -114,7 +107,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
-<<<<<<< HEAD
     
     public void setRecorridos(ArrayList<Recorrido> recorridos) {
         
@@ -122,8 +114,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
         this.recorridos = recorridos;
     }
     
-    
-=======
 
     /**
      * Verifica si las coordenadas (nx, ny) del objeto colisionan con la hitbox dada.
@@ -133,7 +123,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * @param ny  Es la nueva posición Y del objeto.
      * @return    Retorna true si hay colisión con la hitbox o false en caso contrario.
      */
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
 
 
@@ -147,7 +136,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
         return false;
     }
     
-<<<<<<< HEAD
             @Override
             public void run() {
                 int tubosColocados = 0;         // Contador de tubos colocados
@@ -215,54 +203,53 @@ public class FontaneroMaldadoso extends SpriteMobile {
                 }
             }
 
-=======
-    /**
-     * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
-     */
-        @Override
-     public void run() {
-         long ultimoTubo = System.currentTimeMillis();
-
-         while (activo) {
-             if (!visible) {
-                 // Teletransportar al siguiente piso
-                 pisoActual = (pisoActual + 1) % pisosY.size();
-                 y = pisosY.get(pisoActual);
-                 visible = true;
-             }
-
-             // Movimiento horizontal
-             x += dx;
-
-             // Rebotar en los bordes de la casa
-             if (x < 0 || x + width > casa.getWidth()) {
-                 dx = -dx;
-             }
-
-             // Soltar tubo si ha pasado suficiente tiempo
-             if (System.currentTimeMillis() - ultimoTubo >= tiempoEntreTubos) {
-                 dejarTuboConFuga();
-                 visible = false;
-                 ultimoTubo = System.currentTimeMillis();
-             }
-
-             // Verificar si está cerca del fontanero bueno
-             if (cercaDelFontaneroBueno()) {
-                 visible = false;
-                 break;
-             }
-
-             try {
-                 Thread.sleep(20);
-             } catch (InterruptedException e) {
-                 e.printStackTrace();
-                 break; // Salir si el hilo fue interrumpido
-             }
-         }
-
-         this.setVisible(false);
-         casa.eliminarFontaneroMalo();
-     }
+//    /**
+//     * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
+//     */
+//     @Override
+//     public void run() {
+//         long ultimoTubo = System.currentTimeMillis();
+//
+//         while (activo) {
+//             if (!visible) {
+//                 // Teletransportar al siguiente piso
+//                 pisoActual = (pisoActual + 1) % pisosY.size();
+//                 y = pisosY.get(pisoActual);
+//                 visible = true;
+//             }
+//
+//             // Movimiento horizontal
+//             x += dx;
+//
+//             // Rebotar en los bordes de la casa
+//             if (x < 0 || x + width > casa.getWidth()) {
+//                 dx = -dx;
+//             }
+//
+//             // Soltar tubo si ha pasado suficiente tiempo
+//             if (System.currentTimeMillis() - ultimoTubo >= tiempoEntreTubos) {
+//                 dejarTuboConFuga();
+//                 visible = false;
+//                 ultimoTubo = System.currentTimeMillis();
+//             }
+//
+//             // Verificar si está cerca del fontanero bueno
+//             if (cercaDelFontaneroBueno()) {
+//                 visible = false;
+//                 break;
+//             }
+//
+//             try {
+//                 Thread.sleep(20);
+//             } catch (InterruptedException e) {
+//                 e.printStackTrace();
+//                 break; // Salir si el hilo fue interrumpido
+//             }
+//         }
+//
+//         this.setVisible(false);
+//         casa.eliminarFontaneroMalo();
+//     }
 
 
 
@@ -271,7 +258,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * 
      * @param g Es el objeto Graphics para el dibujo.
      */
->>>>>>> 1eff4f847c5f8102f8696a1768079ab7f4a22cc6
     @Override
     public void paint(Graphics g) {
          if (this.isVisible() && this.getImage() != null) {
