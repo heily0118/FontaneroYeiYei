@@ -276,8 +276,8 @@ public class FontaneroBueno extends Sprite{
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        System.out.println("lugar de donde se pinta");
-        System.out.println("x :"+x + "y :" + y);
+//        System.out.println("lugar de donde se pinta");
+//        System.out.println("x :"+x + "y :" + y);
 
         g.drawImage(jugadorImage, x, y, width, height, null);
         
