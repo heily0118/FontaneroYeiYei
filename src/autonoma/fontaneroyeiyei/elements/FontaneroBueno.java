@@ -250,13 +250,13 @@ public class FontaneroBueno extends Sprite{
      */
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
         
-        System.out.println("Valores de comparación:");
-    System.out.println("nx: " + nx);
-    System.out.println("ny: " + ny);
-    System.out.println("h.getX(): " + h.getX());
-    System.out.println("h.getY(): " + h.getY());
-    System.out.println("h.getWidth(): " + h.getWidth());
-    System.out.println("h.getHeight(): " + h.getHeight());
+//        System.out.println("Valores de comparación:");
+//    System.out.println("nx: " + nx);
+//    System.out.println("ny: " + ny);
+//    System.out.println("h.getX(): " + h.getX());
+//    System.out.println("h.getY(): " + h.getY());
+//    System.out.println("h.getWidth(): " + h.getWidth());
+//    System.out.println("h.getHeight(): " + h.getHeight());
 
 
 
