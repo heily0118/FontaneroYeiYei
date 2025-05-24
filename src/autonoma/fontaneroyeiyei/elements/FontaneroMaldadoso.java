@@ -19,6 +19,15 @@ import javax.swing.JPanel;
 
 public class FontaneroMaldadoso extends SpriteMobile {
     
+    private final int maxTubos;
+    private final int tiempoEntreTubos;
+    private volatile boolean activo = true;
+    private List<Integer> pisosY; 
+    private int pisoActual = 0;
+    private boolean visible = true;
+
+    private FontaneroBueno fontaneroBueno;
+    
     /**
      * Incremento horizontal de la posición, usado para desplazamiento en X.
      */
@@ -48,14 +57,19 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * @param y Es la poosición Y inicial
      *
      */
-    public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa){
-        super(x,y,w,h);
-
+    public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa, List<Integer> pisosY, FontaneroBueno fontaneroBueno, int maxTubos, int tiempoEntreTubos){
+       super(x,y,w,h);
         this.casa = casa;
-        this.setVisible(true);            
-        this.setImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")));
+      this.pisosY = pisosY;
+      this.fontaneroBueno = fontaneroBueno;
+      this.maxTubos = maxTubos;
+      this.tiempoEntreTubos = tiempoEntreTubos;
+      this.pisoActual = 0;
+      this.y = pisosY.get(pisoActual);
+      this.setVisible(true);
+      this.setImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroMalo.png")));
+   }
 
-    }
 
     /** Suelta un tubo exactamente en la posición actual */
     private void dejarTuboConFuga(){
@@ -113,36 +127,52 @@ public class FontaneroMaldadoso extends SpriteMobile {
     /**
      * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
      */
-    @Override
-    public void run() {
-        int tubosColocados = 0;
-        long ultimoTubo = System.currentTimeMillis();
+        @Override
+     public void run() {
+         long ultimoTubo = System.currentTimeMillis();
 
-        while (tubosColocados < 10) {
-            x += dx; // Solo movimiento horizontal
+         while (activo) {
+             if (!visible) {
+                 // Teletransportar al siguiente piso
+                 pisoActual = (pisoActual + 1) % pisosY.size();
+                 y = pisosY.get(pisoActual);
+                 visible = true;
+             }
 
-            // Detectar colisión con los bordes y cambiar dirección si es necesario
-            if (x < 0 || x + width > casa.getWidth()) {
-                dx = -dx;
-            }
+             // Movimiento horizontal
+             x += dx;
 
-            // Controlar el tiempo para soltar tubos
-            if (System.currentTimeMillis() - ultimoTubo >= 2000) {
-                dejarTuboConFuga();
-                tubosColocados++;
-                ultimoTubo = System.currentTimeMillis();
-            }
+             // Rebotar en los bordes de la casa
+             if (x < 0 || x + width > casa.getWidth()) {
+                 dx = -dx;
+             }
 
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+             // Soltar tubo si ha pasado suficiente tiempo
+             if (System.currentTimeMillis() - ultimoTubo >= tiempoEntreTubos) {
+                 dejarTuboConFuga();
+                 visible = false;
+                 ultimoTubo = System.currentTimeMillis();
+             }
 
-        this.setVisible(false);
-        casa.eliminarFontaneroMalo();
-    }
+             // Verificar si está cerca del fontanero bueno
+             if (cercaDelFontaneroBueno()) {
+                 visible = false;
+                 break;
+             }
+
+             try {
+                 Thread.sleep(20);
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+                 break; // Salir si el hilo fue interrumpido
+             }
+         }
+
+         this.setVisible(false);
+         casa.eliminarFontaneroMalo();
+     }
+
+
 
     /**
      * Dibuja el objeto en pantalla si está visible y tiene imagen asignada.
@@ -154,6 +184,19 @@ public class FontaneroMaldadoso extends SpriteMobile {
          if (this.isVisible() && this.getImage() != null) {
             g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
         }
-    }    
+    }  
+    
+    private boolean cercaDelFontaneroBueno() {
+        if (fontaneroBueno == null) return false;
+        int distanciaX = Math.abs(this.x - fontaneroBueno.getX());
+        int distanciaY = Math.abs(this.y - fontaneroBueno.getY());
+       
+        return distanciaX < 50 && distanciaY < 50;
+    }
+    
+      public void detener() {
+        activo = false;
+    }
+
 }
 

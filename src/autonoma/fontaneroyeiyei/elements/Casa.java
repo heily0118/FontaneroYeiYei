@@ -12,72 +12,95 @@ import java.util.List;
  * @version 1.0.0
  */
 
-public class Casa {
+    public class Casa {
 
-    private int width;
-    private int height;
+        private int width;
+        private int height;
 
-    private List<Tubo> tubos;
-    private List<Serpiente> servientes;
-    private FontaneroMaldadoso fontaneroMalo;
+        private List<Tubo> tubos;
+        private List<Serpiente> servientes;
+        private FontaneroMaldadoso fontaneroMalo;
 
-    public Casa(int width, int height, int nivel) {
+       public Casa(int width, int height, int nivel) {
         this.width = width;
-      this.height = height;
+        this.height = height;
 
-      this.tubos = new ArrayList<>();
-      this.servientes = new ArrayList<>();
+        this.tubos = new ArrayList<>();
+        this.servientes = new ArrayList<>();
 
-      int limiteIzquierdo = 0;
-      int limiteDerecho = width;
+        int limiteIzquierdo = 0;
+        int limiteDerecho = width;
 
-      int[] posicionesY;
+        int[] posicionesY;
+        int tiempoEntreTubos;
+        int maxTubos;
 
-      switch (nivel) {
-          case 1:
-            
-              posicionesY = new int[] {
-                   height - 100,  //1
-                   height - 500  //2
-              };
-              break;
-          case 2:
+        switch (nivel) {
+            case 1:
+                posicionesY = new int[] {
+                    height - 100,
+                    height - 500
+                };
+                tiempoEntreTubos = 4000; // 4 segundos
+                maxTubos = 10;
+                break;
+            case 2:
+                posicionesY = new int[] {
+                    height - 100,
+                    height - 450
+                };
+                tiempoEntreTubos = 3000; // 3 segundos
+                maxTubos = 15;
+                break;
+            case 3:
+                posicionesY = new int[] {
+                    height - 90,
+                    height - 300,
+                    height - 510
+                };
+                tiempoEntreTubos = 2000; // 2 segundos
+                maxTubos = 20;
+                break;
+            default:
+                posicionesY = new int[] {height - 160};
+                tiempoEntreTubos = 4000;
+                maxTubos = 10;
+        }
 
-              posicionesY = new int[] {
-                  height - 100,  // 1
-                  height - 450   // 2
-              };
-              break;
-          case 3:
-              // Casa de 3 pisos
-              posicionesY = new int[] {
-                  height - 90,  // 1
-                  height - 300,  // 2
-                  height - 510   // 3
-              };
-              break;
-          default:
-              posicionesY = new int[] {height - 160};  
-      }
+        for (int i = 0; i < posicionesY.length; i++) {
+            int x = 100 + i * 150; 
+            int y = posicionesY[i];
 
-      for (int i = 0; i < posicionesY.length; i++) {
-          int x = 100 + i * 150; 
-          int y = posicionesY[i];
+            Serpiente s = new Serpiente(x, y, 50, 50, limiteIzquierdo, limiteDerecho);
+            servientes.add(s);
 
-          Serpiente s = new Serpiente(x, y, 50, 50, limiteIzquierdo, limiteDerecho);
-          servientes.add(s);
+            Thread hiloServiente = new Thread(s);
+            hiloServiente.start();
+        }
 
-          Thread hiloServiente = new Thread(s);
-          hiloServiente.start();
-      }
+        List<Integer> pisosY = new ArrayList<>();
+        for (int pos : posicionesY) {
+            pisosY.add(pos);
+        }
 
-    
-      int fontaneroMaloAncho = 80;
-      int fontaneroMaloAlto = 80;
-      this.fontaneroMalo = new FontaneroMaldadoso(0, posicionesY[0], fontaneroMaloAncho, fontaneroMaloAlto, this);
-      Thread hiloFontanero = new Thread(fontaneroMalo);
-      hiloFontanero.start();
-  }
+        int fontaneroMaloAncho = 80;
+        int fontaneroMaloAlto = 80;
+
+        this.fontaneroMalo = new FontaneroMaldadoso(
+            0, 
+            pisosY.get(0), 
+            fontaneroMaloAncho, 
+            fontaneroMaloAlto, 
+            this, 
+            pisosY, 
+            null, 
+            tiempoEntreTubos, 
+            maxTubos
+        );
+        Thread hiloFontanero = new Thread(fontaneroMalo);
+        hiloFontanero.start();
+    }
+
 
     public FontaneroMaldadoso getFontaneroMalo() {
         return fontaneroMalo;
@@ -95,17 +118,25 @@ public class Casa {
     }
     public void paint(Graphics g) {
       
-           for (Tubo tubo : tubos) {
-            tubo.paint(g);
-        }
+        List<TuboConFuga> copiaTubos = new ArrayList<>();
+         for (Tubo t : tubos) {
+             if (t instanceof TuboConFuga) {
+                 copiaTubos.add((TuboConFuga) t);
+             }
+         }
 
-        for (Serpiente s : servientes) {
-            s.paint(g);
-        }
+         for (TuboConFuga tubo : copiaTubos) {
+             tubo.paint(g);
+         }
 
-        if (fontaneroMalo != null) {
-            fontaneroMalo.paint(g);
-        }
+         for (Serpiente s : servientes) {
+             s.paint(g);
+         }
+
+         if (fontaneroMalo != null) {
+             fontaneroMalo.detener();
+             fontaneroMalo.paint(g);
+         }
     }
 
   
