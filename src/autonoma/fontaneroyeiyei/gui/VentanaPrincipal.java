@@ -5,6 +5,7 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import autonoma.fontaneroyeiyei.gui.VentanaInformacionJuego;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -56,16 +57,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             panelFondo.setLayout(null);
             JButton botonJugar = new JButton("Jugar");
             botonJugar.setBounds(340, 600, 120, 40);
-            estiloBoton(botonJugar);  // <- Aplicar estilo
+            estiloBoton(botonJugar);  //  Aplicar estilo
             botonJugar.addActionListener(e -> {
-                //pedirNombreJugador();
-                
-                
+            String nombreJugador = pedirNombreJugador();
+            juego.inicializarFontanero(nombreJugador);  
+            new VentanaInformacionJuego(this, true, juego).setVisible(true);
+            dispose();
+        });
 
-               new VentanaInformacionJuego(this, true, juego).setVisible(true);
 
-                dispose();
-            });
 
             panelFondo.add(botonJugar);
             setContentPane(panelFondo);
@@ -96,18 +96,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//   private void pedirNombreJugador() {
-//            while (true) {
-//            String nombre = JOptionPane.showInputDialog(this, "Ingresa tu nombre:");
-//            if (nombre != null && !nombre.trim().isEmpty()) {
-//              
-//                break;
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para continuar.");
-//            }
-//        }
-//    }
-    
+    private String pedirNombreJugador() {
+        while (true) {
+            String nombre = JOptionPane.showInputDialog(this, "Ingresa tu nombre:");
+            if (nombre != null && !nombre.trim().isEmpty()) {
+                return nombre.trim();
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para continuar.");
+            }
+        }
+    }
+
   
     private void estiloBoton(JButton boton) {
         boton.setForeground(Color.WHITE); 

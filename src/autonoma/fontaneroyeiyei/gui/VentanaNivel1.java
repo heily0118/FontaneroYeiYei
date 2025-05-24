@@ -10,6 +10,7 @@ import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
+import autonoma.fontaneroyeiyei.elements.Tubo;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
@@ -232,13 +234,17 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         if(evt.getKeyCode() == KeyEvent.VK_SPACE){
         
-        f.saltar(evt.getKeyCode());
-        
-
-
-
-        
+           f.saltar(evt.getKeyCode());
         }
+
+        // reparar la fuga
+       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+             juego.manejarTecla(evt.getKeyChar());
+         }
+
+        
+        
        
         
         this.repaint();
