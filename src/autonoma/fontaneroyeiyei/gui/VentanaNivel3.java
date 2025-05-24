@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -181,6 +182,20 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         timer.start();
         
         iniciarReloj();
+        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(null,
+                "¿Estás seguro de que deseas salir del juego?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION
+            );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }  
+            }
+        });
 
      }
 
