@@ -68,9 +68,6 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         ///se va indicar la siguientes posiciones para ej jugador
        
         
-        //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
-        f.setAlturaMax(700);
-        f.setLargoMax(700);
         
         
         // se pone el fontanero en el lado de la izquierda
@@ -78,9 +75,11 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         f.setX(0);
         
         //SEGUNDO PISO HITBOX
+        HitBox techoSegundoPiso2 = new HitBox(0, 0,230,700);
         HitBox SegundoPiso = new HitBox(0, 325,40,480);
         HitBox SegundoPiso2 = new HitBox(625, 325,40,100);
         
+        hitBoxs.add(techoSegundoPiso2);
         hitBoxs.add(SegundoPiso);
         hitBoxs.add(SegundoPiso2);
         
@@ -109,9 +108,9 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                     
                     //////codigo temporar
 //                    Para pintar el los bloques de hitboxs
-//                    for(HitBox h : hitBoxs){                
-//                        h.paint(g);
-//                    }
+                    for(HitBox h : hitBoxs){                
+                        h.paint(g);
+                    }
                  
                 }
             };
@@ -170,6 +169,11 @@ public class VentanaNivel2 extends javax.swing.JDialog {
             } catch (IOException ex) {
                 Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_SPACE){
+        
+        f.saltar(evt.getKeyCode());
+
         }
         
         this.repaint();

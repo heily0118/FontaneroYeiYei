@@ -72,10 +72,6 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         ///se va indicar la siguientes posiciones para ej jugador
        
         
-        //se limita el mapa de personaje en ese nivel para que no salga a la parte blanca
-        f.setAlturaMax(700);
-        f.setLargoMax(700);
-        
         
         // se pone el fontanero en el lado de la izquierda
         f.setY(0);
