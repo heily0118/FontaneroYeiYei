@@ -11,7 +11,12 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * 
@@ -30,10 +35,7 @@ public class FontaneroBueno extends Sprite{
     private String nombre;
     private Image jugadorImage;
     private int pasos = 20;
-    private int alturaMax;
-    private int largoMax;
-    private int alturaMin;
-    private int largoMin;
+    private boolean saltando;
     
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
 
@@ -65,21 +67,6 @@ public class FontaneroBueno extends Sprite{
         this.nombre = nombre;
     }
 
-    public void setAlturaMax(int alturaMax) {
-        this.alturaMax = alturaMax;
-    }
-
-    public void setLargoMax(int largoMax) {
-        this.largoMax = largoMax;
-    }
-
-    public void setAlturaMin(int alturaMin) {
-        this.alturaMin = alturaMin;
-    }
-
-    public void setLargoMin(int largoMin) {
-        this.largoMin = largoMin;
-    }
 
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
@@ -132,14 +119,14 @@ public class FontaneroBueno extends Sprite{
                // Verifica si el movimiento es válido
                 // Primero verificamos si hay colisión
                 boolean hayColision = false;
-
+                if (!saltando){
                 for (HitBox h : hitBoxs) {
                     if (this.colisionaConhHitbox(h,nx,ny)) {
                         hayColision = true;
                         break; // Salimos del ciclo en cuanto detectamos una colisión
                     }
                 }
-
+                }
                 // Si no hay colisión, verificamos si está dentro del límite del mapa
                 if (!hayColision && limiteDeMapa(nx, ny)) {
                     // Si es válido, actualiza x e y
@@ -151,6 +138,53 @@ public class FontaneroBueno extends Sprite{
             
         }
 
+            public void saltar(int direccion) {
+                int nx = x;
+                int ny = y;
+
+                switch (direccion) {
+                    case KeyEvent.VK_SPACE:
+                        ny -= 80; // Salto hacia arriba
+                        saltando = true;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        ny += pasos;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        nx -= pasos;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        nx += pasos;
+                        break;
+                }
+
+                this.x = nx;
+                this.y = ny;
+
+                if (direccion == KeyEvent.VK_SPACE) {
+                    caerLento(y + 80); // Llamar a caída lenta hacia la posición original
+                }
+            }
+
+
+
+        public void caerLento(int posicionOriginalY) {
+            Timer timer = new Timer(20, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (y < posicionOriginalY) {
+                        y += 2;
+                    } else {
+                        y = posicionOriginalY;
+                        saltando = false;
+                        ((Timer)e.getSource()).stop();
+                    }
+                }
+            });
+            timer.start();
+        }
+        
+        
         public boolean limiteDeMapa(int nx, int ny) {
             // Verifica si nx y ny están dentro del rango permitido
             
@@ -167,12 +201,6 @@ public class FontaneroBueno extends Sprite{
         }
 
         public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
-            
-//            System.out.println("Evaluando colisión: " + 
-//                   nx + " < " + h.getX() + " + " + h.getWidth() + " && " +
-//                   nx + " + " + this.getWidth() + " > " + h.getX() + " && " +
-//                   ny + " < " + h.getY() + " + " + h.getHeight() + " && " +
-//                   ny + " + " + this.getHeight() + " > " + h.getY());
             
             
                 if ( nx < h.getX() + h.getWidth() &&
@@ -226,5 +254,7 @@ public class FontaneroBueno extends Sprite{
             }
         }
 }
+
+    
 
 }

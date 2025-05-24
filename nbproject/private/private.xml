@@ -2,20 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group/>
+        <group/>
         <group>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/SpriteMobile.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
-        </group>
-        <group>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/main/FontaneroYeiYei.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Fuga.java</file>
         </group>
-        <group/>
-        <group/>
+        <group>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
+            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Fuga.java</file>
+        </group>
     </open-files>
 </project-private>
