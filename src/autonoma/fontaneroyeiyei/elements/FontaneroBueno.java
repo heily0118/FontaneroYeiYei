@@ -250,13 +250,6 @@ public class FontaneroBueno extends Sprite{
      */
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
         
-//        System.out.println("Valores de comparación:");
-//    System.out.println("nx: " + nx);
-//    System.out.println("ny: " + ny);
-//    System.out.println("h.getX(): " + h.getX());
-//    System.out.println("h.getY(): " + h.getY());
-//    System.out.println("h.getWidth(): " + h.getWidth());
-//    System.out.println("h.getHeight(): " + h.getHeight());
 
 
 
@@ -286,12 +279,12 @@ public class FontaneroBueno extends Sprite{
 //        System.out.println("lugar de donde se pinta");
 //        System.out.println("x :"+x + "y :" + y);
 
-//        g.drawImage(jugadorImage, x, y, width, height, null);
+        g.drawImage(jugadorImage, x, y, width, height, null);
         
 //              HIT bOXS
-        this.setColor(Color.RED);
-        g.setColor(color);
-        g.fillRect(x,y, height, width);
+//        this.setColor(Color.RED);
+//        g.setColor(color);
+//        g.fillRect(x,y, height, width);
     }
     
     /**
