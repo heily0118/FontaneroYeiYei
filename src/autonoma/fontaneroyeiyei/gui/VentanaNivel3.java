@@ -117,17 +117,23 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         f.setHitBoxs(hitBoxs);
         
         ////PONER RECORRDOS AL MALO
+        ///
+        ///
         ArrayList<Recorrido> recorridos = new ArrayList<>();
         
-        Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 600,160);
-        Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,580);
+        Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,350);
+
+          Recorrido sotano = new Recorrido("segundo piso recoridos", 600,570);
+        Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 0,150);
         
-        recorridos.add(recoridoSegundoPiso);
+        
         recorridos.add(recoridoPrimerPiso);
         
-        juego.getCasaNivel1().getFontaneroMalo().setRecorridos(recorridos);
+        recorridos.add(sotano);
+        recorridos.add(recoridoSegundoPiso);
+        juego.getCasaNivel3().getFontaneroMalo().setRecorridos(recorridos);
         
-        Thread hiloFontanero = new Thread(juego.getCasaNivel1().getFontaneroMalo());
+        Thread hiloFontanero = new Thread(juego.getCasaNivel3().getFontaneroMalo());
         hiloFontanero.start();
         
         
