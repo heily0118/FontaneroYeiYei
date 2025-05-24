@@ -84,33 +84,36 @@ public class FontaneroMaldadoso extends SpriteMobile {
          return false;
     }
     
-    @Override
-    public void run(){
-        int tubosColocados = 0;
-        long ultimoTubo = System.currentTimeMillis();
+        @Override
+        public void run() {
+            int tubosColocados = 0;
+            long ultimoTubo = System.currentTimeMillis();
 
-        while(tubosColocados < 10){
-     
-            x += dx;
-            y += dy;
+            while (tubosColocados < 10) {
+                x += dx; // Solo movimiento horizontal
 
-            if(x<0 || x+width>casa.getWidth()){ dx = -dx; }
-            if(y<0 || y+height>casa.getHeight()){ dy = -dy; }
+                // Detectar colisión con los bordes y cambiar dirección si es necesario
+                if (x < 0 || x + width > casa.getWidth()) {
+                    dx = -dx;
+                }
 
-           
-            if(System.currentTimeMillis() - ultimoTubo >= 2000){
-                dejarTuboConFuga();
-                tubosColocados++;
-                ultimoTubo = System.currentTimeMillis();
+                // Controlar el tiempo para soltar tubos
+                if (System.currentTimeMillis() - ultimoTubo >= 2000) {
+                    dejarTuboConFuga();
+                    tubosColocados++;
+                    ultimoTubo = System.currentTimeMillis();
+                }
+
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
-            try{ Thread.sleep(20); }catch(InterruptedException e){}
-
+            this.setVisible(false);
+            casa.eliminarFontaneroMalo();
         }
-    
-        this.setVisible(false);        
-        casa.eliminarFontaneroMalo();    
-    }
 
     @Override
     public void paint(Graphics g) {
