@@ -112,9 +112,9 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         recorridos.add(recoridoSegundoPiso);
         recorridos.add(recoridoPrimerPiso);
         
-        juego.getCasaNivel1().getFontaneroMalo().setRecorridos(recorridos);
+        juego.getCasaNivel2().getFontaneroMalo().setRecorridos(recorridos);
         
-        Thread hiloFontanero = new Thread(juego.getCasaNivel1().getFontaneroMalo());
+        Thread hiloFontanero = new Thread(juego.getCasaNivel2().getFontaneroMalo());
         hiloFontanero.start();
         
         
