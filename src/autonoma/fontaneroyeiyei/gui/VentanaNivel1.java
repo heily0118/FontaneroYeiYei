@@ -250,19 +250,41 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private void perderJuego() {
         
         System.out.println("Se acabó el tiempo, perdiste una vida!");
-        
+
         juegoTerminado = true;
         repaint();
 
         Timer timerGameOver = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                javax.swing.JOptionPane.showMessageDialog(VentanaNivel1.this, "¡Tiempo terminado! Has perdido.");
-                dispose();
+                Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
+                int seleccion = javax.swing.JOptionPane.showOptionDialog(
+                        VentanaNivel1.this,
+                        "¡Tiempo terminado! ¿Qué deseas hacer?",
+                        "Fin del Juego",
+                        javax.swing.JOptionPane.DEFAULT_OPTION,
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[0]
+                );
+
+                if (seleccion == 0) {
+                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
+                    nuevaListaCasas.add(new Casa(700, 700)); 
+                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
+
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego);
+                    dispose(); 
+                    nuevaVentana.setVisible(true); 
+                } else {
+                    dispose(); 
+                }
             }
         });
-        timerGameOver.setRepeats(false); 
-        timerGameOver.start(); 
+
+        timerGameOver.setRepeats(false);
+        timerGameOver.start();
     }
     
     private void iniciarReloj() {

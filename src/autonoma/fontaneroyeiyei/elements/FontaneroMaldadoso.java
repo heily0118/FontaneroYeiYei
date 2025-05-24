@@ -16,11 +16,7 @@ import javax.swing.JPanel;
  * @since 20250516
  * @version 1.0.0
  */
-
-
-
-    
-    
+      
  
 public class FontaneroMaldadoso extends SpriteMobile {
 
@@ -36,8 +32,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * 
      * @param x Es la posición X inicial
      * @param y Es la poosición Y inicial
-     * @param width Es el ancho del sprite
-     * @param height Es el alto del sprite
     
      */
     

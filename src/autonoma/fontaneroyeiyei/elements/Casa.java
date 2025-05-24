@@ -16,7 +16,7 @@ public class Casa {
     public Casa(int width, int height) {
         this.width = width;
         this.height = height;
-
+        
         this.tubos = new ArrayList<>();
     
 
@@ -26,7 +26,10 @@ public class Casa {
 
       
         this.serviente = new Serpiente(0, height - 100, 50, 50, limiteIzquierdo, limiteDerecho);
-        this.fontaneroMalo = new FontaneroMaldadoso(0, height - 100, 50, 50, this);
+        
+        int fontaneroMaloAncho = 80; 
+        int fontaneroMaloAlto = 80;  
+        this.fontaneroMalo = new FontaneroMaldadoso(0, height - 100, fontaneroMaloAncho, fontaneroMaloAlto, this);
 
       
         Thread hiloServiente = new Thread(serviente);
