@@ -17,6 +17,22 @@ public class Puntaje {
      * Puntaje actual acumulado por el jugador. 
      */
     private int puntajeActual;
+    
+    /**
+     * Puntaje máximo alcanzado históricamente por el jugador, guardado en archivo.
+     */
+    private int puntajeMaximo;
+    
+    /**
+     * Nombre del jugador.
+     */
+    private String nombreJugador;
+
+    
+    /**
+     * Nombre del jugador de Puntaje Maximo.
+     */
+    private String MaximoNombre;
 
     /**
      * Constructor de la clase Puntaje.
@@ -75,5 +91,58 @@ public class Puntaje {
      */
     public void aumentarPuntajePorLlaveInglesa() {
         this.puntajeActual += 2;
+    }
+    
+    /**
+     * Obtiene el nombre del jugador.
+     * 
+     * @return Retorna el nombre del jugador.
+     */
+    public String getNombreJugador() {
+        return nombreJugador;
+    }
+    
+    /**
+     * Obtiene el nombre del jugador con el máximo puntaje.
+     * 
+     * @return Retorna el nombre del jugador con el máximo puntaje.
+     */
+    public String getMaximoNombre() {
+        return MaximoNombre;
+    }
+
+    /**
+     * Establece el nombre del jugador.
+     * 
+     * @param nombreJugador Es el nombre del jugador.
+     */
+    public void setNombreJugador(String nombreJugador) {
+        this.nombreJugador = nombreJugador;
+    }
+
+    /**
+     * Establece el nombre del jugador con el puntaje máximo.
+     * 
+     * @param MaximoNombre Es el nombre del jugador con el puntaje máximo.
+     */
+    public void setMaximoNombre(String MaximoNombre) {
+        this.MaximoNombre = MaximoNombre;
+    }
+    
+    /**
+     * Obtiene el puntaje máximo del jugador.
+     * 
+     * @return Retorna el puntaje máximo.
+     */
+    public int getPuntajeMaximo() {
+        return puntajeMaximo;
+    }
+
+    /**
+     * Establece el puntaje máximo del jugador.
+     * @param puntajeMaximo Es el puntaje máximo del jugador.
+     */
+    public void setPuntajeMaximo(int puntajeMaximo) {
+        this.puntajeMaximo = puntajeMaximo;
     }
 }

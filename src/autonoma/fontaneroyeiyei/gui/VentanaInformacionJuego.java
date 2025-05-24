@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -93,6 +94,20 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             panelFondo.add(botonNivel3);
 
             setContentPane(panelFondo);
+            
+            addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(null,
+                "¿Estás seguro de que deseas salir del juego?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION
+            );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }  
+            }
+        });
        
     }
 
