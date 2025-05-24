@@ -13,7 +13,7 @@ package autonoma.fontaneroyeiyei.elements;
 
 public class Sellador extends Herramienta {
 
-      @Override
+    @Override
     public void usarEn(Tubo tubo) {
        
         if (tubo instanceof TuboConFuga) {
