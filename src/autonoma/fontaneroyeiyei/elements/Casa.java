@@ -32,8 +32,7 @@ public class Casa {
         Thread hiloServiente = new Thread(serviente);
         hiloServiente.start();
 
-        Thread hiloFontanero = new Thread(fontaneroMalo);
-        hiloFontanero.start();
+        
     }
 
     public FontaneroMaldadoso getFontaneroMalo() {

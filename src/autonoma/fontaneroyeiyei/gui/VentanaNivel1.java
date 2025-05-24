@@ -89,7 +89,21 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         f.setHitBoxs(hitBoxs);
         juego.getCasaNivel1().getFontaneroMalo().setHitBoxs(hitBoxs);
-                
+        
+        
+        ArrayList<Recorrido> recorridos = new ArrayList<>();
+        
+        Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 600,160);
+        Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,580);
+        
+        recorridos.add(recoridoSegundoPiso);
+        recorridos.add(recoridoPrimerPiso);
+        
+        juego.getCasaNivel1().getFontaneroMalo().setRecorridos(recorridos);
+        
+        Thread hiloFontanero = new Thread(juego.getCasaNivel1().getFontaneroMalo());
+        hiloFontanero.start();
+        
         Casa casaNivel1 = juego.getCasaNivel1(); 
      
 

@@ -29,6 +29,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
     private int dy = -3; 
     private final Casa casa;
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
+   private ArrayList<Recorrido> recorridos = new ArrayList<>();
 
 
     /**
@@ -68,7 +69,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
         Fuga fuga = new Fuga(this.x+10, this.y+10,
                              Math.random()<0.5?"tuerca":"grieta");
         TuboConFuga nuevo = new TuboConFuga("malo",
-                         this.x, this.y, 60, 20, fuga);
+                         this.x+50, this.y+50, 60, 20, fuga);
         casa.agregarTubo(nuevo);
         }
     }
@@ -76,7 +77,14 @@ public class FontaneroMaldadoso extends SpriteMobile {
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
-
+    
+    public void setRecorridos(ArrayList<Recorrido> recorridos) {
+        
+        System.out.println("sse ingresa los recorridos");
+        this.recorridos = recorridos;
+    }
+    
+    
     public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
 
 
@@ -90,36 +98,72 @@ public class FontaneroMaldadoso extends SpriteMobile {
          return false;
     }
     
-        @Override
-        public void run() {
-            int tubosColocados = 0;
-            long ultimoTubo = System.currentTimeMillis();
+            @Override
+            public void run() {
+                int tubosColocados = 0;         // Contador de tubos colocados
+                int numeroRecorrido = 0;        // Indice del recorrido actual
+                long ultimoTubo = System.currentTimeMillis();  // Marca de tiempo del ultimo tubo colocado
 
-            while (tubosColocados < 10) {
-                x += dx; // Solo movimiento horizontal
+                  
+                // Validar que la lista de recorridos exista y tenga al menos un elemento
+                if (recorridos != null && !recorridos.isEmpty()) {
+                    
+                    System.out.println("esta en caminar los recorridos");
+                    // Posicion inicial del fontanero
+                    x = recorridos.get(numeroRecorrido).getInicioX();
+                    y = recorridos.get(numeroRecorrido).getInicioY();
 
-                // Detectar colisión con los bordes y cambiar dirección si es necesario
-                if (x < 0 || x + width > casa.getWidth()) {
-                    dx = -dx;
-                }
+                    // Ciclo principal: colocar 10 tubos
+                    while (tubosColocados < 10) {
 
-                // Controlar el tiempo para soltar tubos
-                if (System.currentTimeMillis() - ultimoTubo >= 2000) {
-                    dejarTuboConFuga();
-                    tubosColocados++;
-                    ultimoTubo = System.currentTimeMillis();
-                }
+                        // Si el indice de recorrido supera el tamaño, reiniciar
+                        if (numeroRecorrido >= recorridos.size()) {
+                            numeroRecorrido = 0;
+                        }
 
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                        // Movimiento segun la posicion del recorrido
+                        if ((casa.getWidth() / 2) > recorridos.get(numeroRecorrido).getInicioX()) {
+                            
+                            System.out.println("es mennor se va por la derecha ");
+                            System.out.println(" x "+x +" + "+ " dx" +dx);
+                            x += dx;
+                            if (x < 0 || x + width > casa.getWidth()) {
+                                numeroRecorrido++;
+                                if (numeroRecorrido < recorridos.size()) {
+                                    x = recorridos.get(numeroRecorrido).getInicioX();
+                                    y = recorridos.get(numeroRecorrido).getInicioY();
+                                }
+                            }
+                        } else {
+                            x -= dx;
+                            if (x < 0 || x + width > casa.getWidth()) {
+                                numeroRecorrido++;
+                                if (numeroRecorrido < recorridos.size()) {
+                                    x = recorridos.get(numeroRecorrido).getInicioX();
+                                    y = recorridos.get(numeroRecorrido).getInicioY();
+                                }
+                            }
+                        }
+
+                        // Colocacion de tubos cada 2 segundos
+                        if (System.currentTimeMillis() - ultimoTubo >= 2000) {
+                            dejarTuboConFuga();
+                            tubosColocados++;
+                            ultimoTubo = System.currentTimeMillis();
+                        }
+
+                        try {
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Ocultar y eliminar el fontanero
+                    this.setVisible(false);
+                    casa.eliminarFontaneroMalo();
                 }
             }
-
-            this.setVisible(false);
-            casa.eliminarFontaneroMalo();
-        }
 
     @Override
     public void paint(Graphics g) {

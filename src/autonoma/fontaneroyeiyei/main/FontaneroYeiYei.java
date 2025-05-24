@@ -25,9 +25,9 @@ public class FontaneroYeiYei {
         casas.add(new Casa(700, 700));
         casas.add(new Casa(700, 700));
 
-        casas.get(0).iniciarEnemigo(100, 50, 80, 80);
-        casas.get(1).iniciarEnemigo(200, 50, 80, 80);
-        casas.get(2).iniciarEnemigo(300, 50, 80, 80);
+        casas.get(0).iniciarEnemigo(600, 160, 80, 80);
+        casas.get(1).iniciarEnemigo(200, 200, 80, 80);
+        casas.get(2).iniciarEnemigo(300, 200, 80, 80);
 
 
         GestorJuego juego = new GestorJuego(casas);

@@ -39,6 +39,7 @@ public class FontaneroBueno extends Sprite{
     
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
 
+
     private Herramienta herramientaSeleccionada;
 
     
@@ -71,6 +72,8 @@ public class FontaneroBueno extends Sprite{
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
+
+    
 
 
 
@@ -219,7 +222,7 @@ public class FontaneroBueno extends Sprite{
             
 //        System.out.println("lugar de donde se pinta");
 //        System.out.println("x :"+x + "y :" + y);
-        g.drawImage(jugadorImage, x, y, width, height, null);
+//        g.drawImage(jugadorImage, x, y, width, height, null);
         
 //              HIT bOXS
 //        this.setColor(Color.BLACK);
