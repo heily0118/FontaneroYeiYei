@@ -260,8 +260,8 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 
                 if (seleccion == 0) {
                     ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700)); 
-                    nuevaListaCasas.add(new Casa(700, 700));
+                    nuevaListaCasas.add(new Casa(700, 700,2)); 
+                    nuevaListaCasas.add(new Casa(700, 700,2));
                     GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
 
                     VentanaNivel2 nuevaVentana = new VentanaNivel2(null, true, nuevoJuego);

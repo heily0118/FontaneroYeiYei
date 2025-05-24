@@ -273,9 +273,9 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 
                 if (seleccion == 0) {
                     ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700)); 
-                    nuevaListaCasas.add(new Casa(700, 700));
-                    nuevaListaCasas.add(new Casa(700, 700)); 
+                    nuevaListaCasas.add(new Casa(700, 700,3)); 
+                    nuevaListaCasas.add(new Casa(700, 700,3));
+                    nuevaListaCasas.add(new Casa(700, 700,3)); 
                     GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
 
                     VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego);
