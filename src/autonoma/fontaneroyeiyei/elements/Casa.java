@@ -10,7 +10,7 @@ public class Casa {
     private int height;
 
     private List<Tubo> tubos;
-    private Serviente serviente;
+    private Serpiente serviente;
     private FontaneroMaldadoso fontaneroMalo;
 
     public Casa(int width, int height) {
@@ -25,7 +25,7 @@ public class Casa {
         int limiteDerecho = width;
 
       
-        this.serviente = new Serviente(0, height - 100, 50, 50, limiteIzquierdo, limiteDerecho);
+        this.serviente = new Serpiente(0, height - 100, 50, 50, limiteIzquierdo, limiteDerecho);
         this.fontaneroMalo = new FontaneroMaldadoso(0, height - 100, 50, 50, this);
 
       
