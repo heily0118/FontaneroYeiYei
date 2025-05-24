@@ -20,7 +20,10 @@ public class TuboConFuga extends Tubo {
     public TuboConFuga(String estado, int x, int y, int width, int height, Fuga fuga) {
         super(estado, x, y, width, height);
         this.fuga = fuga;
-        this.setImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMalo.png"))); 
+       ImageIcon icono = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMalo.png"));
+        System.out.println("Tamaño real de la imagen: " + icono.getIconWidth() + " x " + icono.getIconHeight());
+        this.setImage(icono); 
+
     }
 
     @Override

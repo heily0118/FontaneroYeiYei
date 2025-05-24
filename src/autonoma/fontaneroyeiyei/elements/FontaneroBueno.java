@@ -320,7 +320,7 @@ public class FontaneroBueno extends Sprite{
                 TuboConFuga tuboConFuga = (TuboConFuga) tubo;
                 Fuga fuga = tuboConFuga.getFuga();
 
-                if (fuga != null && !fuga.estaReparada() && fuga.estaCerca(x, y)) {
+              if (fuga.estaCerca(this.getX(), this.getY(), this.getWidth(), this.getHeight())){
                     boolean antesReparada = fuga.estaReparada();
 
                     herramienta.usarEn(tuboConFuga);
