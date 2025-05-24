@@ -135,73 +135,72 @@ public class FontaneroMaldadoso extends SpriteMobile {
         
         return false;
     }
-    
-            @Override
-            public void run() {
-                int tubosColocados = 0;         // Contador de tubos colocados
-                int numeroRecorrido = 0;        // Indice del recorrido actual
-                long ultimoTubo = System.currentTimeMillis();  // Marca de tiempo del ultimo tubo colocado
+        @Override
+        public void run() {
+            int tubosColocados = 0;         // Contador de tubos colocados
+            int numeroRecorrido = 0;        // Indice del recorrido actual
+            long ultimoTubo = System.currentTimeMillis();  // Marca de tiempo del ultimo tubo colocado
 
-                  
-                // Validar que la lista de recorridos exista y tenga al menos un elemento
-                if (recorridos != null && !recorridos.isEmpty()) {
-                    
-                    System.out.println("esta en caminar los recorridos");
-                    // Posicion inicial del fontanero
-                    x = recorridos.get(numeroRecorrido).getInicioX();
-                    y = recorridos.get(numeroRecorrido).getInicioY();
+            // Validar que la lista de recorridos exista y tenga al menos un elemento
+            if (recorridos != null && !recorridos.isEmpty()) {
 
-                    // Ciclo principal: colocar 10 tubos
-                    while (tubosColocados < 10) {
+                // Posicion inicial del fontanero
+                x = recorridos.get(numeroRecorrido).getInicioX();
+                y = recorridos.get(numeroRecorrido).getInicioY();
 
-                        // Si el indice de recorrido supera el tamaño, reiniciar
-                        if (numeroRecorrido >= recorridos.size()) {
-                            numeroRecorrido = 0;
+                // Ciclo principal: colocar 10 tubos
+                while (tubosColocados < 10) {
+
+                    // Verifica si se ha salido del limite de la lista y reinicia
+                    if (numeroRecorrido >= recorridos.size()) {
+                        numeroRecorrido = 0;
+                    }
+
+                    // Movimiento segun la posicion del recorrido actual
+                    Recorrido recorridoActual = recorridos.get(numeroRecorrido);
+
+                    if ((casa.getWidth() / 2) > recorridoActual.getInicioX()) {
+                        // Si el recorrido esta a la izquierda de la casa, se mueve a la derecha
+                        x += dx;
+
+                        // Si choca con los bordes, pasa al siguiente recorrido
+                        if (x < 0 || x + width > casa.getWidth()) {
+                            numeroRecorrido = (numeroRecorrido + 1) % recorridos.size(); // Reinicia si es necesario
+                            x = recorridos.get(numeroRecorrido).getInicioX();
+                            y = recorridos.get(numeroRecorrido).getInicioY();
                         }
 
-                        // Movimiento segun la posicion del recorrido
-                        if ((casa.getWidth() / 2) > recorridos.get(numeroRecorrido).getInicioX()) {
-                            
-                            System.out.println("es mennor se va por la derecha ");
-                            System.out.println(" x "+x +" + "+ " dx" +dx);
-                            x += dx;
-                            if (x < 0 || x + width > casa.getWidth()) {
-                                numeroRecorrido++;
-                                if (numeroRecorrido < recorridos.size()) {
-                                    x = recorridos.get(numeroRecorrido).getInicioX();
-                                    y = recorridos.get(numeroRecorrido).getInicioY();
-                                }
-                            }
-                        } else {
-                            x -= dx;
-                            if (x < 0 || x + width > casa.getWidth()) {
-                                numeroRecorrido++;
-                                if (numeroRecorrido < recorridos.size()) {
-                                    x = recorridos.get(numeroRecorrido).getInicioX();
-                                    y = recorridos.get(numeroRecorrido).getInicioY();
-                                }
-                            }
-                        }
+                    } else {
+                        // Si el recorrido esta a la derecha de la casa, se mueve a la izquierda
+                        x -= dx;
 
-                        // Colocacion de tubos cada 2 segundos
-                        if (System.currentTimeMillis() - ultimoTubo >= 2000) {
-                            dejarTuboConFuga();
-                            tubosColocados++;
-                            ultimoTubo = System.currentTimeMillis();
-                        }
-
-                        try {
-                            Thread.sleep(20);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        // Si choca con los bordes, pasa al siguiente recorrido
+                        if (x < 0 || x + width > casa.getWidth()) {
+                            numeroRecorrido = (numeroRecorrido + 1) % recorridos.size(); // Reinicia si es necesario
+                            x = recorridos.get(numeroRecorrido).getInicioX();
+                            y = recorridos.get(numeroRecorrido).getInicioY();
                         }
                     }
 
-                    // Ocultar y eliminar el fontanero
-                    this.setVisible(false);
-                    casa.eliminarFontaneroMalo();
+                    // Colocacion de tubos cada 2 segundos
+                    if (System.currentTimeMillis() - ultimoTubo >= 2000) {
+                        dejarTuboConFuga();
+                        tubosColocados++;
+                        ultimoTubo = System.currentTimeMillis();
+                    }
+
+                    try {
+                        Thread.sleep(20); // Pequeña pausa para evitar saturar la CPU
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+                // Ocultar y eliminar el fontanero una vez termina
+                this.setVisible(false);
+                casa.eliminarFontaneroMalo();
             }
+        }
 
 //    /**
 //     * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
