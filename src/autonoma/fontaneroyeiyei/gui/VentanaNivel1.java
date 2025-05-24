@@ -53,7 +53,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private boolean juegoTerminado;
     private Timer timerReloj;
     private int tiempoRestante = 40;
-    private int puntaje = 0;
+ 
     
 
 
@@ -163,8 +163,9 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     g3d.setColor(Color.WHITE);
                     g3d.drawString("Tiempo: " + tiempoFormateado, x1, y1);
 
-                    // ✅ Aquí dibujas el puntaje usando g3d
-                    String textoPuntaje = "Puntaje: " + puntaje;
+                  
+                    String textoPuntaje = "Puntaje: " + f.getPuntaje().getPuntajeActual();
+
                     Font fuentePuntaje = new Font("Comic Sans MS", Font.BOLD, 28);
                     g3d.setFont(fuentePuntaje);
                     FontMetrics fmP = g3d.getFontMetrics();
@@ -267,7 +268,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
             evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
              juego.manejarTecla(evt.getKeyChar());
-                puntaje += 10;
+                
          }
 
         
