@@ -40,7 +40,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private GestorJuego juego;
     private ImageIcon fondo;
     private FontaneroBueno f;
-    private FontaneroMaldadoso fmalo;
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
@@ -82,7 +81,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         hitBoxs.addLast(escalas);
         
         f.setHitBoxs(hitBoxs);
-        
+        juego.getCasaNivel1().getFontaneroMalo().setHitBoxs(hitBoxs);
                 
         Casa casaNivel1 = juego.getCasaNivel1(); 
      

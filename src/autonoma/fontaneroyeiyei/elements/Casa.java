@@ -36,6 +36,10 @@ public class Casa {
         hiloFontanero.start();
     }
 
+    public FontaneroMaldadoso getFontaneroMalo() {
+        return fontaneroMalo;
+    }
+
    
 
 

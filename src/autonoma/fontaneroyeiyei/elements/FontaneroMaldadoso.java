@@ -28,6 +28,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
     private int dx = 3;  
     private int dy = -3; 
     private final Casa casa;
+    private ArrayList<HitBox> hitBoxs = new ArrayList<>();
 
 
     /**
@@ -52,13 +53,43 @@ public class FontaneroMaldadoso extends SpriteMobile {
 
     /** Suelta un tubo exactamente en la posición actual */
     private void dejarTuboConFuga(){
+        
+        // Verifica si el movimiento es válido
+        // Primero verificamos si hay colisión
+        boolean hayColision = false;
+        
+        for (HitBox h : hitBoxs) {
+                    if (this.colisionaConhHitbox(h,x,y)) {
+                        hayColision = true;
+                        break; // Salimos del ciclo en cuanto detectamos una colisión
+                    }
+                }
+        if(!hayColision){
         Fuga fuga = new Fuga(this.x+10, this.y+10,
                              Math.random()<0.5?"tuerca":"grieta");
         TuboConFuga nuevo = new TuboConFuga("malo",
                          this.x, this.y, 60, 20, fuga);
         casa.agregarTubo(nuevo);
+        }
     }
 
+    public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
+        this.hitBoxs = hitBoxs;
+    }
+
+    public boolean colisionaConhHitbox(HitBox h,int nx, int ny) {
+
+
+        if ( nx < h.getX() + h.getWidth() &&
+        nx + this.getWidth() > h.getX() &&
+        ny < h.getY() + h.getHeight() &&
+        ny + this.getHeight() > h.getY()) {
+            return true;
+        }
+        
+         return false;
+    }
+    
     @Override
     public void run(){
         int tubosColocados = 0;
@@ -93,6 +124,9 @@ public class FontaneroMaldadoso extends SpriteMobile {
             g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
         }
     }
+    
+    
+    
     
     
 }
