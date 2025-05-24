@@ -59,7 +59,7 @@ public class FontaneroBueno extends Sprite{
         super(0,0, 90, 90);
         this.puntaje = new Puntaje();
         this.nombre = nombre;
-        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno3.png"))
+        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"))
                    .getImage()
                    .getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
@@ -276,7 +276,8 @@ public class FontaneroBueno extends Sprite{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 //        System.out.println("lugar de donde se pinta");
 //        System.out.println("x :"+x + "y :" + y);
-//        g.drawImage(jugadorImage, x, y, width, height, null);
+
+        g.drawImage(jugadorImage, x, y, width, height, null);
         
 //              HIT bOXS
 //        this.setColor(Color.BLACK);
