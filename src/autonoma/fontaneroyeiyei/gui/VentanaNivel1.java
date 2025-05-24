@@ -87,7 +87,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         hitBoxs.add(SegundoPiso);
         //escalas HITBOX
         HitBox escalas = new HitBox(180, 250, 250, 30);
-        HitBox escalas2 = new HitBox(0, 250, 250, 60);
+        HitBox escalas2 = new HitBox(0, 250, 300, 60);
         hitBoxs.add(escalas2);
         hitBoxs.add(escalas);
         

@@ -27,6 +27,7 @@ import java.awt.Graphics;
 
     //         PROBAR HIT BOXS
             this.setColor(Color.black);
+            g.setColor(color);
             g.fillRect(this.x,this.y, this.width,this.height );
         }
  

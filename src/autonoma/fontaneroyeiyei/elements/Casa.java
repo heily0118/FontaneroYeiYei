@@ -37,7 +37,7 @@ import java.util.List;
         switch (nivel) {
             case 1:
                 posicionesY = new int[] {
-                    height - 100,
+                    height - 90,
                     height - 500
                 };
                 tiempoEntreTubos = 4000; // 4 segundos
@@ -45,8 +45,8 @@ import java.util.List;
                 break;
             case 2:
                 posicionesY = new int[] {
-                    height - 100,
-                    height - 450
+                    height - 90,
+                    height - 425
                 };
                 tiempoEntreTubos = 3000; // 3 segundos
                 maxTubos = 15;

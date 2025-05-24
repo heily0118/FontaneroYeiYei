@@ -90,16 +90,16 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         
         //SEGUNDO PISO HITBOX
         HitBox techoSegundoPiso2 = new HitBox(0, 0,150,700);
-        HitBox SegundoPiso = new HitBox(0, 240,125,300);
-        HitBox SegundoPiso2 = new HitBox(450, 240,125,450);
+        HitBox SegundoPiso = new HitBox(0, 240,100,300);
+        HitBox SegundoPiso2 = new HitBox(450, 240,100,450);
         
         hitBoxs.add(techoSegundoPiso2);
         hitBoxs.add(SegundoPiso);
         hitBoxs.add(SegundoPiso2);
         
         //ESCALAS SEGUNDO PISO HITBOX
-        HitBox escalasSegundoPiso1 = new HitBox(300, 240, 125, 30);
-        HitBox escalasSegundoPiso2 = new HitBox(450, 240, 125, 30);
+        HitBox escalasSegundoPiso1 = new HitBox(300, 240, 100, 30);
+        HitBox escalasSegundoPiso2 = new HitBox(450, 240, 100, 30);
         
         hitBoxs.add(escalasSegundoPiso1);
         hitBoxs.add(escalasSegundoPiso2);
@@ -108,9 +108,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         //PRIMER PISO HITBOX
         HitBox primerPiso = new HitBox(0, 450,120,350);
         HitBox primerPiso2 = new HitBox(450, 450,120,450);
-        HitBox sotano  = new HitBox(0, 650,125,700);
-        
-        hitBoxs.add(sotano);
+
+
         hitBoxs.add(primerPiso);
         hitBoxs.add(primerPiso2);
         
@@ -132,10 +131,10 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                      f.paint(g);
                      casaNivel3.paint(g); 
 //                    Para pintar el los bloques de hitboxs
-//                    for(HitBox h : hitBoxs){                
-//                        h.paint(g);
-//                    
-//                }
+                    for(HitBox h : hitBoxs){                
+                        h.paint(g);
+                    
+                }
                     int minutos = tiempoRestante / 60;
                     int segundos = tiempoRestante % 60;
 

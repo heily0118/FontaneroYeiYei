@@ -4,6 +4,7 @@
  */
 package autonoma.fontaneroyeiyei.elements;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -31,7 +32,14 @@ public class Serpiente extends SpriteMobile {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(servienteImage, getX(), getY(), getWidth(), getHeight(), null);
+        
+        //          HIT bOXS
+        this.setColor(Color.GREEN);
+        g.setColor(color);
+        g.fillRect(x,y, height, width);
+        
+        
+//        g.drawImage(servienteImage, getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
