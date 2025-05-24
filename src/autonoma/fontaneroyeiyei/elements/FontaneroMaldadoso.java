@@ -5,7 +5,9 @@
 package autonoma.fontaneroyeiyei.elements;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -60,6 +62,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
     public FontaneroMaldadoso(int x,int y,int w,int h,Casa casa, List<Integer> pisosY, FontaneroBueno fontaneroBueno, int maxTubos, int tiempoEntreTubos){
        super(x,y,w,h);
         this.casa = casa;
+
       this.pisosY = pisosY;
       this.fontaneroBueno = fontaneroBueno;
       this.maxTubos = maxTubos;
@@ -182,6 +185,12 @@ public class FontaneroMaldadoso extends SpriteMobile {
     @Override
     public void paint(Graphics g) {
          if (this.isVisible() && this.getImage() != null) {
+             Graphics2D g2 = (Graphics2D) g;
+
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
             g.drawImage(((ImageIcon) this.getImage()).getImage(), x, y, width, height, null);
         }
     }  

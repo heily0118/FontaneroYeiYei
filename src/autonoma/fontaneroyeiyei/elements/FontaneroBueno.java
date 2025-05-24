@@ -6,7 +6,9 @@ package autonoma.fontaneroyeiyei.elements;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,10 +56,12 @@ public class FontaneroBueno extends Sprite{
      * @param nombre 
      */
     public FontaneroBueno(String nombre) {
-        super(0,0, 80, 80);
+        super(0,0, 90, 90);
         this.puntaje = new Puntaje();
         this.nombre = nombre;
-        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png")).getImage();
+        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno3.png"))
+                   .getImage()
+                   .getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
     /**
@@ -264,7 +268,11 @@ public class FontaneroBueno extends Sprite{
      */
     @Override
     public void paint(Graphics g){ 
-            
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 //        System.out.println("lugar de donde se pinta");
 //        System.out.println("x :"+x + "y :" + y);
         g.drawImage(jugadorImage, x, y, width, height, null);
