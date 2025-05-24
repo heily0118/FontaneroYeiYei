@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  * @since 20250516
  * @version 1.0.0
  */
-public class Serviente extends SpriteMobile {
+public class Serpiente extends SpriteMobile {
 
     private Image servienteImage;
     private int direccionMovimiento = 1; // 1 para derecha, -1 para izquierda
@@ -22,7 +22,7 @@ public class Serviente extends SpriteMobile {
     private int limiteDerecho;
     private int velocidad = 2; 
 
-    public Serviente(int x, int y, int ancho, int alto, int limiteIzquierdo, int limiteDerecho) {
+    public Serpiente(int x, int y, int ancho, int alto, int limiteIzquierdo, int limiteDerecho) {
         super(x, y, ancho, alto);
         servienteImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Serviente.png")).getImage();
         this.limiteIzquierdo = limiteIzquierdo;
