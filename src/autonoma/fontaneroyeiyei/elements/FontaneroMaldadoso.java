@@ -94,10 +94,11 @@ public class FontaneroMaldadoso extends SpriteMobile {
                              Math.random()<0.5?"tuerca":"grieta");
         TuboConFuga nuevo = new TuboConFuga("malo",
                          this.x, this.y+10, 60, 60, fuga);
-            System.out.println("------fontanero maliloso-----");
-            System.out.println("se agrego tubo");
-            System.out.println(" en casa "+ casa.getNivel());
-            System.out.println("tamanio actual "+ casa.getTubos().size());
+                         /// INFORMACION DE DEJAR TUBOS
+//            System.out.println("------fontanero maliloso-----");
+//            System.out.println("se agrego tubo");
+//            System.out.println(" en casa "+ casa.getNivel());
+//            System.out.println("tamanio actual "+ casa.getTubos().size());
         casa.agregarTubo(nuevo);
           
         }
