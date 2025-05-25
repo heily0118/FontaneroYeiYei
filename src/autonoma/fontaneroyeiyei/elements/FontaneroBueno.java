@@ -29,6 +29,10 @@ import java.awt.event.ActionListener;
 
 public class FontaneroBueno extends Sprite{
     
+    
+    private long lastHitTime = 0; // Variable para registrar el tiempo del último choque
+    private static final int HIT_DELAY = 1000; // Tiempo de espera en milisegundos
+    
     /** Objeto que maneja el puntaje del jugador, incluyendo aciertos e intentos. */
     private Puntaje puntaje;
 
@@ -272,21 +276,23 @@ public class FontaneroBueno extends Sprite{
     
     
     
-    public boolean TocoSerpiente(List<Serpiente> servientes){
-        
-        for (Serpiente s : servientes){
-         if (this.checkCollision(s)){
-             System.out.println("se choco");
-             vida--;
-             if(vida<0){
-             vida =0;
-             }
-             return true;
-         
-         }
-           }
-    return true;
-    }
+
+
+        public boolean TocoSerpiente(List<Serpiente> servientes) {
+            long currentTime = System.currentTimeMillis();
+
+            for (Serpiente s : servientes) {
+                if (this.checkCollision(s)) {
+                    if (currentTime - lastHitTime > HIT_DELAY) { // Verifica si pasó suficiente tiempo
+                        vida--;
+                        if (vida < 0) vida = 0;
+                        lastHitTime = currentTime; // Actualiza el tiempo del choque
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     /**
      * Dibuja la imagen del jugador en la pantalla en la posición actual.
      * 
