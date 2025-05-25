@@ -5,8 +5,10 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.sound.sampled.Clip;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -51,6 +53,38 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             };
             panelFondo.setLayout(null);
 
+                // Botón de Información con ícono
+            ImageIcon iconoInfo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/Informacion.png"));
+            JButton btnInformacion = new JButton(iconoInfo);
+            btnInformacion.setBounds(20, 10, 64, 64);
+
+            // Fondo claro para que se vea
+            btnInformacion.setOpaque(true);
+            btnInformacion.setBackground(new Color(255, 255, 255, 150)); 
+            btnInformacion.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+          
+            btnInformacion.setContentAreaFilled(true); 
+            btnInformacion.setFocusPainted(false);
+            btnInformacion.setToolTipText("Ver controles del juego");
+
+            // Acción
+            btnInformacion.addActionListener(e -> {
+                String mensaje = """
+                    Controles del juego:
+
+                    L → Usar llave inglesa
+                    S → Usar sellador
+                    Espacio → Saltar
+                    ← → Mover a la izquierda
+                    → → Mover a la derecha
+                    ↑ → Subir escalera 
+                    """;
+
+                JOptionPane.showMessageDialog(this, mensaje, "Controles del juego", JOptionPane.INFORMATION_MESSAGE);
+            });
+
+
             // === Botones con imágenes de casas ===
             ImageIcon iconoNivel1 = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/casa1Fuera.png"));
             ImageIcon iconoNivel2 = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/casa2Fuera.png"));
@@ -92,6 +126,8 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             panelFondo.add(botonNivel1);
             panelFondo.add(botonNivel2);
             panelFondo.add(botonNivel3);
+            panelFondo.add(btnInformacion);
+
 
             setContentPane(panelFondo);
             
