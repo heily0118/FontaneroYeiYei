@@ -147,7 +147,13 @@ public class GestorJuego {
         int maxTubos = casaActual.getMaxTubos();
 
         // Intenta usar herramienta y repara tubos si es posible
-        fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual);
+         System.out.println("-0---gestor jjuego---");
+        System.out.println("-------");
+        
+        if(fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual)){
+        System.out.println("-0---se aumenta las tuberia buenas---");
+            casaActual.repararTubo();
+        }
 
         // Verifica si aumentó el número de tubos reparados
         if (casaActual.getTubo() > reparadosAntes) {

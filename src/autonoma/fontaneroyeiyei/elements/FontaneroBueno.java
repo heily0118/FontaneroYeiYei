@@ -170,15 +170,20 @@ public class FontaneroBueno extends Sprite {
     }
 
 
-    public void usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
+    public boolean usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
         Herramienta herramienta = crearHerramienta(tecla);
-        if (herramienta == null) return;
-
+        if (herramienta == null) {
+            System.out.println("no hay erramientas"); 
+        return false ;
+        }
         boolean reparoAlguno = intentarRepararTubosConHerramienta(herramienta, tubos);
 
         if (!reparoAlguno) {
             System.out.println("no se pudo reparar");
+            return false;
         }
+        
+        return reparoAlguno;
     }
 
     private Herramienta crearHerramienta(char tecla) {
@@ -192,28 +197,28 @@ public class FontaneroBueno extends Sprite {
     public boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
        boolean reparoAlguno = false;
           // Aquí es donde agregas los prints para depurar posiciones:
-            System.out.println("Fontanero posicion: (" +  this.x + "," + this.y + ")");
-            System.out.println("lista de tubos"+ tubos.size());
+//            System.out.println("Fontanero posicion: (" +  this.x + "," + this.y + ")");
+//            System.out.println("lista de tubos"+ tubos.size());
             for (Tubo tubo : tubos) {
                 
                 if (tubo instanceof TuboConFuga tuboConFuga) {
-                    System.out.println("Tubo posición: (" + tuboConFuga.getX() + "," + tuboConFuga.getY() + ")");
+//                    System.out.println("Tubo posición: (" + tuboConFuga.getX() + "," + tuboConFuga.getY() + ")");
                 }
             }
 
         for (Tubo tubo : tubos) {
             if (tubo instanceof TuboConFuga tuboConFuga) {
-                System.out.println("Revisando tubo en: (" + tuboConFuga.getX() + ", " + tuboConFuga.getY() + ")");
+//                System.out.println("Revisando tubo en: (" + tuboConFuga.getX() + ", " + tuboConFuga.getY() + ")");
 
                 if (tuboConFuga.estaCerca(x, y, width, height)) {
-                    System.out.println("Fontanero está cerca del tubo");
+//                    System.out.println("Fontanero está cerca del tubo");
 
                     Fuga fuga = tuboConFuga.getFuga();
                     if (fuga != null) {
                         boolean antesReparada = fuga.estaReparada();
-                        System.out.println("Tipo de fuga: " + fuga.getTipo() + ", Reparada antes: " + antesReparada);
-                        
-                        System.out.println("Usando herramienta: " + herramienta.getNombre());
+//                        System.out.println("Tipo de fuga: " + fuga.getTipo() + ", Reparada antes: " + antesReparada);
+//                        
+//                        System.out.println("Usando herramienta: " + herramienta.getNombre());
 
                        
                         herramienta.usarEn(tubo);
@@ -230,10 +235,10 @@ public class FontaneroBueno extends Sprite {
                         System.out.println("El tubo no tiene fuga");
                     }
                 } else {
-                    System.out.println("Fontanero no está cerca del tubo (distancia > 50)");
+//                    System.out.println("Fontanero no está cerca del tubo (distancia > 50)");
                     
                     int distancia = calcularDistancia(x, y, width, height, tuboConFuga.getX(), tuboConFuga.getY(), tuboConFuga.getWidth(), tuboConFuga.getHeight());
-                    System.out.println("Distancia actual: " + distancia);
+//                    System.out.println("Distancia actual: " + distancia);
                 }
             }
         }
