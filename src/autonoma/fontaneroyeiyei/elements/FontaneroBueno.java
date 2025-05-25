@@ -111,6 +111,10 @@ public class FontaneroBueno extends Sprite{
         return nombre;
     }
 
+    public int getVida() {
+        return vida;
+    }
+
 
     /**
      * El movimiento se realiza en pasos de tamaño fijo, y se verifica si hay colisiones con objetos representados por HitBoxs.
@@ -264,6 +268,25 @@ public class FontaneroBueno extends Sprite{
         return false;
     }
       
+    
+    
+    
+    
+    public boolean TocoSerpiente(List<Serpiente> servientes){
+        
+        for (Serpiente s : servientes){
+         if (this.checkCollision(s)){
+             System.out.println("se choco");
+             vida--;
+             if(vida<0){
+             vida =0;
+             }
+             return true;
+         
+         }
+           }
+    return true;
+    }
     /**
      * Dibuja la imagen del jugador en la pantalla en la posición actual.
      * 
@@ -276,8 +299,8 @@ public class FontaneroBueno extends Sprite{
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        System.out.println("lugar de donde se pinta");
-        System.out.println("x :"+x + "y :" + y);
+//        System.out.println("lugar de donde se pinta");
+//        System.out.println("x :"+x + "y :" + y);
 
         g.drawImage(jugadorImage, x, y, width, height, null);
         

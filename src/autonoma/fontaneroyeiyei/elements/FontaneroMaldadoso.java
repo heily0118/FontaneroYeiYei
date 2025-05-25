@@ -163,7 +163,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
                     if ((casa.getWidth() / 2) > recorridoActual.getInicioX()) {
                         // Si el recorrido esta a la izquierda de la casa, se mueve a la derecha
                         
-                        System.out.println(" x "+x +" + "+ " dx" +dx);
+//                        System.out.println(" x "+x +" + "+ " dx" +dx);
                         x += dx;
 
                         // Si choca con los bordes, pasa al siguiente recorrido
