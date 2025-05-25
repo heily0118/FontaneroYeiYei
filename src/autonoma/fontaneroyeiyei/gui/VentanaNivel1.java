@@ -54,6 +54,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private boolean juegoTerminado;
     private Timer timerReloj;
     private int tiempoRestante = 40;
+    private boolean dialogoMostrado = false;
  
     
 
@@ -207,6 +208,10 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
                         g3d.setColor(Color.BLACK);
                         g3d.fillRect(0, 0, getWidth(), getHeight());
+                        
+                        if (!dialogoMostrado) {
+                            perderJuego();
+                        }
 
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
                         g3d.setColor(Color.RED);
@@ -216,6 +221,8 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                         int x = (getWidth() - fm.stringWidth(mensaje)) / 2;
                         int y = getHeight() / 2;
                         g3d.drawString(mensaje, x, y);
+                        
+                        
                     }
                 }
             };
@@ -321,7 +328,8 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     
     private void perderJuego() {
         
-        System.out.println("Se acabó el tiempo, perdiste una vida!");
+        if (dialogoMostrado) return;
+        dialogoMostrado = true;
 
         juegoTerminado = true;
         repaint();
@@ -330,12 +338,12 @@ public class VentanaNivel1 extends javax.swing.JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
-                int seleccion = javax.swing.JOptionPane.showOptionDialog(
+                int seleccion = JOptionPane.showOptionDialog(
                         VentanaNivel1.this,
                         "¡Tiempo terminado! ¿Qué deseas hacer?",
                         "Fin del Juego",
-                        javax.swing.JOptionPane.DEFAULT_OPTION,
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE,
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
                         null,
                         opciones,
                         opciones[0]
@@ -343,14 +351,14 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
                 if (seleccion == 0) {
                     ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700,1)); 
+                    nuevaListaCasas.add(new Casa(700, 700, 1));
                     GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
 
                     VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego);
-                    dispose(); 
-                    nuevaVentana.setVisible(true); 
+                    dispose();
+                    nuevaVentana.setVisible(true);
                 } else {
-                    dispose(); 
+                    dispose();
                 }
             }
         });
