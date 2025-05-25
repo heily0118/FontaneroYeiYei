@@ -59,12 +59,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             botonJugar.setBounds(290, 600, 120, 40);
             estiloBoton(botonJugar);  //  Aplicar estilo
             botonJugar.addActionListener(e -> {
-            String nombreJugador = pedirNombreJugador();
-            juego.inicializarFontanero(nombreJugador);  
+                
+                String nombreJugador = pedirNombreJugador();
+
+                juego.setNombreJugador(nombreJugador); 
+
+                juego.inicializarFontanero(nombreJugador);  
+                new VentanaInformacionJuego(this, true, juego).setVisible(true);
+                dispose();
              detenerSonido();
-            new VentanaInformacionJuego(this, true, juego).setVisible(true);
-            dispose();
             
+
         });
 
 

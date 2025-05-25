@@ -59,13 +59,14 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     private Timer timerReloj;
     private int tiempoRestante = 40;
     private boolean dialogoMostrado = false;
+    private String nombreJugador;
  
     
 
 
 
 
-    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego juego) {
+    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador) {
         super(parent, modal);
         initComponents();
 
@@ -74,7 +75,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         ///se va indicar la siguientes posiciones para ej jugador
        
-        this.f = new FontaneroBueno("teo");
+        this.f = new FontaneroBueno(nombreJugador);
 
         
         
@@ -382,7 +383,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     nuevaListaCasas.add(new Casa(700, 700, 1));
                     GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
 
-                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego);
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, nombreJugador);
                     dispose();
                     nuevaVentana.setVisible(true);
                 } else {
