@@ -82,23 +82,13 @@ public class FontaneroBueno extends Sprite {
     }
 
     boolean hayColision = false;
-    System.out.println("Posición actual fontanero: (" + x + ", " + y + ")");
-            System.out.println("HitBoxes a revisar:");
-            for (HitBox h : hitBoxs) {
-                System.out.println(" - " + h.getClass().getSimpleName() + " en (" + h.getX() + ", " + h.getY() + 
-                                   "), tamaño: " + h.getWidth() + "x" + h.getHeight());
-            }
-
 
     if (!saltando) {
         HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
         for (HitBox h : hitBoxs) {
-            if (h instanceof Tubo t && t.tieneFuga()) {
-                continue;
-            }
             if (hitBoxFuturo.intersects(h)) {
                 hayColision = true;
-                System.out.println("¡Colisión con " + h.getClass().getSimpleName() + "!");
+                System.out.println("¡Colision con " + h.getClass().getSimpleName() + "!");
                 return;
             }
         }
@@ -108,7 +98,7 @@ public class FontaneroBueno extends Sprite {
         this.x = nx;
         this.y = ny;
     } else {
-        System.out.println("Movimiento no permitido: " + (hayColision ? "hay colisión" : "fuera de los límites"));
+        System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los límites"));
     }
 }
 
@@ -212,8 +202,10 @@ public class FontaneroBueno extends Sprite {
     private boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
        boolean reparoAlguno = false;
           // Aquí es donde agregas los prints para depurar posiciones:
-            System.out.println("Fontanero posición: (" + x + "," + y + ")");
+            System.out.println("Fontanero posicion: (" + x + "," + y + ")");
+            System.out.println("lista de tubos"+ tubos.size());
             for (Tubo tubo : tubos) {
+                
                 if (tubo instanceof TuboConFuga tuboConFuga) {
                     System.out.println("Tubo posición: (" + tuboConFuga.getX() + "," + tuboConFuga.getY() + ")");
                 }

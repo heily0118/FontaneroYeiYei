@@ -108,6 +108,7 @@ public class Casa {
     }
 
     public List<Tubo> getTubos() {
+        System.out.println("tamnio tubos "+ tubos.size());
         return tubos;
     }
 
