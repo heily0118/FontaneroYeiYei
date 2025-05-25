@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/autonoma/fontaneroyeiyei/main/FontaneroYeiYei.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>26</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel2.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/main/FontaneroYeiYei.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroMaldadoso.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/FontaneroBueno.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel3.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Casa.java</file>
-            <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/elements/Recorrido.java</file>
-        </group>
         <group/>
         <group>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/main/FontaneroYeiYei.java</file>
@@ -42,5 +23,6 @@
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel1.java</file>
             <file>file:/C:/Users/mateo/Documents/NetBeansProjects/FontaneroYeiYei/src/autonoma/fontaneroyeiyei/gui/VentanaNivel3.java</file>
         </group>
+        <group/>
     </open-files>
 </project-private>
