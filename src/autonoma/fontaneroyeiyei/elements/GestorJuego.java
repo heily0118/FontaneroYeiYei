@@ -108,8 +108,14 @@ public class GestorJuego {
     }
 
     public void subirNivel() {
-        nivel.setNumero(nivel.getNumero() + 1);
-        guardarNivel();
+        int nuevoNivel = nivel.getNumero() + 1;
+            if (nuevoNivel <= casas.size()) {
+                nivel.setNumero(nuevoNivel);
+                guardarNivel();
+                System.out.println("Subiste al nivel " + nuevoNivel);
+            } else {
+                System.out.println("¡Felicidades! Completaste todos los niveles.");
+            }
     }
 
     public ArrayList<Casa> getCasas() {
@@ -120,16 +126,42 @@ public class GestorJuego {
         this.casas = casas;
     }
 
-    
-     public void manejarTecla(char tecla, List<Tubo> tubosCasaActual) {
+  public boolean manejarTecla(char tecla, List<Tubo> tubosCasaActual) {
         if (fontanero == null) {
             System.out.println("Fontanero no inicializado, ingresa el nombre primero.");
-            return;
+            return false;
         }
 
+        Casa casaActual = null;
+        int nivelActual = getNivel();
 
+        if (nivelActual > 0 && nivelActual <= casas.size()) {
+            casaActual = casas.get(nivelActual - 1);
+        } else {
+            System.out.println("Nivel inválido o sin casa asignada.");
+            return false;
+        }
+
+        int reparadosAntes = casaActual.getTubo();
+        int maxTubos = casaActual.getMaxTubos();
+
+        // Intenta usar herramienta y repara tubos si es posible
         fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual);
+
+        // Verifica si aumentó el número de tubos reparados
+        if (casaActual.getTubo() > reparadosAntes) {
+            System.out.println("Tubos reparados: " + casaActual.getTubo() + " / " + maxTubos);
+
+            if (casaActual.getTubo() >= maxTubos) {
+                System.out.println("¡Nivel completado! Subiendo de nivel...");
+                subirNivel();
+            }
+            return true;  // Se reparó un tubo
+        }
+
+        return false;  // No se reparó tubo
     }
+
      
     public Casa getCasaNivel1() {
         return casas.get(0); 

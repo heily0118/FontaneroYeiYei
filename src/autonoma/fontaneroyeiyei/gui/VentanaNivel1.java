@@ -137,33 +137,38 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
 //                     Pinta elementos que están dentro de Casa
                     casaNivel1.paint(g); 
-//                    for(HitBox h : hitBoxs){
-//                        
-//                        h.paint(g);
-//                    
-//                    }
+                    for(HitBox h : hitBoxs){
+                        
+                        h.paint(g);
+                    
+                    }
                     // Pinta al fontanero bueno
                     f.paint(g);
                     
                     //Cantidad de Tubos a reparar
-                    
-                    Casa c = juego.getCasaNivel1();
+                    Casa casaActual = juego.getCasaNivel1(); // O el nivel que toque
+                    int reparados = casaActual.getTubo();
+                    int max = casaActual.getMaxTubos();
 
-
-                    int tubitos = c.getTubo();    // Tubos reparados
-                    int tubosMax = c.getMaxTubos(); // Tubos totales a reparar
+                    // Dibuja la barra de progreso (por ejemplo, una barra horizontal)
+                    int anchoBarra = 200;   // ancho total de la barra
+                    int altoBarra = 20;
+                    int xBarra = 500;
+                    int yBarra = 70;
 
                     // Fondo de la barra (gris)
                     g.setColor(Color.GRAY);
-                    g.fillRect(500, 60, 150, 20);
+                    g.fillRect(xBarra, yBarra, anchoBarra, altoBarra);
 
-                    // Barra verde proporcional a progreso
+                    // Parte llena de la barra (verde)
+                    int anchoProgreso = (int) ((reparados / (double) max) * anchoBarra);
                     g.setColor(Color.GREEN);
-                    g.fillRect(500, 60, (int)(200 * (tubitos / (double) tubosMax)), 20);
+                    g.fillRect(xBarra, yBarra, anchoProgreso, altoBarra);
 
-                    // Borde blanco de la barra
+                    // Texto del progreso
                     g.setColor(Color.WHITE);
-                    g.drawRect(500, 60, 150, 20);
+                    g.drawString("Tubos reparados: " + reparados + " / " + max, xBarra, yBarra - 10);
+
 
                   
                     // Tiempo
@@ -303,48 +308,43 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        
-        
-        if(evt.getKeyCode() == KeyEvent.VK_Q)
-        {
-            System.exit(0);
+    
+    if(evt.getKeyCode() == KeyEvent.VK_Q) {
+        System.exit(0);
+    }
+    
+    if(evt.getKeyCode() == KeyEvent.VK_UP ||
+       evt.getKeyCode() == KeyEvent.VK_DOWN ||
+       evt.getKeyCode() == KeyEvent.VK_LEFT ||
+       evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+              
+        try {
+            f.move(evt.getKeyCode());
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_UP |
-           evt.getKeyCode() == KeyEvent.VK_DOWN |
-           evt.getKeyCode() == KeyEvent.VK_LEFT |
-           evt.getKeyCode() == KeyEvent.VK_RIGHT)
-        {
-                  
-            try {
-                
-                f.move(evt.getKeyCode());
-            } catch (IOException ex) {
-                Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-        
-           f.saltar(evt.getKeyCode());
-        }
+    }
+    
+    if(evt.getKeyCode() == KeyEvent.VK_SPACE) {
+       f.saltar(evt.getKeyCode());
+    }
 
-        // reparar la fuga
-       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
-           
-             juego.setFontanero(f);
-             juego.manejarTecla(evt.getKeyChar(),juego.getCasaNivel1().getTubos());
-                
-         }
-
-        
+    // Reparar la fuga
+    if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+       evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+       
+        juego.setFontanero(f);
         
        
-        
-        this.repaint();
+        boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-        
+        if (reparo) {
+            juego.getCasaNivel1().repararTubo();
+
+        }
+    }
+
+    this.repaint();
         
     }
     
@@ -405,7 +405,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         });
         timerReloj.start();
     }
-
 
 
     

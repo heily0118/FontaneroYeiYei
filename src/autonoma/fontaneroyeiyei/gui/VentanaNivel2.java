@@ -321,9 +321,12 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         }
         
            // reparar la fuga
-        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
             evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
-             juego.manejarTecla(evt.getKeyChar());
+           
+             juego.setFontanero(f);
+             juego.manejarTecla(evt.getKeyChar(),juego.getCasaNivel1().getTubos());
+                
          }
         
         this.repaint();
