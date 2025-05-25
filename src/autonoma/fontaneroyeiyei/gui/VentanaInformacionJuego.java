@@ -64,6 +64,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
 
             btnMejorJugador.addActionListener(e -> {
                 String nombre = juego.getFontanero().getPuntaje().getMaximoNombre();
+                juego.getFontanero().getPuntaje().setNombreJugador(nombre);
                 int puntaje = juego.getFontanero().getPuntaje().getPuntajeMaximo();
 
                 JOptionPane.showMessageDialog(this,
@@ -138,8 +139,9 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             botonNivel2.setEnabled(nivelActual >= 2);
             botonNivel3.setEnabled(nivelActual >= 3);
 
+            String nombreJugador = juego.getNombreJugador();
             // Acciones botones
-            botonNivel1.addActionListener(e -> new VentanaNivel1(null, true, juego).setVisible(true));
+            botonNivel1.addActionListener(e -> new VentanaNivel1(null, true, juego, nombreJugador).setVisible(true));
             botonNivel2.addActionListener(e -> new VentanaNivel2(null, true, juego).setVisible(true));
             botonNivel3.addActionListener(e -> new VentanaNivel3(null, true, juego).setVisible(true));
 

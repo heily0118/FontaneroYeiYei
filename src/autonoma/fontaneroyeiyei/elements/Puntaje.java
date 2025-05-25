@@ -84,6 +84,7 @@ public class Puntaje {
      */
     public void aumentarPuntajePorSellador() {
         this.puntajeActual += 1;
+        verificarYActualizarPuntajeMaximo();
     }
 
     /**
@@ -91,6 +92,7 @@ public class Puntaje {
      */
     public void aumentarPuntajePorLlaveInglesa() {
         this.puntajeActual += 2;
+        verificarYActualizarPuntajeMaximo();
     }
     
     /**
@@ -144,5 +146,15 @@ public class Puntaje {
      */
     public void setPuntajeMaximo(int puntajeMaximo) {
         this.puntajeMaximo = puntajeMaximo;
+    }
+    
+    /**
+     * Verifica y actualiza el puntaje máximo si el puntaje actual lo supera.
+     */
+    public void verificarYActualizarPuntajeMaximo() {
+        if (this.puntajeActual > this.puntajeMaximo) {
+            this.puntajeMaximo = this.puntajeActual;
+            this.MaximoNombre = this.nombreJugador;
+        }
     }
 }

@@ -24,6 +24,7 @@ public class GestorJuego {
     private LectorArchivoTextoPlano lector;
     private EscritorArchivoTextoPlano escritor;
     private final String archivoProgreso = "progreso.txt";
+    private String nombreJugador;
 
     public GestorJuego(ArrayList<Casa> casas) {
         this.casas = casas;
@@ -181,6 +182,13 @@ public class GestorJuego {
         this.fontanero = fontanero;
     }
     
+    public String getNombreJugador() {
+        return nombreJugador;
+    }
+    
+    public void setNombreJugador(String nombreJugador) {
+        this.nombreJugador = nombreJugador;
+    }
 
 
 }
