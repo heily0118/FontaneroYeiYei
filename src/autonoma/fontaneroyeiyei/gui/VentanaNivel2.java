@@ -138,6 +138,25 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 //                    for(HitBox h : hitBoxs){                
 //                        h.paint(g);
 //                    }
+                  //Cantidad de Tubos a reparar
+                    
+                    Casa c = juego.getCasaNivel2();
+
+
+                    int tubitos = c.getTubo();    // Tubos reparados
+                    int tubosMax = c.getMaxTubos(); // Tubos totales a reparar
+
+                    // Fondo de la barra (gris)
+                    g.setColor(Color.GRAY);
+                    g.fillRect(500, 60, 150, 20);
+
+                    // Barra verde proporcional a progreso
+                    g.setColor(Color.GREEN);
+                    g.fillRect(500, 60, (int)(200 * (tubitos / (double) tubosMax)), 20);
+
+                    // Borde blanco de la barra
+                    g.setColor(Color.WHITE);
+                    g.drawRect(500, 60, 150, 20);
                   
                     // Tiempo
                     int minutos = tiempoRestante / 60;
