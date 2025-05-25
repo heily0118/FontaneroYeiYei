@@ -57,7 +57,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
              // Botón para mostrar el mejor jugador
                ImageIcon iconoMayor= new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/MayorPuntaje.png"));
             JButton btnMejorJugador = new JButton(iconoMayor);
-            btnMejorJugador.setBounds(20, 100, 50, 100);
+            btnMejorJugador.setBounds(20, 100, 48, 48);
             btnMejorJugador.setFocusPainted(false);
             btnMejorJugador.setBackground(new Color(0, 102, 204));
             btnMejorJugador.setForeground(Color.WHITE);
