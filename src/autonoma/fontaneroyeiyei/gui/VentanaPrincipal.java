@@ -61,8 +61,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             botonJugar.addActionListener(e -> {
             String nombreJugador = pedirNombreJugador();
             juego.inicializarFontanero(nombreJugador);  
+             detenerSonido();
             new VentanaInformacionJuego(this, true, juego).setVisible(true);
             dispose();
+            
         });
 
 
