@@ -7,7 +7,12 @@ package autonoma.fontaneroyeiyei.gui;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +29,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class VentanaInformacionJuego extends javax.swing.JDialog {
     private GestorJuego juego;
-   // private Clip clip;    
+    private Clip clip;    
 
     
     /**
@@ -34,6 +39,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             super(parent, modal);
             initComponents();
             this.juego = juego;
+            reproducirSonido();
 
             setTitle("Fontanero Yei Yei");
             setSize(700, 700);
@@ -55,7 +61,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
 
             
              // Botón para mostrar el mejor jugador
-               ImageIcon iconoMayor= new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/MayorPuntaje.png"));
+             ImageIcon iconoMayor= new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/MayorPuntaje.png"));
             JButton btnMejorJugador = new JButton(iconoMayor);
             btnMejorJugador.setBounds(20, 100, 48, 48);
             btnMejorJugador.setFocusPainted(false);
@@ -138,10 +144,22 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             botonNivel2.setEnabled(nivelActual >= 2);
             botonNivel3.setEnabled(nivelActual >= 3);
 
-            // Acciones botones
-            botonNivel1.addActionListener(e -> new VentanaNivel1(null, true, juego).setVisible(true));
-            botonNivel2.addActionListener(e -> new VentanaNivel2(null, true, juego).setVisible(true));
-            botonNivel3.addActionListener(e -> new VentanaNivel3(null, true, juego).setVisible(true));
+           // Acciones botones con sonido detenido
+            botonNivel1.addActionListener(e -> {
+                detenerSonido();  
+                new VentanaNivel1(null, true, juego).setVisible(true);
+            });
+
+            botonNivel2.addActionListener(e -> {
+                detenerSonido();  
+                new VentanaNivel2(null, true, juego).setVisible(true);
+            });
+
+            botonNivel3.addActionListener(e -> {
+                detenerSonido();  
+                new VentanaNivel3(null, true, juego).setVisible(true);
+            });
+
 
             // Añadir al panel
             panelFondo.add(botonNivel1);
@@ -170,6 +188,26 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
        
     }
 
+    
+    public void reproducirSonido() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                    getClass().getResource("/autonoma/fontaneroyeiyei/sounds/sonidoEspera.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void detenerSonido() {
+        if (clip != null) {
+            clip.stop();
+            clip.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
