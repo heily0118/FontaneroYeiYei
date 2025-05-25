@@ -53,6 +53,27 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             };
             panelFondo.setLayout(null);
 
+            
+             // Botón para mostrar el mejor jugador
+               ImageIcon iconoMayor= new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/MayorPuntaje.png"));
+            JButton btnMejorJugador = new JButton(iconoMayor);
+            btnMejorJugador.setBounds(20, 100, 50, 100);
+            btnMejorJugador.setFocusPainted(false);
+            btnMejorJugador.setBackground(new Color(0, 102, 204));
+            btnMejorJugador.setForeground(Color.WHITE);
+
+            btnMejorJugador.addActionListener(e -> {
+                String nombre = juego.getFontanero().getPuntaje().getMaximoNombre();
+                int puntaje = juego.getFontanero().getPuntaje().getPuntajeMaximo();
+
+                JOptionPane.showMessageDialog(this,
+                    "🏆 Jugador con mejor puntaje:\n\n" +
+                    nombre + " - " + puntaje + " puntos",
+                    "Mejor Puntaje",
+                    JOptionPane.INFORMATION_MESSAGE);
+            });
+
+
                 // Botón de Información con ícono
             ImageIcon iconoInfo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/Informacion.png"));
             JButton btnInformacion = new JButton(iconoInfo);
@@ -127,6 +148,8 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             panelFondo.add(botonNivel2);
             panelFondo.add(botonNivel3);
             panelFondo.add(btnInformacion);
+            panelFondo.add(btnMejorJugador);
+
 
 
             setContentPane(panelFondo);

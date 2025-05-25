@@ -149,5 +149,14 @@ public class GestorJuego {
         return casas.get(2); 
     }
 
+    public FontaneroBueno getFontanero() {
+        return fontanero;
+    }
+
+    public void setFontanero(FontaneroBueno fontanero) {
+        this.fontanero = fontanero;
+    }
+    
+
 
 }
