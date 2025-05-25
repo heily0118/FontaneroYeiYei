@@ -4,6 +4,8 @@
  */
 package autonoma.fontaneroyeiyei.elements;
 
+import javax.swing.ImageIcon;
+
 /**
  * 
  * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
@@ -12,35 +14,43 @@ package autonoma.fontaneroyeiyei.elements;
  */
 
 public class Sellador extends Herramienta {
-
-    /**
-     * Usa el sellador sobre un tubo. 
-     * Si el tubo es una instancia de TuboConFuga y tiene una fuga 
-     * de tipo "grieta" que no ha sido reparada, se aplica la reparación.
-     * 
-     * @param tubo Es el tubo sobre el que se desea aplicar la herramienta.
-     */
     @Override
     public void usarEn(Tubo tubo) {
-       
-        if (tubo instanceof TuboConFuga) {
-            TuboConFuga tuboConFuga = (TuboConFuga) tubo;
-            if (tuboConFuga.getFuga() != null && 
-                !tuboConFuga.getFuga().estaReparada() &&
-                "grieta".equalsIgnoreCase(tuboConFuga.getFuga().getTipo())) {
-                tuboConFuga.repararConSellador();
-           }
+        if (!(tubo instanceof TuboConFuga)) {
+            System.out.println("El sellador solo funciona en tubos con fuga");
+            return;
+        }
+        
+        TuboConFuga tuboConFuga = (TuboConFuga) tubo;
+        Fuga fuga = tuboConFuga.getFuga();
+        
+        if (fuga != null) {
+            if (fuga.estaReparada()) {
+                System.out.println("Esta fuga ya está reparada");
+                return;
+            }
+            
+            // Usar el método reparar(char) de tu clase Fuga
+            boolean reparado = fuga.reparar('S');
+            
+            if (reparado) {
+                System.out.println("¡Grieta sellada con sellador!");
+                // Cambiar imagen del tubo a reparado
+                cambiarImagenTuboReparado(tuboConFuga);
+            } else {
+                System.out.println("El sellador no puede reparar " + fuga.getTipo() + ". Necesitas llave inglesa.");
+     }
         }
     }
 
-    /**
-     * Devuelve el nombre de la herramienta.
-     * 
-     * @return Retorna el nombre "Sellador".
-     */
     @Override
     public String getNombre() {
         return "Sellador";
     }
-
+    
+    private void cambiarImagenTuboReparado(TuboConFuga tubo) {
+        ImageIcon iconoBueno = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboBueno.png"));
+        tubo.setImage(iconoBueno);
+        tubo.setEstado("bueno"); 
+    }
 }

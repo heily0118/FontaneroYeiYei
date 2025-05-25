@@ -12,7 +12,7 @@ import java.awt.Graphics;
  * @version 1.0.0
  */
 
-public abstract class Tubo extends Sprite{
+public abstract class Tubo extends HitBox{
     
     
     /**

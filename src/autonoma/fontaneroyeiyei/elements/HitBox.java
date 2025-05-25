@@ -18,8 +18,8 @@ import java.awt.Graphics;
 
     public class HitBox extends Sprite {
 
-        public HitBox (int x, int y, int height, int width) {
-           super(x,y,height,width);
+        public HitBox (int x, int y, int width, int height) {
+           super(x, y, width, height);
         }
 
         @Override
@@ -31,7 +31,13 @@ import java.awt.Graphics;
             g.fillRect(this.x,this.y, this.width,this.height );
         }
  
-    
+   public boolean intersects(HitBox other) {
+    return this.x < other.x + other.width &&
+           this.x + this.width > other.x &&
+           this.y < other.y + other.height &&
+           this.y + this.height > other.y;
+}
+
 }
 
 

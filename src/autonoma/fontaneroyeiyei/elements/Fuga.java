@@ -22,16 +22,7 @@ public class Fuga {
         this.reparada = false;
     }
 
-    public boolean estaCerca(int jugadorX, int jugadorY, int jugadorAncho, int jugadorAlto) {
-        int centroJugadorX = jugadorX + jugadorAncho / 2;
-        int centroJugadorY = jugadorY + jugadorAlto / 2;
-        int centroFugaX = x;
-        int centroFugaY = y;
-
-        double distancia = Math.sqrt(Math.pow(centroJugadorX - centroFugaX, 2) + Math.pow(centroJugadorY - centroFugaY, 2));
-        return distancia < 40;
-    }
-
+   
 
     public boolean reparar(char herramienta) {
         if (reparada) return false;

@@ -34,11 +34,11 @@ public abstract class Sprite {
      * @param height altura del sprite
      * @param width ancho del sprite
      */
-    public Sprite(int x, int y, int height, int width) {
+    public Sprite(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
-        this.height = height;
         this.width = width;
+        this.height = height;
     }
 
     /**

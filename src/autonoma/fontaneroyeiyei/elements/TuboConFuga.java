@@ -55,4 +55,24 @@ public class TuboConFuga extends Tubo {
         return true;
     }
     
+    public boolean estaCerca(int fontaneroX, int fontaneroY, int fontaneroWidth, int fontaneroHeight) {
+         // Distancia máxima para considerar "cerca" (ajusta según necesites)
+         int distanciaMaxima = 50; 
+
+         // Centro del fontanero
+         int centroFontaneroX = fontaneroX + fontaneroWidth / 2;
+         int centroFontaneroY = fontaneroY + fontaneroHeight / 2;
+
+         // Centro del tubo
+         int centroTuboX = this.x + this.width / 2;
+         int centroTuboY = this.y + this.height / 2;
+
+         // Calcular distancia
+         double distancia = Math.sqrt(Math.pow(centroFontaneroX - centroTuboX, 2) + 
+                                     Math.pow(centroFontaneroY - centroTuboY, 2));
+
+         return distancia <= distanciaMaxima;
+     }
+
+
 }
