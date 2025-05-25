@@ -81,7 +81,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
 
             // Fondo claro para que se vea
             btnInformacion.setOpaque(true);
-            btnInformacion.setBackground(new Color(255, 255, 255, 150)); 
+            btnInformacion.setBackground(new Color(255, 255, 255, 255)); 
             btnInformacion.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
           

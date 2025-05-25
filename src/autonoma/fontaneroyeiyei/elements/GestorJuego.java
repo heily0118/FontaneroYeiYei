@@ -121,20 +121,24 @@ public class GestorJuego {
     }
 
     
-     public void manejarTecla(char tecla) {
+     public void manejarTecla(char tecla, List<Tubo> tubosCasaActual) {
         if (fontanero == null) {
             System.out.println("Fontanero no inicializado, ingresa el nombre primero.");
             return;
         }
 
-        int indiceCasa = nivel.getNumero() - 1;
+        int indiceCasa = nivel.getNumero() - 2;
         if (indiceCasa < 0 || indiceCasa >= casas.size()) {
             System.out.println("Nivel fuera de rango, no hay casa para este nivel");
             return;
         }
 
-        Casa casaActual = casas.get(indiceCasa);
-        List<Tubo> tubosCasaActual = casaActual.getTubos();
+//        Casa casaActual = casas.get(indiceCasa);
+//        
+//         System.out.println("--------gestor juego-------");
+//         System.out.println("indice de la casa"+indiceCasa);
+//         System.out.println("casa nivel "+ casaActual.getNivel());
+//        List<Tubo> tubosCasaActual = casaActual.getTubos();
 
         fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual);
     }

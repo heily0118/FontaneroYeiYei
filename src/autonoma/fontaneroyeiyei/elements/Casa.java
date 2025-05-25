@@ -14,6 +14,7 @@ public class Casa {
 
     private int width;
     private int height;
+    private int nivel;
 
     private List<Tubo> tubos;
     private List<Serpiente> servientes;
@@ -25,7 +26,7 @@ public class Casa {
     public Casa(int width, int height, int nivel) {
         this.width = width;
         this.height = height;
-
+        this.nivel = nivel;
         this.tubos = new ArrayList<>();
         this.servientes = new ArrayList<>();
 
@@ -160,6 +161,11 @@ public class Casa {
     public int getHeight() {
         return this.height;
     }
+
+    public int getNivel() {
+        return nivel;
+    }
+    
 
     // Retorna la cantidad de tubos reparados hasta ahora
     public int getTubo() {
