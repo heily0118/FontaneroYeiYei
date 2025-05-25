@@ -135,16 +135,36 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
 
-                    // Pinta elementos que están dentro de Casa
+//                     Pinta elementos que están dentro de Casa
                     casaNivel1.paint(g); 
-                    for(HitBox h : hitBoxs){
-                        
-                        h.paint(g);
-                    
-                    }
+//                    for(HitBox h : hitBoxs){
+//                        
+//                        h.paint(g);
+//                    
+//                    }
                     // Pinta al fontanero bueno
                     f.paint(g);
                     
+                    //Cantidad de Tubos a reparar
+                    
+                    Casa c = juego.getCasaNivel1();
+
+
+                    int tubitos = c.getTubo();    // Tubos reparados
+                    int tubosMax = c.getMaxTubos(); // Tubos totales a reparar
+
+                    // Fondo de la barra (gris)
+                    g.setColor(Color.GRAY);
+                    g.fillRect(500, 60, 150, 20);
+
+                    // Barra verde proporcional a progreso
+                    g.setColor(Color.GREEN);
+                    g.fillRect(500, 60, (int)(200 * (tubitos / (double) tubosMax)), 20);
+
+                    // Borde blanco de la barra
+                    g.setColor(Color.WHITE);
+                    g.drawRect(500, 60, 150, 20);
+
                   
                     // Tiempo
                     int minutos = tiempoRestante / 60;

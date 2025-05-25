@@ -4,24 +4,25 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250516
  * @version 1.0.0
  */
+public class Casa {
 
-    public class Casa {
+    private int width;
+    private int height;
 
-        private int width;
-        private int height;
+    private List<Tubo> tubos;
+    private List<Serpiente> servientes;
+    private FontaneroMaldadoso fontaneroMalo;
 
-        private List<Tubo> tubos;
-        private List<Serpiente> servientes;
-        private FontaneroMaldadoso fontaneroMalo;
+    private int maxTubos;           // Total tubos a reparar
+    private int tubosReparados;     // Tubos reparados actualmente
 
-       public Casa(int width, int height, int nivel) {
+    public Casa(int width, int height, int nivel) {
         this.width = width;
         this.height = height;
 
@@ -33,7 +34,7 @@ import java.util.List;
 
         int[] posicionesY;
         int tiempoEntreTubos;
-        int maxTubos;
+
         switch (nivel) {
             case 1:
                 posicionesY = new int[] {
@@ -41,7 +42,7 @@ import java.util.List;
                     height - 500
                 };
                 tiempoEntreTubos = 4000; // 4 segundos
-                maxTubos = 10;
+                this.maxTubos = 10;
                 break;
             case 2:
                 posicionesY = new int[] {
@@ -49,7 +50,7 @@ import java.util.List;
                     height - 425
                 };
                 tiempoEntreTubos = 3000; // 3 segundos
-                maxTubos = 15;
+                this.maxTubos = 15;
                 break;
             case 3:
                 posicionesY = new int[] {
@@ -58,14 +59,16 @@ import java.util.List;
                     height - 510
                 };
                 tiempoEntreTubos = 2000; // 2 segundos
-                maxTubos = 20;
+                this.maxTubos = 20;
                 break;
             default:
                 posicionesY = new int[] {height - 160};
                 tiempoEntreTubos = 4000;
-                maxTubos = 10;
+                this.maxTubos = 10;
         }
-        
+
+        this.tubosReparados = 0;
+
         for (int i = 0; i < posicionesY.length; i++) {
             int x = 100 + i * 150; 
             int y = posicionesY[i];
@@ -100,14 +103,9 @@ import java.util.List;
         hiloFontanero.start();
     }
 
-
-
     public FontaneroMaldadoso getFontaneroMalo() {
         return fontaneroMalo;
     }
-
-   
-
 
     public List<Tubo> getTubos() {
         return tubos;
@@ -116,53 +114,67 @@ import java.util.List;
     public List<Serpiente> getServientes() {
         return servientes;
     }
+
     public void paint(Graphics g) {
       
         List<TuboConFuga> copiaTubos = new ArrayList<>();
-         for (Tubo t : tubos) {
-             if (t instanceof TuboConFuga) {
-                 copiaTubos.add((TuboConFuga) t);
-             }
-         }
+        for (Tubo t : tubos) {
+            if (t instanceof TuboConFuga) {
+                copiaTubos.add((TuboConFuga) t);
+            }
+        }
 
-         for (TuboConFuga tubo : copiaTubos) {
-             tubo.paint(g);
-         }
+        for (TuboConFuga tubo : copiaTubos) {
+            tubo.paint(g);
+        }
 
-         for (Serpiente s : servientes) {
-             s.paint(g);
-         }
+        for (Serpiente s : servientes) {
+            s.paint(g);
+        }
 
-         if (fontaneroMalo != null) {
-             fontaneroMalo.detener();
-             fontaneroMalo.paint(g);
-         }
+        if (fontaneroMalo != null) {
+            fontaneroMalo.detener();
+            fontaneroMalo.paint(g);
+        }
     }
 
-  
     public void iniciarEnemigo(int x, int y, int ancho, int alto) {
         fontaneroMalo.setX(x);
         fontaneroMalo.setY(y);
         fontaneroMalo.setWidth(ancho);
         fontaneroMalo.setHeight(alto);
     }
-    
-     public synchronized void agregarTubo(Tubo tubo){
+
+    public synchronized void agregarTubo(Tubo tubo){
         tubos.add(tubo);
     }
+
     public void eliminarFontaneroMalo(){
         this.fontaneroMalo = null;        
     }
-    
+
     public int getWidth() {
         return this.width;
     }
 
-    
-    
-   
     public int getHeight() {
         return this.height;
     }
 
+    // Retorna la cantidad de tubos reparados hasta ahora
+    public int getTubo() {
+        return tubosReparados; 
+    }
+
+    // Retorna la cantidad máxima de tubos a reparar en este nivel
+    public int getMaxTubos() {
+        return maxTubos; 
+    }
+
+    // Método para incrementar la cantidad de tubos reparados (debes llamar a este cuando repares un tubo)
+    public void repararTubo() {
+        if (tubosReparados < maxTubos) {
+            tubosReparados++;
+        }
+    }
 }
