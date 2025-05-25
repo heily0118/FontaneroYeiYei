@@ -51,6 +51,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     private boolean juegoTerminado;
     private Timer timerReloj;
     private int tiempoRestante = 30;
+    private boolean dialogoMostrado = false;
     
     public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego ) {
         super(parent, modal);
@@ -171,13 +172,46 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                     g3d.drawString(textoPuntaje, xP + 2, yP + 2);
                     g3d.setColor(Color.YELLOW);
                     g3d.drawString(textoPuntaje, xP, yP);
+                    
+                    
+                    String textoVidas = "Vidas: " + f.getVida();
+                    Font fuenteVidas = new Font("Comic Sans MS", Font.BOLD, 28);
+                    g3d.setFont(fuenteVidas);
+                    
+                    int xV = 300;
+                    int yV = 40;
+                    
+                    g3d.setColor(Color.BLACK);
+                    g3d.drawString(textoVidas, xV + 2, yV + 2);
+                    g3d.setColor(Color.red);
+                    g3d.drawString(textoVidas, xV, yV);
+                    
+                    
+                    if (f.TocoSerpiente(casaNivel2.getServientes())) {
+
+                        FontMetrics fm = g3d.getFontMetrics();
+                        String mensaje = "¡Fue golpeado!";
+                        int x = (getWidth() - fm.stringWidth(mensaje)) / 2;
+                        int y = getHeight() / 2;
+                        g3d.drawString(mensaje, x, y);
+
+                    }
+                    
+                    
+                    
+                    
 
                     // Mensaje de Game Over
-                    if (juegoTerminado) {
+                    if (juegoTerminado || f.getVida()<=0) {
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
                         g3d.setColor(Color.BLACK);
                         g3d.fillRect(0, 0, getWidth(), getHeight());
-
+                        
+                        if (!dialogoMostrado) {
+                            perderJuego();
+                        }
+                        
+                        
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
                         g3d.setColor(Color.RED);
                         g3d.setFont(new Font("Arial", Font.BOLD, 60));
@@ -283,6 +317,10 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         
     }//GEN-LAST:event_formKeyPressed
     private void perderJuego() {
+        
+        if (dialogoMostrado) return;
+        dialogoMostrado = true;
+        
         
         System.out.println("Se acabó el tiempo, perdiste una vida!");
 
