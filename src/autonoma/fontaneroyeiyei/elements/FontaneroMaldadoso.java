@@ -147,6 +147,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
                 // Posicion inicial del fontanero
                 x = recorridos.get(numeroRecorrido).getInicioX();
                 y = recorridos.get(numeroRecorrido).getInicioY();
+                System.out.println("se mueve");
 
                 // Ciclo principal: colocar 10 tubos
                 while (tubosColocados < 10) {
@@ -161,6 +162,8 @@ public class FontaneroMaldadoso extends SpriteMobile {
 
                     if ((casa.getWidth() / 2) > recorridoActual.getInicioX()) {
                         // Si el recorrido esta a la izquierda de la casa, se mueve a la derecha
+                        
+//                        System.out.println(" x "+x +" + "+ " dx" +dx);
                         x += dx;
 
                         // Si choca con los bordes, pasa al siguiente recorrido
@@ -201,54 +204,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
                 casa.eliminarFontaneroMalo();
             }
         }
-
-//    /**
-//     * Método que se ejecuta en un hilo separado para mover el objeto y soltar tubos con fuga periódicamente.
-//     */
-//     @Override
-//     public void run() {
-//         long ultimoTubo = System.currentTimeMillis();
-//
-//         while (activo) {
-//             if (!visible) {
-//                 // Teletransportar al siguiente piso
-//                 pisoActual = (pisoActual + 1) % pisosY.size();
-//                 y = pisosY.get(pisoActual);
-//                 visible = true;
-//             }
-//
-//             // Movimiento horizontal
-//             x += dx;
-//
-//             // Rebotar en los bordes de la casa
-//             if (x < 0 || x + width > casa.getWidth()) {
-//                 dx = -dx;
-//             }
-//
-//             // Soltar tubo si ha pasado suficiente tiempo
-//             if (System.currentTimeMillis() - ultimoTubo >= tiempoEntreTubos) {
-//                 dejarTuboConFuga();
-//                 visible = false;
-//                 ultimoTubo = System.currentTimeMillis();
-//             }
-//
-//             // Verificar si está cerca del fontanero bueno
-//             if (cercaDelFontaneroBueno()) {
-//                 visible = false;
-//                 break;
-//             }
-//
-//             try {
-//                 Thread.sleep(20);
-//             } catch (InterruptedException e) {
-//                 e.printStackTrace();
-//                 break; // Salir si el hilo fue interrumpido
-//             }
-//         }
-//
-//         this.setVisible(false);
-//         casa.eliminarFontaneroMalo();
-//     }
 
 
 

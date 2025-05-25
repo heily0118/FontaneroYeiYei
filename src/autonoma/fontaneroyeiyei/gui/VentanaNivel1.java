@@ -75,7 +75,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         
         // se pone el fontanero en el lado de la izquierda
         f.setY(160);
-        f.setX(600);
+        f.setX(0);
         
         //se crea la hit box del nivel 
 
@@ -166,7 +166,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
                   
                     String textoPuntaje = "Puntaje: " + f.getPuntaje().getPuntajeActual();
-
                     Font fuentePuntaje = new Font("Comic Sans MS", Font.BOLD, 28);
                     g3d.setFont(fuentePuntaje);
                     FontMetrics fmP = g3d.getFontMetrics();
@@ -179,8 +178,32 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     g3d.setColor(Color.YELLOW);
                     g3d.drawString(textoPuntaje, xP, yP);
 
+                                        
+                    String textoVidas = "Vidas: " + f.getVida();
+                    Font fuenteVidas = new Font("Comic Sans MS", Font.BOLD, 28);
+                    g3d.setFont(fuenteVidas);
+                    
+                    int xV = 300;
+                    int yV = 40;
+                    
+                    g3d.setColor(Color.BLACK);
+                    g3d.drawString(textoVidas, xV + 2, yV + 2);
+                    g3d.setColor(Color.red);
+                    g3d.drawString(textoVidas, xV, yV);
+                    
+                    
+                    if (f.TocoSerpiente(casaNivel1.getServientes())) {
+
+                        FontMetrics fm = g3d.getFontMetrics();
+                        String mensaje = "¡Fue golpeado!";
+                        int x = (getWidth() - fm.stringWidth(mensaje)) / 2;
+                        int y = getHeight() / 2;
+                        g3d.drawString(mensaje, x, y);
+
+                    }
+
                     // Mensaje de Game Over
-                    if (juegoTerminado) {
+                    if (juegoTerminado || f.getVida()<=0) {
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
                         g3d.setColor(Color.BLACK);
                         g3d.fillRect(0, 0, getWidth(), getHeight());
