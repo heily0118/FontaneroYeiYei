@@ -93,7 +93,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
         Fuga fuga = new Fuga(this.x+10, this.y+10,
                              Math.random()<0.5?"tuerca":"grieta");
         TuboConFuga nuevo = new TuboConFuga("malo",
-                         this.x+50, this.y+50, 60, 20, fuga);
+                         this.x, this.y+10, 60, 60, fuga);
         casa.agregarTubo(nuevo);
           
         }

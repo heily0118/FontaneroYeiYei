@@ -21,7 +21,7 @@ public class TuboConFuga extends Tubo {
         super(estado, x, y, width, height);
         this.fuga = fuga;
        ImageIcon icono = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMalo.png"));
-        System.out.println("Tamaño real de la imagen: " + icono.getIconWidth() + " x " + icono.getIconHeight());
+//        System.out.println("Tamaño real de la imagen: " + icono.getIconWidth() + " x " + icono.getIconHeight());
         this.setImage(icono); 
 
     }
