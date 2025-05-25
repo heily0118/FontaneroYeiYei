@@ -142,11 +142,11 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
 //                     Pinta elementos que están dentro de Casa
                     casaNivel1.paint(g); 
-                    for(HitBox h : hitBoxs){
-                        
-                        h.paint(g);
-                    
-                    }
+//                    for(HitBox h : hitBoxs){
+//                        
+//                        h.paint(g);
+//                    
+//                    }
                     // Pinta al fontanero bueno
                     f.paint(g);
                     
@@ -383,10 +383,13 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                     nuevaListaCasas.add(new Casa(700, 700, 1));
                     GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
 
-                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, nombreJugador);
+                    detenerSonido();
                     dispose();
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, nombreJugador);
+                   
                     nuevaVentana.setVisible(true);
                 } else {
+                    detenerSonido();
                     dispose();
                 }
             }

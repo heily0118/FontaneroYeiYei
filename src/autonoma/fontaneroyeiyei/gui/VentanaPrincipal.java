@@ -63,11 +63,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 String nombreJugador = pedirNombreJugador();
 
                 juego.setNombreJugador(nombreJugador); 
-
+               
                 juego.inicializarFontanero(nombreJugador);  
+                detenerSonido();
+                 
                 new VentanaInformacionJuego(this, true, juego).setVisible(true);
                 dispose();
-             detenerSonido();
+            
             
 
         });
