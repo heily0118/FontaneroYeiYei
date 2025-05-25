@@ -169,16 +169,6 @@ public class FontaneroBueno extends Sprite {
         return false;
     }
 
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g.drawImage(jugadorImage, x, y, width, height, null);
-    }
 
     public void usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
         Herramienta herramienta = crearHerramienta(tecla);
@@ -199,10 +189,10 @@ public class FontaneroBueno extends Sprite {
         };
     }
 
-    private boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
+    public boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
        boolean reparoAlguno = false;
           // Aquí es donde agregas los prints para depurar posiciones:
-            System.out.println("Fontanero posicion: (" + x + "," + y + ")");
+            System.out.println("Fontanero posicion: (" +  this.x + "," + this.y + ")");
             System.out.println("lista de tubos"+ tubos.size());
             for (Tubo tubo : tubos) {
                 
@@ -274,5 +264,19 @@ public class FontaneroBueno extends Sprite {
     }
 
 
+    
+    
+        @Override
+    public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
 
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        
+//        System.out.println("se pinta en ("+ x +","+ y+")");
+        g.drawImage(jugadorImage, x, y, width, height, null);
+    }
+    
 }
