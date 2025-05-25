@@ -29,14 +29,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class VentanaPrincipal extends javax.swing.JFrame {
     
       private GestorJuego juego;
-     // private Clip clip;
+      private Clip clip;
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal(GestorJuego juego) {
             initComponents();
             this.juego = juego;
-            //reproducirSonido();
+            reproducirSonido();
             setTitle("Fontanero Yei Yei");
             setSize(700, 700);
             setLocationRelativeTo(null);
@@ -118,26 +118,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
 
-//    public void reproducirSonido() {
-//        try {
-//            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-//                    getClass().getResource("/autonoma/demoatrapacomida/sounds/Menu.wav"));
-//            clip = AudioSystem.getClip();
-//            clip.open(audioInputStream);
-//            clip.loop(Clip.LOOP_CONTINUOUSLY);
-//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    
-//    
-//    public void detenerSonido() {
-//        if (clip != null) {
-//            clip.stop();
-//            clip.close();
-//        }
-//    }
-//    
+    public void reproducirSonido() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                    getClass().getResource("/autonoma/fontaneroyeiyei/sounds/sonidoEspera.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void detenerSonido() {
+        if (clip != null) {
+            clip.stop();
+            clip.close();
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
