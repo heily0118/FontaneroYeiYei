@@ -56,7 +56,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             };
             panelFondo.setLayout(null);
             JButton botonJugar = new JButton("Jugar");
-            botonJugar.setBounds(340, 600, 120, 40);
+            botonJugar.setBounds(290, 600, 120, 40);
             estiloBoton(botonJugar);  //  Aplicar estilo
             botonJugar.addActionListener(e -> {
             String nombreJugador = pedirNombreJugador();
