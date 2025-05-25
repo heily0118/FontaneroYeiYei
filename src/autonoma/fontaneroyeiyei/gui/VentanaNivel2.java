@@ -138,25 +138,29 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 //                    for(HitBox h : hitBoxs){                
 //                        h.paint(g);
 //                    }
-                  //Cantidad de Tubos a reparar
-                    
-                    Casa c = juego.getCasaNivel2();
+                 //Cantidad de Tubos a reparar
+                    Casa casaActual = juego.getCasaNivel1(); // O el nivel que toque
+                    int reparados = casaActual.getTubo();
+                    int max = casaActual.getMaxTubos();
 
-
-                    int tubitos = c.getTubo();    // Tubos reparados
-                    int tubosMax = c.getMaxTubos(); // Tubos totales a reparar
+                    // Dibuja la barra de progreso (por ejemplo, una barra horizontal)
+                    int anchoBarra = 200;   // ancho total de la barra
+                    int altoBarra = 20;
+                    int xBarra = 500;
+                    int yBarra = 70;
 
                     // Fondo de la barra (gris)
                     g.setColor(Color.GRAY);
-                    g.fillRect(500, 60, 150, 20);
+                    g.fillRect(xBarra, yBarra, anchoBarra, altoBarra);
 
-                    // Barra verde proporcional a progreso
+                    // Parte llena de la barra (verde)
+                    int anchoProgreso = (int) ((reparados / (double) max) * anchoBarra);
                     g.setColor(Color.GREEN);
-                    g.fillRect(500, 60, (int)(200 * (tubitos / (double) tubosMax)), 20);
+                    g.fillRect(xBarra, yBarra, anchoProgreso, altoBarra);
 
-                    // Borde blanco de la barra
+                    // Texto del progreso
                     g.setColor(Color.WHITE);
-                    g.drawRect(500, 60, 150, 20);
+                    g.drawString("Tubos reparados: " + reparados + " / " + max, xBarra, yBarra - 10);
                   
                     // Tiempo
                     int minutos = tiempoRestante / 60;
