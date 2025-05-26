@@ -97,25 +97,25 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         f.setX(0);
         
         //SEGUNDO PISO HITBOX
-        HitBox techoSegundoPiso2 = new HitBox(0, 0,150,700);
-        HitBox SegundoPiso = new HitBox(0, 240,100,300);
-        HitBox SegundoPiso2 = new HitBox(450, 240,100,450);
+        HitBox techoSegundoPiso2 = new HitBox(0, 0,700,150);//150,700
+        HitBox SegundoPiso = new HitBox(0, 240,300,100);//100, 300
+        HitBox SegundoPiso2 = new HitBox(450, 240,450,100);//100, 450
         
         hitBoxs.add(techoSegundoPiso2);
         hitBoxs.add(SegundoPiso);
         hitBoxs.add(SegundoPiso2);
         
         //ESCALAS SEGUNDO PISO HITBOX
-        HitBox escalasSegundoPiso1 = new HitBox(300, 240, 100, 30);
-        HitBox escalasSegundoPiso2 = new HitBox(450, 240, 100, 30);
+        HitBox escalasSegundoPiso1 = new HitBox(300, 240, 30, 100);//100,30
+        HitBox escalasSegundoPiso2 = new HitBox(450, 240, 30, 100);
         
         hitBoxs.add(escalasSegundoPiso1);
         hitBoxs.add(escalasSegundoPiso2);
         
         
         //PRIMER PISO HITBOX
-        HitBox primerPiso = new HitBox(0, 450,120,350);
-        HitBox primerPiso2 = new HitBox(450, 450,120,450);
+        HitBox primerPiso = new HitBox(0, 450,350,120);//120,350
+        HitBox primerPiso2 = new HitBox(450, 450,450,120);
 
 
         hitBoxs.add(primerPiso);
