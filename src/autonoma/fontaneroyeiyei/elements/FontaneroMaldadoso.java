@@ -50,7 +50,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * Lista de áreas de colisión (hitboxes) que se utilizan para detectar colisiones con el entorno.
      */
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
-   private ArrayList<Recorrido> recorridos = new ArrayList<>();
+    private ArrayList<Recorrido> recorridos = new ArrayList<>();
 
 
     /**
