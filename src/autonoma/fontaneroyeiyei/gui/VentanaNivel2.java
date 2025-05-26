@@ -146,7 +146,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 //                        h.paint(g);
 //                    }
                  //Cantidad de Tubos a reparar
-                    Casa casaActual = juego.getCasaNivel1(); // O el nivel que toque
+                    Casa casaActual = juego.getCasaNivel2(); // O el nivel que toque
                     int reparados = casaActual.getTubo();
                     int max = casaActual.getMaxTubos();
 

@@ -43,7 +43,7 @@ public class Casa {
                     height - 500
                 };
                 tiempoEntreTubos = 4000; // 4 segundos
-                this.maxTubos = 10;
+                this.maxTubos = 5;
                 break;
             case 2:
                 posicionesY = new int[] {
@@ -51,7 +51,7 @@ public class Casa {
                     height - 425
                 };
                 tiempoEntreTubos = 3000; // 3 segundos
-                this.maxTubos = 15;
+                this.maxTubos = 10;
                 break;
             case 3:
                 posicionesY = new int[] {
@@ -60,7 +60,7 @@ public class Casa {
                     height - 510
                 };
                 tiempoEntreTubos = 2000; // 2 segundos
-                this.maxTubos = 20;
+                this.maxTubos = 15;
                 break;
             default:
                 posicionesY = new int[] {height - 160};
