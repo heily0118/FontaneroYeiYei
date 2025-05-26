@@ -62,7 +62,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador ) {
         super(parent, modal);
         initComponents();
-         reproducirSonido();
+         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
         
         this.nombreJugador = nombreJugador;
@@ -256,6 +256,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 
                         
                         if (!dialogoMostrado) {
+                            reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoPerdido.wav");
                             perderJuego();
                         }
                         
@@ -358,6 +359,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             if (reparo) {
                 juego.getCasaNivel3().repararTubo();
                  if (juego.getCasaNivel3().getTubosReparados() == juego.getCasaNivel3().getMaxTubos()) {
+                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
                   nivelCompletado();
                  }
 
@@ -434,6 +436,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                 } else {
                     timerReloj.stop();
                     juegoTerminado = true;
+                    reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoPerdido.wav");
                     perderJuego();
                 }
             }
@@ -442,17 +445,22 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     }
 
     
-      public void reproducirSonido() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                    getClass().getResource("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav"));
+    public void reproducirSonido(String ruta) {
+         try {
+           
+            if (clip != null && clip.isRunning()) {
+                clip.stop();
+            }
+
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(getClass().getResource(ruta));
             clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.open(audioInput);
+            clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            System.err.println("Error al reproducir el sonido: " + e.getMessage());
         }
     }
+    
     
     
     public void detenerSonido() {
