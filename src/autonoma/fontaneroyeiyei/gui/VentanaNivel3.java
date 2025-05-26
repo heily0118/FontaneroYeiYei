@@ -325,46 +325,47 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-       
-        
-        
-        if(evt.getKeyCode() == KeyEvent.VK_Q)
-        {
+
+        if(evt.getKeyCode() == KeyEvent.VK_Q) {
             System.exit(0);
         }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_UP |
-           evt.getKeyCode() == KeyEvent.VK_DOWN |
-           evt.getKeyCode() == KeyEvent.VK_LEFT |
-           evt.getKeyCode() == KeyEvent.VK_RIGHT)
-        {
-                  
+
+        if(evt.getKeyCode() == KeyEvent.VK_UP ||
+           evt.getKeyCode() == KeyEvent.VK_DOWN ||
+           evt.getKeyCode() == KeyEvent.VK_LEFT ||
+           evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+
             try {
-                
                 f.move(evt.getKeyCode());
             } catch (IOException ex) {
                 Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-        
+
+        if(evt.getKeyCode() == KeyEvent.VK_SPACE) {
            f.saltar(evt.getKeyCode());
-
         }
-        
-           // reparar la fuga
-       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
-           
-             juego.setFontanero(f);
-             juego.manejarTecla(evt.getKeyChar(),juego.getCasaNivel1().getTubos());
-                
-         }
-        
-        this.repaint();
 
+        // Reparar la fuga
+        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+
+            juego.setFontanero(f);
+
+
+            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel3().getTubos());
+
+            if (reparo) {
+                juego.getCasaNivel3().repararTubo();
+                 if (juego.getCasaNivel3().getTubosReparados() == juego.getCasaNivel3().getMaxTubos()) {
+                  nivelCompletado();
+                 }
+
+            }
+    }
+
+    this.repaint();
         
-              
         
     }//GEN-LAST:event_formKeyPressed
 
@@ -456,11 +457,27 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     
     public void detenerSonido() {
         if (clip != null) {
-            clip.stop();
-            clip.close();
+                clip.stop();
+                clip.close();
+            }
+        }
+
+          private void nivelCompletado() {
+           int opcion = JOptionPane.showOptionDialog(this,
+            "¡Felicidades! Has completado el Nivel 3 ! \nEres un verdadero Fontanero Yei Yei.",
+            "Nivel Completado",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            new Object[]{"Aceptar"},
+            "Aceptar");
+
+        if (opcion == 0) {
+            this.dispose(); 
+           new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
