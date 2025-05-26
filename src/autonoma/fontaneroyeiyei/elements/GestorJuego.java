@@ -153,9 +153,9 @@ public class GestorJuego {
 
         if (nivelActual > 0 && nivelActual <= casas.size()) {
             casaActual = casas.get(nivelActual - 1);
-            System.out.println("----gestor jjuego---");
-            System.out.println("tamnio de casas"+ casas.size());
-            System.out.println(" la casa actual la" + (nivelActual-1));
+//            System.out.println("----gestor jjuego---");
+//            System.out.println("tamnio de casas"+ casas.size());
+//            System.out.println(" la casa actual la" + (nivelActual-1));
         System.out.println("-------");
             
         } else {
@@ -168,7 +168,6 @@ public class GestorJuego {
 
         // Intenta usar herramienta y repara tubos si es posible
          System.out.println("----gestor jjuego---");
-        System.out.println("-------");
         
         if(fontanero.usarHerramientaEnTubos(tecla, tubosCasaActual)){
         System.out.println("----se aumenta las tuberia buenas---");
