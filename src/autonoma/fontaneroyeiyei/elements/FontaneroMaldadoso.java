@@ -155,7 +155,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
                 System.out.println("se mueve");
 
                 // Ciclo principal: colocar 10 tubos
-                while (tubosColocados < 10) {
+                while (tubosColocados < 15) {
 
                     // Verifica si se ha salido del limite de la lista y reinicia
                     if (numeroRecorrido >= recorridos.size()) {
@@ -230,13 +230,6 @@ public class FontaneroMaldadoso extends SpriteMobile {
         }
     }  
     
-    private boolean cercaDelFontaneroBueno() {
-        if (fontaneroBueno == null) return false;
-        int distanciaX = Math.abs(this.x - fontaneroBueno.getX());
-        int distanciaY = Math.abs(this.y - fontaneroBueno.getY());
-       
-        return distanciaX < 50 && distanciaY < 50;
-    }
     
       public void detener() {
         activo = false;
