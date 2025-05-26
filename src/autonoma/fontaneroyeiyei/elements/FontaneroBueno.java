@@ -214,7 +214,7 @@ public class FontaneroBueno extends Sprite {
                             reparoAlguno = true;
 
                             
-                            tubos.remove(i);
+                           
                         } else if (antesReparada) {
                             System.out.println("Esta fuga ya estaba reparada");
                         }

@@ -16,7 +16,8 @@ import javax.swing.ImageIcon;
 public class TuboBueno extends Tubo {
     public TuboBueno(int x, int y, int width, int height) {
         super("funcionando", x, y, width, height);
-        this.setImage(new ImageIcon("/autonoma/fontaneroyeiyei/images/TuboBueno.png"));
+        this.setImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboBueno.png")));
+
     }
 
     @Override
