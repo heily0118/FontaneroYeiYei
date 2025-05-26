@@ -194,51 +194,33 @@ public class FontaneroBueno extends Sprite {
         };
     }
 
-    public boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
-       boolean reparoAlguno = false;
-          // Aquí es donde agregas los prints para depurar posiciones:
-//            System.out.println("Fontanero posicion: (" +  this.x + "," + this.y + ")");
-//            System.out.println("lista de tubos"+ tubos.size());
-            for (Tubo tubo : tubos) {
-                
-                if (tubo instanceof TuboConFuga tuboConFuga) {
-//                    System.out.println("Tubo posición: (" + tuboConFuga.getX() + "," + tuboConFuga.getY() + ")");
-                }
-            }
+   public boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
+        boolean reparoAlguno = false;
 
-        for (Tubo tubo : tubos) {
+        for (int i = tubos.size() - 1; i >= 0; i--) {
+            Tubo tubo = tubos.get(i);
+
             if (tubo instanceof TuboConFuga tuboConFuga) {
-//                System.out.println("Revisando tubo en: (" + tuboConFuga.getX() + ", " + tuboConFuga.getY() + ")");
-
                 if (tuboConFuga.estaCerca(x, y, width, height)) {
-//                    System.out.println("Fontanero está cerca del tubo");
-
                     Fuga fuga = tuboConFuga.getFuga();
                     if (fuga != null) {
                         boolean antesReparada = fuga.estaReparada();
-//                        System.out.println("Tipo de fuga: " + fuga.getTipo() + ", Reparada antes: " + antesReparada);
-//                        
-//                        System.out.println("Usando herramienta: " + herramienta.getNombre());
 
-                       
                         herramienta.usarEn(tubo);
 
-                       
                         if (!antesReparada && fuga.estaReparada()) {
                             System.out.println("¡Tubo reparado exitosamente!");
                             actualizarPuntajePorHerramienta(herramienta);
                             reparoAlguno = true;
+
+                            
+                            tubos.remove(i);
                         } else if (antesReparada) {
                             System.out.println("Esta fuga ya estaba reparada");
                         }
                     } else {
                         System.out.println("El tubo no tiene fuga");
                     }
-                } else {
-//                    System.out.println("Fontanero no está cerca del tubo (distancia > 50)");
-                    
-                    int distancia = calcularDistancia(x, y, width, height, tuboConFuga.getX(), tuboConFuga.getY(), tuboConFuga.getWidth(), tuboConFuga.getHeight());
-//                    System.out.println("Distancia actual: " + distancia);
                 }
             }
         }
