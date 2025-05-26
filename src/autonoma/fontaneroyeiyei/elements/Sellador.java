@@ -14,6 +14,12 @@ import javax.swing.ImageIcon;
  */
 
 public class Sellador extends Herramienta {
+    
+    /**
+     * Intenta usar el sellador sobre un tubo con fuga. 
+     * 
+     * @param tubo Es el tubo en el que se quiere usar el sellador.
+     */
     @Override
     public void usarEn(Tubo tubo) {
         if (!(tubo instanceof TuboConFuga)) {
@@ -39,15 +45,26 @@ public class Sellador extends Herramienta {
                 cambiarImagenTuboReparado(tuboConFuga);
             } else {
                 System.out.println("El sellador no puede reparar " + fuga.getTipo() + ". Necesitas llave inglesa.");
-     }
+            }
         }
     }
 
+    /**
+     * Devuelve el nombre de la herramienta.
+     *
+     * @return El nombre "Sellador".
+     */
     @Override
     public String getNombre() {
         return "Sellador";
     }
     
+    /**
+     * Cambia la imagen del tubo con fuga a una imagen de tubo reparado
+     * y actualiza su estado a "bueno".
+     *
+     * @param tubo Es el tubo con fuga que fue reparado exitosamente.
+     */
     private void cambiarImagenTuboReparado(TuboConFuga tubo) {
         ImageIcon iconoBueno = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboBueno.png"));
         tubo.setImage(iconoBueno);
