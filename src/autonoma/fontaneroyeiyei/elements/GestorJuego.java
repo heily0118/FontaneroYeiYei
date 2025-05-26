@@ -64,10 +64,25 @@ public class GestorJuego {
 
     // Guardar nivel actual al archivo
     public void guardarNivel() {
-        try {
+         try {
             ArrayList<String> lineas = lector.leer(archivoProgreso);
-            lineas = new ArrayList<>(actualizarNivel(lineas, nivel.getNumero()));
-            escritor.escribir(lineas); 
+            ArrayList<String> nuevasLineas = new ArrayList<>();
+            boolean reemplazado = false;
+
+            for (String linea : lineas) {
+                if (linea.startsWith("nivel=") && !reemplazado) {
+                    nuevasLineas.add("nivel=" + nivel.getNumero());
+                    reemplazado = true;
+                } else if (!linea.startsWith("nivel=")) {
+                    nuevasLineas.add(linea);
+                }
+            }
+
+            if (!reemplazado) {
+                nuevasLineas.add("nivel=" + nivel.getNumero());
+            }
+
+            escritor.escribir(nuevasLineas);
         } catch (IOException e) {
             e.printStackTrace();
         }
