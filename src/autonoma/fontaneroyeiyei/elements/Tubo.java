@@ -23,11 +23,11 @@ public abstract class Tubo extends HitBox{
     /**
      * Constructor del tubo.
      * 
-     * @param estado Estado inicial del tubo.
-     * @param x Posición X
-     * @param y Posición Y
-     * @param width Ancho del tubo
-     * @param height Alto del tubo
+     * @param estado Es el estado inicial del tubo.
+     * @param x Es la posición X
+     * @param y Es la posición Y
+     * @param width Es el ancho del tubo
+     * @param height Es el alto del tubo
      */
     public Tubo(String estado, int x, int y, int width, int height) {
         super(x, y, height, width);
@@ -36,7 +36,7 @@ public abstract class Tubo extends HitBox{
 
     /**
      * Obtiene el estado actual del tubo.
-     * @return Estado del tubo
+     * @return Retorna el estado del tubo
      */
     public String getEstado() {
         return estado;
@@ -44,7 +44,7 @@ public abstract class Tubo extends HitBox{
 
     /**
      * Establece el estado del tubo.
-     * @param estado Nuevo estado
+     * @param estado Es el nuevo estado
      */
     public void setEstado(String estado) {
         this.estado = estado;
@@ -52,7 +52,7 @@ public abstract class Tubo extends HitBox{
 
     /**
      * Indica si el tubo es reparable.
-     * @return true si está "dañado" o "averiado", false si está "funcionando"
+     * @return Retorna true si está "dañado" o "averiado" o false si está "funcionando"
      */
     public boolean esReparable() {
         return "dañado".equalsIgnoreCase(estado) || "averiado".equalsIgnoreCase(estado);
@@ -62,7 +62,7 @@ public abstract class Tubo extends HitBox{
      * Método de dibujo común para todos los tubos.
      * Se puede sobrescribir si es necesario, pero sirve por defecto.
      * 
-     * @param g Objeto gráfico
+     * @param g Es el objeto gráfico
      */
     @Override
     public void paint(Graphics g) {
@@ -71,6 +71,11 @@ public abstract class Tubo extends HitBox{
         }
     }
     
-     public abstract boolean tieneFuga();
+    /**
+     * Indica si el tubo tiene una fuga.
+     *
+     * @return Retorna true si el tubo presenta una fuga o false en caso contrario.
+     */
+    public abstract boolean tieneFuga();
 
 }

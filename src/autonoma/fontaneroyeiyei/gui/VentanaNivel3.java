@@ -66,7 +66,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         this.juego = juego;
         
         this.nombreJugador = nombreJugador;
-        this.f = new FontaneroBueno("teo");
+        this.f = new FontaneroBueno("nombreJugador");
         
         Casa casaNivel3= juego.getCasaNivel3(); 
         setTitle("FontaneroYeiYei Nivel 3");
