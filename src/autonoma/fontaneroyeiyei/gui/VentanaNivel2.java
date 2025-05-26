@@ -96,16 +96,16 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         f.setX(0);
         
         //SEGUNDO PISO HITBOX
-        HitBox techoSegundoPiso2 = new HitBox(0, 0,230,700);
-        HitBox SegundoPiso = new HitBox(0, 325,250,480);
-        HitBox SegundoPiso2 = new HitBox(625, 325,250,100);
+        HitBox techoSegundoPiso2 = new HitBox(0, 0,700,230);//230, 700
+        HitBox SegundoPiso = new HitBox(0, 325,480,250);//250, 480
+        HitBox SegundoPiso2 = new HitBox(625, 325,100,250);//250,100
         
         hitBoxs.add(techoSegundoPiso2);
         hitBoxs.add(SegundoPiso);
         hitBoxs.add(SegundoPiso2);
         
         //ESCALAS HITBOX
-        HitBox escalas = new HitBox(480, 325, 250, 30);
+        HitBox escalas = new HitBox(480, 325, 30, 250);
         hitBoxs.add(escalas);
         
         f.setHitBoxs(hitBoxs);
@@ -140,7 +140,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                      // Pinta elementos que están dentro de Casa
                     casaNivel2.paint(g); 
                     
-                    //////codigo temporar
+                    ////codigo temporar
 //                    Para pintar el los bloques de hitboxs
 //                    for(HitBox h : hitBoxs){                
 //                        h.paint(g);
