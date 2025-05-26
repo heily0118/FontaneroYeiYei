@@ -213,7 +213,6 @@ public class FontaneroBueno extends Sprite {
                             actualizarPuntajePorHerramienta(herramienta);
                             reparoAlguno = true;
 
-                            
 
                         } else if (antesReparada) {
                             System.out.println("Esta fuga ya estaba reparada");
