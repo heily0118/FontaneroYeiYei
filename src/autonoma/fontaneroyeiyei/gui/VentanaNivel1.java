@@ -316,40 +316,43 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-    
-    if(evt.getKeyCode() == KeyEvent.VK_Q) {
-        System.exit(0);
-    }
-    
-    if(evt.getKeyCode() == KeyEvent.VK_UP ||
-       evt.getKeyCode() == KeyEvent.VK_DOWN ||
-       evt.getKeyCode() == KeyEvent.VK_LEFT ||
-       evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-              
-        try {
-            f.move(evt.getKeyCode());
-        } catch (IOException ex) {
-            Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
+
+        if(evt.getKeyCode() == KeyEvent.VK_Q) {
+            System.exit(0);
         }
-    }
-    
-    if(evt.getKeyCode() == KeyEvent.VK_SPACE) {
-       f.saltar(evt.getKeyCode());
-    }
 
-    // Reparar la fuga
-    if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-       evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
-       
-        juego.setFontanero(f);
-        
-       
-        boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+        if(evt.getKeyCode() == KeyEvent.VK_UP ||
+           evt.getKeyCode() == KeyEvent.VK_DOWN ||
+           evt.getKeyCode() == KeyEvent.VK_LEFT ||
+           evt.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-        if (reparo) {
-            juego.getCasaNivel1().repararTubo();
-
+            try {
+                f.move(evt.getKeyCode());
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
+        if(evt.getKeyCode() == KeyEvent.VK_SPACE) {
+           f.saltar(evt.getKeyCode());
+        }
+
+        // Reparar la fuga
+        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+
+            juego.setFontanero(f);
+
+
+            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+
+            if (reparo) {
+                juego.getCasaNivel1().repararTubo();
+                 if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                  nivelCompletado();
+                   }
+
+            }
     }
 
     this.repaint();
@@ -442,6 +445,36 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         }
     }
     
+    
+    private void nivelCompletado() {
+        if (dialogoMostrado) return;
+        dialogoMostrado = true;
+        detenerSonido();
+        timerReloj.stop();
+
+        Object[] opciones = {"Siguiente Nivel", "Volver al Menú"};
+        int seleccion = JOptionPane.showOptionDialog(
+                this,
+                "¡Nivel 1 completado! ¿Qué deseas hacer?",
+                "¡Felicidades!",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        if (seleccion == 0) {
+           
+            dispose(); 
+           
+            new VentanaNivel2(null, true, juego, nombreJugador).setVisible(true);
+        } else {
+            dispose(); 
+            new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);
+        }
+    }
+
     
         
     }//GEN-LAST:event_formKeyPressed
