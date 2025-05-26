@@ -21,13 +21,41 @@ import javax.swing.JPanel;
 
 public class FontaneroMaldadoso extends SpriteMobile {
     
+    /**
+     * Número máximo de tubos que pueden aparecer en el juego simultáneamente.
+     */
     private final int maxTubos;
+
+    /**
+     * Tiempo (en milisegundos) que debe transcurrir entre la aparición de tubos.
+     */
     private final int tiempoEntreTubos;
+
+    /**
+     * Indica si el hilo o proceso actual del personaje está activo.
+     * Usado para controlar la ejecución de forma segura entre hilos.
+     */
     private volatile boolean activo = true;
-    private List<Integer> pisosY; 
+
+    /**
+     * Lista de posiciones verticales (coordenadas Y) correspondientes a los pisos del edificio.
+     */
+    private List<Integer> pisosY;
+
+    /**
+     * Índice del piso en el que actualmente se encuentra el personaje.
+     */
     private int pisoActual = 0;
+
+    /**
+     * Indica si el personaje es visible o no en la interfaz gráfica del juego.
+     */
     private boolean visible = true;
 
+    /**
+     * Referencia al objeto {@link FontaneroBueno}, que podría ser el jugador principal
+     * o un personaje aliado con el que se coordina.
+     */
     private FontaneroBueno fontaneroBueno;
     
     /**
@@ -50,6 +78,10 @@ public class FontaneroMaldadoso extends SpriteMobile {
      * Lista de áreas de colisión (hitboxes) que se utilizan para detectar colisiones con el entorno.
      */
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
+    
+    /**
+     * Lista de recorridos realizados o posibles por el personaje.
+     */
     private ArrayList<Recorrido> recorridos = new ArrayList<>();
 
 
@@ -90,17 +122,16 @@ public class FontaneroMaldadoso extends SpriteMobile {
         }
         
         if(!hayColision){
-        Fuga fuga = new Fuga(this.x+10, this.y+10,
-                             Math.random()<0.5?"tuerca":"grieta");
-        TuboConFuga nuevo = new TuboConFuga("malo",
-                         this.x, this.y+10, 60, 60, fuga);
-                         /// INFORMACION DE DEJAR TUBOS
-//            System.out.println("------fontanero maliloso-----");
-//            System.out.println("se agrego tubo");
-//            System.out.println(" en casa "+ casa.getNivel());
-//            System.out.println("tamanio actual "+ casa.getTubos().size());
-        casa.agregarTubo(nuevo);
-          
+            Fuga fuga = new Fuga(this.x+10, this.y+10,
+                                 Math.random()<0.5?"tuerca":"grieta");
+            TuboConFuga nuevo = new TuboConFuga("malo",
+                             this.x, this.y+10, 60, 60, fuga);
+                             /// INFORMACION DE DEJAR TUBOS
+    //            System.out.println("------fontanero maliloso-----");
+    //            System.out.println("se agrego tubo");
+    //            System.out.println(" en casa "+ casa.getNivel());
+    //            System.out.println("tamanio actual "+ casa.getTubos().size());
+            casa.agregarTubo(nuevo);
         }
     }
 
@@ -113,6 +144,11 @@ public class FontaneroMaldadoso extends SpriteMobile {
         this.hitBoxs = hitBoxs;
     }
     
+    /**
+     * Establece la lista de recorridos del personaje.
+     *
+     * @param recorridos Es la lista de objetos Recorrido que representan los nuevos trayectos.
+     */
     public void setRecorridos(ArrayList<Recorrido> recorridos) {
         
         System.out.println("sse ingresa los recorridos");
@@ -140,76 +176,82 @@ public class FontaneroMaldadoso extends SpriteMobile {
         
         return false;
     }
-        @Override
-        public void run() {
-            int tubosColocados = 0;         // Contador de tubos colocados
-            int numeroRecorrido = 0;        // Indice del recorrido actual
-            long ultimoTubo = System.currentTimeMillis();  // Marca de tiempo del ultimo tubo colocado
+    
+    /**
+     * Método principal del hilo del fontanero malo.
+     * Controla el movimiento del fontanero por los recorridos predefinidos dentro de la casa
+     * y coloca tubos con fuga en su camino cada 2 segundos.
+     * 
+     */
+    @Override
+    public void run() {
+        int tubosColocados = 0;         // Contador de tubos colocados
+        int numeroRecorrido = 0;        // Indice del recorrido actual
+        long ultimoTubo = System.currentTimeMillis();  // Marca de tiempo del ultimo tubo colocado
 
-            // Validar que la lista de recorridos exista y tenga al menos un elemento
-            if (recorridos != null && !recorridos.isEmpty()) {
+        // Validar que la lista de recorridos exista y tenga al menos un elemento
+        if (recorridos != null && !recorridos.isEmpty()) {
 
-                // Posicion inicial del fontanero
-                x = recorridos.get(numeroRecorrido).getInicioX();
-                y = recorridos.get(numeroRecorrido).getInicioY();
-                System.out.println("se mueve");
+            // Posicion inicial del fontanero
+            x = recorridos.get(numeroRecorrido).getInicioX();
+            y = recorridos.get(numeroRecorrido).getInicioY();
+            System.out.println("se mueve");
 
-                // Ciclo principal: colocar 10 tubos
-                while (tubosColocados < 15) {
+            // Ciclo principal: colocar 10 tubos
+            while (tubosColocados < 15) {
 
-                    // Verifica si se ha salido del limite de la lista y reinicia
-                    if (numeroRecorrido >= recorridos.size()) {
-                        numeroRecorrido = 0;
-                    }
+                // Verifica si se ha salido del limite de la lista y reinicia
+                if (numeroRecorrido >= recorridos.size()) {
+                    numeroRecorrido = 0;
+                }
 
-                    // Movimiento segun la posicion del recorrido actual
-                    Recorrido recorridoActual = recorridos.get(numeroRecorrido);
+                // Movimiento segun la posicion del recorrido actual
+                Recorrido recorridoActual = recorridos.get(numeroRecorrido);
 
-                    if ((casa.getWidth() / 2) > recorridoActual.getInicioX()) {
-                        // Si el recorrido esta a la izquierda de la casa, se mueve a la derecha
-                        
+                if ((casa.getWidth() / 2) > recorridoActual.getInicioX()) {
+                    // Si el recorrido esta a la izquierda de la casa, se mueve a la derecha
+
 //                        System.out.println(" x "+x +" + "+ " dx" +dx);
-                        x += dx;
+                    x += dx;
 
-                        // Si choca con los bordes, pasa al siguiente recorrido
-                        if (x < 0 || x + width > casa.getWidth()) {
-                            numeroRecorrido = (numeroRecorrido + 1) % recorridos.size(); // Reinicia si es necesario
-                            x = recorridos.get(numeroRecorrido).getInicioX();
-                            y = recorridos.get(numeroRecorrido).getInicioY();
-                        }
-
-                    } else {
-                        // Si el recorrido esta a la derecha de la casa, se mueve a la izquierda
-                        x -= dx;
-
-                        // Si choca con los bordes, pasa al siguiente recorrido
-                        if (x < 0 || x + width > casa.getWidth()) {
-                            numeroRecorrido = (numeroRecorrido + 1) % recorridos.size(); // Reinicia si es necesario
-                            x = recorridos.get(numeroRecorrido).getInicioX();
-                            y = recorridos.get(numeroRecorrido).getInicioY();
-                        }
+                    // Si choca con los bordes, pasa al siguiente recorrido
+                    if (x < 0 || x + width > casa.getWidth()) {
+                        numeroRecorrido = (numeroRecorrido + 1) % recorridos.size(); // Reinicia si es necesario
+                        x = recorridos.get(numeroRecorrido).getInicioX();
+                        y = recorridos.get(numeroRecorrido).getInicioY();
                     }
 
-                    // Colocacion de tubos cada 2 segundos
-                    if (System.currentTimeMillis() - ultimoTubo >= 2000) {
-                        dejarTuboConFuga();
-                        tubosColocados++;
-                        ultimoTubo = System.currentTimeMillis();
-                    }
+                } else {
+                    // Si el recorrido esta a la derecha de la casa, se mueve a la izquierda
+                    x -= dx;
 
-                    try {
-                        Thread.sleep(20); // Pequeña pausa para evitar saturar la CPU
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    // Si choca con los bordes, pasa al siguiente recorrido
+                    if (x < 0 || x + width > casa.getWidth()) {
+                        numeroRecorrido = (numeroRecorrido + 1) % recorridos.size(); // Reinicia si es necesario
+                        x = recorridos.get(numeroRecorrido).getInicioX();
+                        y = recorridos.get(numeroRecorrido).getInicioY();
                     }
                 }
 
-                // Ocultar y eliminar el fontanero una vez termina
-                this.setVisible(false);
-                casa.eliminarFontaneroMalo();
-            }
-        }
+                // Colocacion de tubos cada 2 segundos
+                if (System.currentTimeMillis() - ultimoTubo >= 2000) {
+                    dejarTuboConFuga();
+                    tubosColocados++;
+                    ultimoTubo = System.currentTimeMillis();
+                }
 
+                try {
+                    Thread.sleep(20); // Pequeña pausa para evitar saturar la CPU
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Ocultar y eliminar el fontanero una vez termina
+            this.setVisible(false);
+            casa.eliminarFontaneroMalo();
+        }
+    }
 
 
     /**
@@ -230,8 +272,10 @@ public class FontaneroMaldadoso extends SpriteMobile {
         }
     }  
     
-    
-      public void detener() {
+    /**
+     * Detiene la ejecución del fontanero malo.
+     */
+    public void detener() {
         activo = false;
     }
 
