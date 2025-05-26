@@ -155,13 +155,13 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
 
             botonNivel2.addActionListener(e -> {
                 detenerSonido();  
-                new VentanaNivel2(null, true, juego).setVisible(true);
+                new VentanaNivel2(null, true, juego, nombreJugador).setVisible(true);
                  dispose();
             });
 
             botonNivel3.addActionListener(e -> {
                 detenerSonido();  
-                new VentanaNivel3(null, true, juego).setVisible(true);
+                new VentanaNivel3(null, true, juego, nombreJugador).setVisible(true);
                  dispose();
             });
 

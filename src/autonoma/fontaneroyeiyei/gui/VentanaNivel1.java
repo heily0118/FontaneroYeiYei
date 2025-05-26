@@ -15,6 +15,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -391,6 +392,10 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 } else {
                     detenerSonido();
                     dispose();
+                    Frame miFrame = new Frame();
+                    boolean esModal = true;
+
+                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true); 
                 }
             }
         });

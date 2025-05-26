@@ -13,6 +13,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Frame;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -56,8 +57,9 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     private int tiempoRestante = 20;
     private Timer timerReloj;
     private boolean dialogoMostrado = false;
+    private String nombreJugador;
     
-    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego ) {
+    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador ) {
         super(parent, modal);
         initComponents();
          reproducirSonido();
@@ -403,12 +405,16 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     detenerSonido();
                     dispose();
 
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego);
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego, nombreJugador);
                   
                     nuevaVentana.setVisible(true); 
                 } else {
                     detenerSonido();
-                    dispose(); 
+                    dispose();
+                    Frame miFrame = new Frame();
+                    boolean esModal = true;
+
+                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true); 
                 }
             }
         });
