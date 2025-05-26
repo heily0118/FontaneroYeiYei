@@ -420,6 +420,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 } else {
                     timerReloj.stop();
                     juegoTerminado = true;
+                    reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoPerdido.wav");
                     perderJuego();
                 }
             }
