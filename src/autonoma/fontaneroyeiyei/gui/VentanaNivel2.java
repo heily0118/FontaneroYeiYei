@@ -442,9 +442,12 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     
     
     public void detenerSonido() {
-        if (clip != null) {
-            clip.stop();
+         if (clip != null) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
             clip.close();
+            clip = null;
         }
     }
     
@@ -458,7 +461,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         Object[] opciones = {"Siguiente Nivel", "Volver al Menú"};
         int seleccion = JOptionPane.showOptionDialog(
                 this,
-                "¡Nivel 1 completado! ¿Qué deseas hacer?",
+                "¡Nivel 2 completado! ¿Qué deseas hacer?",
                 "¡Felicidades!",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,

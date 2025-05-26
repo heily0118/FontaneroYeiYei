@@ -448,9 +448,12 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     
     
     public void detenerSonido() {
-        if (clip != null) {
-            clip.stop();
+         if (clip != null) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
             clip.close();
+            clip = null;
         }
     }
     

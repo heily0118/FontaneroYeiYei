@@ -69,14 +69,13 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         this.f = new FontaneroBueno("teo");
         
         Casa casaNivel3= juego.getCasaNivel3(); 
+        
         setTitle("FontaneroYeiYei Nivel 3");
+        setSize(700, 700);
+        setResizable(false);
         setLocationRelativeTo(null);
-        setResizable(false);
 
-
-        this.setSize(700,700);
-        setResizable(false);
-        this.setLocationRelativeTo(null);
+       
         
         try{ 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
@@ -130,7 +129,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         
         Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,350);
 
-          Recorrido sotano = new Recorrido("segundo piso recoridos", 600,570);
+        Recorrido sotano = new Recorrido("segundo piso recoridos", 600,570);
         Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 0,150);
         
         
@@ -464,11 +463,14 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     
     
     public void detenerSonido() {
-        if (clip != null) {
+         if (clip != null) {
+            if (clip.isRunning()) {
                 clip.stop();
-                clip.close();
             }
+            clip.close();
+            clip = null;
         }
+    }
 
           private void nivelCompletado() {
            int opcion = JOptionPane.showOptionDialog(this,
