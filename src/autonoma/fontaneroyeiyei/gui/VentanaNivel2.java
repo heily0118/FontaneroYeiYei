@@ -55,7 +55,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
     private boolean juegoTerminado;
     private Timer timerReloj;
-    private int tiempoRestante = 30;
+    private int tiempoRestante = 180;
     private boolean dialogoMostrado = false;
     private String nombreJugador;
     
