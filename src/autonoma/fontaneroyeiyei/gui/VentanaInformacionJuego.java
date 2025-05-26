@@ -65,8 +65,14 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             JButton btnMejorJugador = new JButton(iconoMayor);
             btnMejorJugador.setBounds(20, 100, 48, 48);
             btnMejorJugador.setFocusPainted(false);
+              btnMejorJugador.setContentAreaFilled(true); 
+           
+            btnMejorJugador.setToolTipText("Mejor Jugador");
+            
             btnMejorJugador.setBackground(new Color(0, 102, 204));
             btnMejorJugador.setForeground(Color.WHITE);
+            
+         
 
             btnMejorJugador.addActionListener(e -> {
                 String nombre = juego.getFontanero().getPuntaje().getMaximoNombre();
@@ -81,7 +87,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             });
 
 
-                // Botón de Información con ícono
+            // Botón de Información con ícono
             ImageIcon iconoInfo = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/Informacion.png"));
             JButton btnInformacion = new JButton(iconoInfo);
             btnInformacion.setBounds(20, 10, 64, 64);
