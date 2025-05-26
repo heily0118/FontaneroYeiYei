@@ -189,4 +189,10 @@ public class Casa {
             tubosReparados++;
         }
     }
+
+    public void setFontaneroMalo(FontaneroMaldadoso fontaneroMalo) {
+        this.fontaneroMalo = fontaneroMalo;
+    }
+    
+    
 }
