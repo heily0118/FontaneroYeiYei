@@ -184,7 +184,7 @@ public class Casa {
     // Método para incrementar la cantidad de tubos reparados (debes llamar a este cuando repares un tubo)
     public void repararTubo() {
         if (tubosReparados < maxTubos) {
-            System.out.println("----------casa-------");
+            System.out.println("----------casa "+ nivel+"-------");
             System.out.println("se aumtena reparados" + tubosReparados);
             tubosReparados++;
         }

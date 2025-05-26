@@ -165,7 +165,12 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 
                     //Cantidad de Tubos a reparar
                     Casa casaActual = juego.getCasaNivel3(); 
-                    int reparados = casaActual.getTubo();
+                    int reparados = casaActual.getTubosReparados();
+                    
+                    
+                    System.out.println("------nivel 3 ------");
+                    System.out.println("cantidad de reparados"+ reparados);
+                    
                     int max = casaActual.getMaxTubos();
 
                     // Dibuja la barra de progreso (por ejemplo, una barra horizontal)
