@@ -71,7 +71,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-         reproducirSonido();
+         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
         this.nombreJugador = nombreJugador;
         
@@ -244,6 +244,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                         g3d.fillRect(0, 0, getWidth(), getHeight());
                         
                         if (!dialogoMostrado) {
+                             reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoPerdido.wav");
                             perderJuego();
                         }
 
@@ -350,8 +351,9 @@ public class VentanaNivel1 extends javax.swing.JDialog {
             if (reparo) {
                 juego.getCasaNivel1().repararTubo();
                  if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
                   nivelCompletado();
-                   }
+                }
 
             }
     }
@@ -426,17 +428,22 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     }
 
 
-    public void reproducirSonido() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                    getClass().getResource("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav"));
+   private void reproducirSonido(String ruta) {
+         try {
+           
+            if (clip != null && clip.isRunning()) {
+                clip.stop();
+            }
+
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(getClass().getResource(ruta));
             clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.open(audioInput);
+            clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            System.err.println("Error al reproducir el sonido: " + e.getMessage());
         }
     }
+
     
     
     public void detenerSonido() {
