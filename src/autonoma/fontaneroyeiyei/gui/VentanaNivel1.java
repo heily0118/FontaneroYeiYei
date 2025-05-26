@@ -73,6 +73,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
          reproducirSonido();
         this.juego = juego;
+        this.nombreJugador = nombreJugador;
         
         ///se va indicar la siguientes posiciones para ej jugador
        

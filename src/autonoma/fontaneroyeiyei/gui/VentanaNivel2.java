@@ -65,6 +65,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         
         reproducirSonido();
         this.juego = juego;
+        this.nombreJugador = nombreJugador;
         
         this.f = new FontaneroBueno("teo");
         

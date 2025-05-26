@@ -65,7 +65,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
          reproducirSonido();
         this.juego = juego;
         
-        
+        this.nombreJugador = nombreJugador;
         this.f = new FontaneroBueno("teo");
         
         Casa casaNivel3= juego.getCasaNivel3(); 
@@ -164,7 +164,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 //                    }
 
                     //Cantidad de Tubos a reparar
-                    Casa casaActual = juego.getCasaNivel3(); // O el nivel que toque
+                    Casa casaActual = juego.getCasaNivel3(); 
                     int reparados = casaActual.getTubo();
                     int max = casaActual.getMaxTubos();
 
