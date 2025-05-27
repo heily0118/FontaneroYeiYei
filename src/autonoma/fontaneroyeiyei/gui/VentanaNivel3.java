@@ -130,15 +130,19 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         
         Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,350);
 
-          Recorrido sotano = new Recorrido("segundo piso recoridos", 600,570);
+        Recorrido sotano = new Recorrido("segundo piso recoridos", 600,570);
         Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 0,150);
-        
-        
         recorridos.add(recoridoPrimerPiso);
+        
+        
         
         recorridos.add(sotano);
         recorridos.add(recoridoSegundoPiso);
         juego.getCasaNivel3().getFontaneroMalo().setRecorridos(recorridos);
+        
+        System.out.println("----------nivel 3---------");
+        System.out.println("----------casa en analisis---------");
+        System.out.println(juego.getCasaNivel3().getNivel());
         
         Thread hiloFontanero = new Thread(juego.getCasaNivel3().getFontaneroMalo());
         hiloFontanero.start();
@@ -166,12 +170,12 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     //Cantidad de Tubos a reparar
                     Casa casaActual = juego.getCasaNivel3(); 
                     int reparados = casaActual.getTubosReparados();
+                    int max = casaActual.getMaxTubos();
                     
-//                    
 //                    System.out.println("------nivel 3 ------");
 //                    System.out.println("cantidad de reparados"+ reparados);
                     
-                    int max = casaActual.getMaxTubos();
+                    
 
                     // Dibuja la barra de progreso (por ejemplo, una barra horizontal)
                     int anchoBarra = 200;   // ancho total de la barra
@@ -361,7 +365,12 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 
             boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel3().getTubos());
 
+//            System.out.println("-----------nivel 3-----");
+//            System.out.println(" arreglar tubo" + reparo);
+
+            
             if (reparo) {
+                System.out.println("fue repardo");
                 juego.getCasaNivel3().repararTubo();
                  if (juego.getCasaNivel3().getTubosReparados() == juego.getCasaNivel3().getMaxTubos()) {
                   reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
@@ -475,7 +484,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             }
         }
 
-          private void nivelCompletado() {
+    private void nivelCompletado() {
            int opcion = JOptionPane.showOptionDialog(this,
             "¡Felicidades! Has completado el Nivel 3 ! \nEres un verdadero Fontanero Yei Yei.",
             "Nivel Completado",
