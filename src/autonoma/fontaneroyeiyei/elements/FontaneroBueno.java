@@ -87,7 +87,7 @@ public class FontaneroBueno extends Sprite {
         super(0, 0, 90, 90);
         this.puntaje = new Puntaje();
         this.nombre = nombre;
-        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"))
+        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/FontaneroBueno.png"))
                 .getImage()
                 .getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
@@ -429,5 +429,53 @@ public class FontaneroBueno extends Sprite {
 //        System.out.println("se pinta en ("+ x +","+ y+")");
         g.drawImage(jugadorImage, x, y, width, height, null);
     }
+
+    public long getLastHitTime() {
+        return lastHitTime;
+    }
+
+    public void setLastHitTime(long lastHitTime) {
+        this.lastHitTime = lastHitTime;
+    }
+
+    public Image getJugadorImage() {
+        return jugadorImage;
+    }
+
+    public void setJugadorImage(Image jugadorImage) {
+        this.jugadorImage = jugadorImage;
+    }
+
+    public int getPasos() {
+        return pasos;
+    }
+
+    public void setPasos(int pasos) {
+        this.pasos = pasos;
+    }
+
+    public boolean isSaltando() {
+        return saltando;
+    }
+
+    public void setSaltando(boolean saltando) {
+        this.saltando = saltando;
+    }
+
+    public Herramienta getHerramientaSeleccionada() {
+        return herramientaSeleccionada;
+    }
+
+    public void setHerramientaSeleccionada(Herramienta herramientaSeleccionada) {
+        this.herramientaSeleccionada = herramientaSeleccionada;
+    }
+   
+
+    public void setVida(int vida) {
+        this.vida = vida;
+   }
+
+    
+    
     
 }
