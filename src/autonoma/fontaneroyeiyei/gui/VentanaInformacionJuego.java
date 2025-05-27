@@ -40,7 +40,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
     private JLabel labelInfoJugador; 
 
     private Clip clip;    
-    private JLabel labelNombre;
+   
 
 
     
@@ -120,31 +120,6 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
 
                 JOptionPane.showMessageDialog(this, mensaje, "Controles del juego", JOptionPane.INFORMATION_MESSAGE);
             });
-
-            String nombre = juego.getNombreJugador(); 
-
-            JLabel labelNombre = new JLabel("Jugador: " + nombre);
-            labelNombre.setBounds(420, 30, 250, 40); 
-            labelNombre.setFont(new Font("Monospaced", Font.BOLD, 24));
-            labelNombre.setForeground(new Color(255, 255, 255)); 
-            labelNombre.setOpaque(true);
-            labelNombre.setBackground(new Color(0, 0, 0, 180)); 
-            labelNombre.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            panelFondo.add(labelNombre);
-
-            panelFondo.add(labelNombre);
-            
-
-            int puntaje = juego.getFontanero().getPuntaje().getPuntajeActual();
-            JLabel labelPuntaje = new JLabel("Puntaje: " + puntaje);
-            labelPuntaje.setBounds(420, 80, 250, 40); 
-            labelPuntaje.setFont(new Font("Monospaced", Font.BOLD, 24));
-            labelPuntaje.setForeground(Color.WHITE);
-            labelNombre.setForeground(new Color(255, 255, 255));
-            labelPuntaje.setOpaque(true);
-            labelPuntaje.setBackground(new Color(0, 0, 0, 180)); 
-            labelPuntaje.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));// O color llamativo
-            panelFondo.add(labelPuntaje);
 
 
             // === Botones con imágenes de casas ===
