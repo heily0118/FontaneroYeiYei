@@ -88,7 +88,7 @@ public class FontaneroBueno extends Sprite {
         for (HitBox h : hitBoxs) {
             if (hitBoxFuturo.intersects(h)) {
                 hayColision = true;
-                System.out.println("¡Colision con " + h.getClass().getSimpleName() + "!");
+//                System.out.println("Colision con " + h.getClass().getSimpleName() + "!");
                 return;
             }
         }
@@ -98,7 +98,7 @@ public class FontaneroBueno extends Sprite {
         this.x = nx;
         this.y = ny;
     } else {
-        System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los límites"));
+//        System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los límites"));
     }
 }
 

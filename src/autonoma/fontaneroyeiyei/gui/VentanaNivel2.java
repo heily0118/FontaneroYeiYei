@@ -343,7 +343,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
             boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel2().getTubos());
             
             System.out.println("-----------nivel 2-----");
-            System.out.println(" arreglar tubo" + reparo);
+            System.out.println(" arreglar tubo   " + reparo);
 
             if (reparo) {
                 juego.getCasaNivel2().repararTubo();
