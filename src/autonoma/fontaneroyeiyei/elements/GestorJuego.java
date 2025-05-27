@@ -216,6 +216,7 @@ public class GestorJuego {
 
             if (casaActual.getTubosReparados() >= maxTubos) {
                 System.out.println("¡Nivel completado! Subiendo de nivel...");
+                puntaje.setPuntajeActual(puntaje.getPuntajeActual() + 5);
                 subirNivel();
             }
             return true;  // Se reparó un tubo
