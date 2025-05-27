@@ -1,5 +1,6 @@
 package autonoma.fontaneroyeiyei.elements;
 
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,7 +184,7 @@ public class GestorJuego {
      * @param tubosCasaActual Lista de tubos de la casa actual
      * @return true si se reparó un tubo, false en caso contrario
      */
-    public boolean manejarTecla(char tecla, List<Tubo> tubosCasaActual) {
+    public boolean manejarTecla(char tecla, List<Tubo> tubosCasaActual) throws HerramientaInvalidaException {
         if (fontanero == null) {
             System.out.println("Fontanero no inicializado, ingresa el nombre primero.");
             return false;

@@ -9,6 +9,7 @@ import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -335,25 +336,26 @@ public class VentanaNivel2 extends javax.swing.JDialog {
 
         // Reparar la fuga
         if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
 
-            juego.setFontanero(f);
+             juego.setFontanero(f);
 
+             try {
+                 boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel2().getTubos());
-            
-            System.out.println("-----------nivel 2-----");
-            System.out.println(" arreglar tubo   " + reparo);
+                 if (reparo) {
+                     juego.getCasaNivel1().repararTubo();
+                     if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
+                         nivelCompletado();
+                     }
+                 }
+             } catch (HerramientaInvalidaException ex) {
+               
+                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
+             }
+         }
 
-            if (reparo) {
-                juego.getCasaNivel2().repararTubo();
-                 if (juego.getCasaNivel2().getTubosReparados() == juego.getCasaNivel2().getMaxTubos()) {
-                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
-                  nivelCompletado();
-                  }
-
-            }
-    }
 
     this.repaint();
         

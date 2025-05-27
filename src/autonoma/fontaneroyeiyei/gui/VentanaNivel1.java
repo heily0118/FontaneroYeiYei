@@ -11,6 +11,7 @@ import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
 import autonoma.fontaneroyeiyei.elements.Tubo;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -341,22 +342,26 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
         // Reparar la fuga
         if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
 
-            juego.setFontanero(f);
+             juego.setFontanero(f);
 
+             try {
+                 boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+                 if (reparo) {
+                     juego.getCasaNivel1().repararTubo();
+                     if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
+                         nivelCompletado();
+                     }
+                 }
+             } catch (HerramientaInvalidaException ex) {
+               
+                  JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
+             }
+         }
 
-            if (reparo) {
-                juego.getCasaNivel1().repararTubo();
-                 if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
-                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
-                  nivelCompletado();
-                }
-
-            }
-    }
 
     this.repaint();
         
