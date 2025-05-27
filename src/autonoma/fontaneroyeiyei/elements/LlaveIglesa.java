@@ -1,18 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.fontaneroyeiyei.elements;
 
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Clase que representa una llave inglesa, una herramienta utilizada 
+ * para reparar tubos con fuga.
+ * 
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250425
  * @version 1.0.0
  */
 public class LlaveIglesa extends Herramienta {
+
+    /**
+     * Usa la llave inglesa en un tubo.
+     * 
+     * @param tubo El tubo sobre el que se usará la llave inglesa
+     */
     @Override
     public void usarEn(Tubo tubo) {
         if (!(tubo instanceof TuboConFuga)) {
@@ -29,7 +33,7 @@ public class LlaveIglesa extends Herramienta {
                 return;
             }
 
-    // Usar el método reparar(char) de tu clase Fuga
+            // Usar el método reparar(char) de la clase Fuga
             boolean reparado = fuga.reparar('L');
             
             if (reparado) {
@@ -42,14 +46,24 @@ public class LlaveIglesa extends Herramienta {
         }
     }
 
+    /**
+     * Obtiene el nombre de la herramienta.
+     * 
+     * @return Nombre de la herramienta
+     */
     @Override
     public String getNombre() {
         return "Llave Inglesa";
     }
+
+    /**
+     * Cambia la imagen del tubo a una imagen de tubo reparado.
+     * 
+     * @param tubo El tubo que ha sido reparado
+     */
     private void cambiarImagenTuboReparado(TuboConFuga tubo) {
         ImageIcon iconoBueno = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboBueno.png"));
         tubo.setImage(iconoBueno);
         tubo.setEstado("bueno"); 
     }
 }
-

@@ -5,24 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Clase que representa una casa en el juego.
+ * 
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250516
  * @version 1.0.0
  */
 public class Casa {
 
-    private int width;
-    private int height;
-    private int nivel;
+    private int width;                  // Ancho de la casa
+    private int height;                 // Alto de la casa
+    private int nivel;                  // Nivel de dificultad
 
-    private List<Tubo> tubos;
-    private List<Serpiente> servientes;
-    private FontaneroMaldadoso fontaneroMalo;
+    private List<Tubo> tubos;           // Lista de tubos en la casa
+    private List<Serpiente> servientes; // Lista de servientes (serpientes)
+    private FontaneroMaldadoso fontaneroMalo; // Fontanero malvado
 
-    private int maxTubos;           // Total tubos a reparar
-    private int tubosReparados;     // Tubos reparados actualmente
+    private int maxTubos;               // Total de tubos a reparar
+    private int tubosReparados;         // Tubos reparados actualmente
 
+    /**
+     * Constructor de la clase Casa.
+     * 
+     * @param width Ancho de la casa
+     * @param height Alto de la casa
+     * @param nivel Nivel de dificultad
+     */
     public Casa(int width, int height, int nivel) {
         this.width = width;
         this.height = height;
@@ -104,20 +112,39 @@ public class Casa {
         hiloFontanero.start();
     }
 
+    /**
+     * Obtiene el fontanero malvado.
+     * 
+     * @return FontaneroMaldadoso
+     */
     public FontaneroMaldadoso getFontaneroMalo() {
         return fontaneroMalo;
     }
 
+    /**
+     * Obtiene la lista de tubos.
+     * 
+     * @return Lista de tubos
+     */
     public List<Tubo> getTubos() {
         return tubos;
     }
 
+    /**
+     * Obtiene la lista de servientes.
+     * 
+     * @return Lista de servientes
+     */
     public List<Serpiente> getServientes() {
         return servientes;
     }
 
+    /**
+     * Dibuja la casa y sus componentes.
+     * 
+     * @param g Objeto Graphics para dibujar
+     */
     public void paint(Graphics g) {
-      
         List<TuboConFuga> copiaTubos = new ArrayList<>();
         for (Tubo t : tubos) {
             if (t instanceof TuboConFuga) {
@@ -139,6 +166,14 @@ public class Casa {
         }
     }
 
+    /**
+     * Inicia al enemigo (fontanero malo) en una posición específica.
+     * 
+     * @param x Posición X
+     * @param y Posición Y
+     * @param ancho Ancho del fontanero
+     * @param alto Alto del fontanero
+     */
     public void iniciarEnemigo(int x, int y, int ancho, int alto) {
         fontaneroMalo.setX(x);
         fontaneroMalo.setY(y);
@@ -146,53 +181,94 @@ public class Casa {
         fontaneroMalo.setHeight(alto);
     }
 
-    public synchronized void agregarTubo(Tubo tubo){
+    /**
+     * Agrega un tubo a la lista de tubos.
+     * 
+     * @param tubo Tubo a agregar
+     */
+    public synchronized void agregarTubo(Tubo tubo) {
         tubos.add(tubo);
     }
 
-    public void eliminarFontaneroMalo(){
+    /**
+     * Elimina al fontanero malo.
+     */
+    public void eliminarFontaneroMalo() {
         this.fontaneroMalo = null;        
     }
 
+    /**
+     * Obtiene el ancho de la casa.
+     * 
+     * @return Ancho de la casa
+     */
     public int getWidth() {
         return this.width;
     }
 
+    /**
+     * Obtiene el alto de la casa.
+     * 
+     * @return Alto de la casa
+     */
     public int getHeight() {
         return this.height;
     }
 
+    /**
+     * Obtiene el nivel de la casa.
+     * 
+     * @return Nivel de la casa
+     */
     public int getNivel() {
         return nivel;
     }
 
+    /**
+     * Obtiene la cantidad de tubos reparados.
+     * 
+     * @return Cantidad de tubos reparados
+     */
     public int getTubosReparados() {
         return tubosReparados;
     }
-    
 
-    // Retorna la cantidad de tubos reparados hasta ahora
+    /**
+     * Retorna la cantidad de tubos reparados hasta ahora.
+     * 
+     * @return Cantidad de tubos reparados
+     */
     public int getTubo() {
         return tubosReparados; 
     }
 
-    // Retorna la cantidad máxima de tubos a reparar en este nivel
+    /**
+     * Retorna la cantidad máxima de tubos a reparar en este nivel.
+     * 
+     * @return Cantidad máxima de tubos
+     */
     public int getMaxTubos() {
         return maxTubos; 
     }
 
-    // Método para incrementar la cantidad de tubos reparados (debes llamar a este cuando repares un tubo)
+    /**
+     * Método para incrementar la cantidad de tubos reparados.
+     * Debes llamar a este cuando repares un tubo.
+     */
     public void repararTubo() {
         if (tubosReparados < maxTubos) {
-            System.out.println("----------casa "+ nivel+"-------");
-            System.out.println("se aumtena reparados" + tubosReparados);
+//            System.out.println("----------casa " + nivel + "-------");
+//            System.out.println("se aumtena reparados " + tubosReparados);
             tubosReparados++;
         }
     }
 
+    /**
+     * Establece el fontanero malo.
+     * 
+     * @param fontaneroMalo Fontanero malvado a establecer
+     */
     public void setFontaneroMalo(FontaneroMaldadoso fontaneroMalo) {
         this.fontaneroMalo = fontaneroMalo;
     }
-    
-    
 }
