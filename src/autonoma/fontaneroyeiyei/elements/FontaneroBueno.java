@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 
 /**
  * Representa al personaje principal del juego: el fontanero bueno.
@@ -221,21 +222,23 @@ public class FontaneroBueno extends Sprite {
      * @param tubos Lista de tubos
      * @return true si se repara algún tubo, false en caso contrario
      */
-    public boolean usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
+
+
+    public boolean usarHerramientaEnTubos(char tecla, List<Tubo> tubos) throws HerramientaInvalidaException {
         Herramienta herramienta = crearHerramienta(tecla);
         if (herramienta == null) {
-            System.out.println("no hay herramientas"); 
-            return false;
+            throw new HerramientaInvalidaException();
         }
         boolean reparoAlguno = intentarRepararTubosConHerramienta(herramienta, tubos);
 
         if (!reparoAlguno) {
-            System.out.println("no se pudo reparar");
+            System.out.println("No se pudo reparar ningún tubo con la herramienta " + herramienta.getNombre());
             return false;
         }
-        
+
         return reparoAlguno;
     }
+
 
     /**
      * Crea una herramienta según la tecla presionada.

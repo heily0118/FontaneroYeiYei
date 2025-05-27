@@ -9,6 +9,7 @@ import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -357,28 +358,27 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         }
 
         // Reparar la fuga
-        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+               evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
 
-            juego.setFontanero(f);
+                juego.setFontanero(f);
 
+                try {
+                    boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel3().getTubos());
-
-//            System.out.println("-----------nivel 3-----");
-//            System.out.println(" arreglar tubo" + reparo);
-
-            
-            if (reparo) {
-                System.out.println("fue repardo");
-                juego.getCasaNivel3().repararTubo();
-                 if (juego.getCasaNivel3().getTubosReparados() == juego.getCasaNivel3().getMaxTubos()) {
-                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
-                  nivelCompletado();
-                 }
-
+                    if (reparo) {
+                        juego.getCasaNivel1().repararTubo();
+                        if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                            reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
+                            nivelCompletado();
+                        }
+                    }
+                } catch (HerramientaInvalidaException ex) {
+                   
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
+                }
             }
-    }
+
 
     this.repaint();
         
