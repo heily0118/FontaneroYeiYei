@@ -21,7 +21,8 @@ public class GestorJuego {
     private LectorArchivoTextoPlano lector; // Lector de archivos
     private EscritorArchivoTextoPlano escritor; // Escritor de archivos
     private final String archivoProgreso = "progreso.txt"; // Archivo de progreso
-    private String nombreJugador;        // Nombre del jugador
+    private String nombreJugador; // Nombre del jugador
+    private Puntaje puntaje;
 
     /**
      * Constructor de la clase GestorJuego.
@@ -30,6 +31,7 @@ public class GestorJuego {
      */
     public GestorJuego(ArrayList<Casa> casas) {
         this.casas = casas;
+        this.puntaje = new Puntaje ();
         this.lector = new LectorArchivoTextoPlano();
         this.escritor = new EscritorArchivoTextoPlano(archivoProgreso);
         cargarNivel();
@@ -297,4 +299,14 @@ public class GestorJuego {
             System.out.println("No se puede reiniciar el nivel actual.");
         }
     }
+
+    public Puntaje getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Puntaje puntaje) {
+        this.puntaje = puntaje;
+    }
+    
+    
 }

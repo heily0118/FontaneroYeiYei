@@ -5,6 +5,7 @@
 package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
+import autonoma.fontaneroyeiyei.elements.Puntaje;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -112,6 +113,18 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             panelFondo.add(labelNombre);
 
             panelFondo.add(labelNombre);
+            
+
+            int puntaje = juego.getFontanero().getPuntaje().getPuntajeActual();
+            JLabel labelPuntaje = new JLabel("Puntaje: " + puntaje);
+            labelPuntaje.setBounds(420, 80, 250, 40); 
+            labelPuntaje.setFont(new Font("Monospaced", Font.BOLD, 24));
+            labelPuntaje.setForeground(Color.WHITE);
+            labelNombre.setForeground(new Color(255, 255, 255));
+            labelPuntaje.setOpaque(true);
+            labelPuntaje.setBackground(new Color(0, 0, 0, 180)); 
+            labelPuntaje.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));// O color llamativo
+            panelFondo.add(labelPuntaje);
 
 
             // === Botones con imágenes de casas ===
