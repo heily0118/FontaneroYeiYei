@@ -166,15 +166,7 @@ public class FontaneroBueno extends Sprite {
 
         boolean hayColision = false;
 
-<<<<<<< HEAD
-    if (!saltando) {
-        HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
-        for (HitBox h : hitBoxs) {
-            if (hitBoxFuturo.intersects(h)) {
-                hayColision = true;
-//                System.out.println("Colision con " + h.getClass().getSimpleName() + "!");
-                return;
-=======
+
         if (!saltando) {
             HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
             for (HitBox h : hitBoxs) {
@@ -183,7 +175,7 @@ public class FontaneroBueno extends Sprite {
                     System.out.println("¡Colision con " + h.getClass().getSimpleName() + "!");
                     return;
                 }
->>>>>>> 58911f8da5108a860a8f09072bf113082f7584b4
+
             }
         }
 
@@ -195,25 +187,14 @@ public class FontaneroBueno extends Sprite {
         }
     }
 
-<<<<<<< HEAD
-    if (!hayColision && limiteDeMapa(nx, ny)) {
-        this.x = nx;
-        this.y = ny;
-    } else {
-//        System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los límites"));
-    }
-}
 
-
-
-=======
     /**
      * Realiza un salto o movimiento especial según la dirección indicada.
      * 
      * @param direccion Es la dirección del salto o movimiento, basada en constantes KeyEvent.
      *                  
      */
->>>>>>> 58911f8da5108a860a8f09072bf113082f7584b4
+
     public void saltar(int direccion) {
         int nx = x;
         int ny = y;
