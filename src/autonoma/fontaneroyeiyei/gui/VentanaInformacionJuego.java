@@ -6,6 +6,7 @@ package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
@@ -17,9 +18,11 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import javax.swing.border.Border;
 
 /**
  * 
@@ -30,6 +33,8 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class VentanaInformacionJuego extends javax.swing.JDialog {
     private GestorJuego juego;
     private Clip clip;    
+    private JLabel labelNombre;
+    
 
     
     /**
@@ -72,7 +77,8 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             btnInformacion.setOpaque(true);
             btnInformacion.setBackground(new Color(255, 255, 255, 255)); 
             btnInformacion.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
-
+            
+            
           
             btnInformacion.setContentAreaFilled(true); 
             btnInformacion.setFocusPainted(false);
@@ -93,6 +99,19 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
 
                 JOptionPane.showMessageDialog(this, mensaje, "Controles del juego", JOptionPane.INFORMATION_MESSAGE);
             });
+
+            String nombre = juego.getNombreJugador(); 
+
+            JLabel labelNombre = new JLabel("Jugador: " + nombre);
+            labelNombre.setBounds(420, 30, 250, 40); 
+            labelNombre.setFont(new Font("Monospaced", Font.BOLD, 24));
+            labelNombre.setForeground(new Color(255, 255, 255)); 
+            labelNombre.setOpaque(true);
+            labelNombre.setBackground(new Color(0, 0, 0, 180)); 
+            labelNombre.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            panelFondo.add(labelNombre);
+
+            panelFondo.add(labelNombre);
 
 
             // === Botones con imágenes de casas ===
