@@ -386,13 +386,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     }//GEN-LAST:event_formKeyPressed
 
     private void perderJuego() {
-        
-        
         if (dialogoMostrado) return;
         dialogoMostrado = true;
-        
-        
-        System.out.println("Se acabó el tiempo, perdiste una vida!");
 
         juegoTerminado = true;
         repaint();
@@ -401,37 +396,35 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
-                int seleccion = javax.swing.JOptionPane.showOptionDialog(
+                int seleccion = JOptionPane.showOptionDialog(
                         VentanaNivel3.this,
-                        "¡Tiempo terminado, has perdido! ¿Qué deseas hacer?",
+                        "¡El juego terminó antes de tiempo! ¿Qué deseas hacer?",
                         "Fin del Juego",
-                        javax.swing.JOptionPane.DEFAULT_OPTION,
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE,
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
                         null,
                         opciones,
                         opciones[0]
                 );
 
                 if (seleccion == 0) {
-                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700,3)); 
-                    nuevaListaCasas.add(new Casa(700, 700,3));
-                    nuevaListaCasas.add(new Casa(700, 700,3)); 
-                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
-                    
+                   
+                    juego.reiniciarNivelActual(); 
+
                     detenerSonido();
                     dispose();
 
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego, nombreJugador);
-                  
-                    nuevaVentana.setVisible(true); 
+                    // Reabre la misma ventana con el mismo gestor y jugador
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, nombreJugador);
+                    nuevaVentana.setVisible(true);
+
                 } else {
                     detenerSonido();
                     dispose();
+
                     Frame miFrame = new Frame();
                     boolean esModal = true;
-
-                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true); 
+                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);
                 }
             }
         });
@@ -439,6 +432,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         timerGameOver.setRepeats(false);
         timerGameOver.start();
     }
+
     
     private void iniciarReloj() {
         timerReloj = new Timer(1000, new ActionListener() {

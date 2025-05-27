@@ -15,6 +15,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -55,8 +56,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             };
             panelFondo.setLayout(null);
-            JButton botonJugar = new JButton("Jugar");
-            botonJugar.setBounds(290, 600, 120, 40);
+            JButton botonJugar = new JButton("JUGAR");
+            botonJugar.setBounds(300, 375, 150, 50);
             estiloBoton(botonJugar);  //  Aplicar estilo
             botonJugar.addActionListener(e -> {
                 
@@ -118,13 +119,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
   
     private void estiloBoton(JButton boton) {
-        boton.setForeground(Color.WHITE); 
-        boton.setFont(new Font("Arial", Font.BOLD, 16));
-        boton.setOpaque(false);           
-        boton.setContentAreaFilled(false); 
-        boton.setBorderPainted(true);     
-        boton.setFocusPainted(false);     
-    }
+       
+      boton.setBackground(new Color(0, 180, 0, 180));
+
+    
+      boton.setOpaque(true);
+      boton.setContentAreaFilled(true);
+
+  
+      boton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+
+      boton.setFont(new Font("Courier New", Font.BOLD, 35)); 
+
+
+      boton.setForeground(Color.WHITE);
+
+     
+      boton.setFocusPainted(false);
+  }
+
 
 
     public void reproducirSonido() {

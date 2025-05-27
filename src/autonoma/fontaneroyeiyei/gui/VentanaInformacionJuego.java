@@ -6,6 +6,7 @@ package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
@@ -17,9 +18,11 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import javax.swing.border.LineBorder;
 
 /**
  * 
@@ -29,7 +32,8 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class VentanaInformacionJuego extends javax.swing.JDialog {
     private GestorJuego juego;
-    private Clip clip;    
+    private Clip clip;   
+    private JLabel labelInfoJugador; 
 
     
     /**
@@ -60,7 +64,21 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             panelFondo.setLayout(null);
 
             
-             
+           
+            // Inicializar labelInfoJugador 
+            String nombreJugador = juego.getNombreJugador();
+            int puntajeGlobal = juego.getPuntajeGlobal();
+
+            labelInfoJugador = new JLabel("Jugador: " + nombreJugador + "  |  Puntaje global: " + puntajeGlobal);
+            labelInfoJugador.setFont(new Font("Arial", Font.BOLD, 18));
+            labelInfoJugador.setForeground(Color.WHITE);
+            labelInfoJugador.setBorder(new LineBorder(Color.WHITE, 2));
+            labelInfoJugador.setOpaque(true);
+            labelInfoJugador.setBackground(new Color(0, 0, 0, 150));  // Fondo negro semitransparente
+            labelInfoJugador.setBounds(280, 10, 320, 30);
+
+
+
 
 
             // Botón de Información con ícono
@@ -127,7 +145,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             botonNivel2.setEnabled(nivelActual >= 2);
             botonNivel3.setEnabled(nivelActual >= 3);
 
-            String nombreJugador = juego.getNombreJugador();
+           
            // Acciones botones con sonido detenido
             botonNivel1.addActionListener(e -> {
                 detenerSonido();  
@@ -156,6 +174,9 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             panelFondo.add(botonNivel2);
             panelFondo.add(botonNivel3);
             panelFondo.add(btnInformacion);
+            panelFondo.add(labelInfoJugador);
+
+       
 
 
 
@@ -189,7 +210,15 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
+      /**
+     * Método para actualizar el puntaje global mostrado en el JLabel
+     */
+    public void actualizarPuntajeGlobal() {
+        String nombreJugador = juego.getNombreJugador();
+        int puntajeGlobal = juego.getPuntajeGlobal();
+
+        labelInfoJugador.setText("Jugador: " + nombreJugador + "  |  Puntaje global: " + puntajeGlobal);
+    }
     
     public void detenerSonido() {
         if (clip != null) {

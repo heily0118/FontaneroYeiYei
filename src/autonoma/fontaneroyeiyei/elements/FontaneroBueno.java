@@ -51,7 +51,7 @@ public class FontaneroBueno extends Sprite {
         jugadorImage = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/FontaneroBueno.png"))
                   .getImage()
                 .getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        this.puntaje.setNombreJugador(nombre);
+        
 
 
     }

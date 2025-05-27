@@ -380,7 +380,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
                 int seleccion = JOptionPane.showOptionDialog(
                         VentanaNivel1.this,
-                        "¡El juego terminó antes de tiempo! ¿Qué deseas hacer?",
+                        "¡El juego terminó ! ¿Qué deseas hacer?",
                         "Fin del Juego",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,

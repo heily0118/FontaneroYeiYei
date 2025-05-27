@@ -214,6 +214,9 @@ public class GestorJuego {
 
             if (casaActual.getTubosReparados() >= maxTubos) {
                 System.out.println("¡Nivel completado! Subiendo de nivel...");
+                 if (fontanero != null && fontanero.getPuntaje() != null) {
+                        fontanero.getPuntaje().acumularPuntajeGlobal();
+                  }
                 subirNivel();
             }
             return true;  // Se reparó un tubo
@@ -293,8 +296,16 @@ public class GestorJuego {
         if (actual > 0 && actual <= casas.size()) {
             casas.get(actual - 1).reiniciar();
             System.out.println("Reiniciaste el nivel " + actual);
-        } else {
+        } else {    
             System.out.println("No se puede reiniciar el nivel actual.");
         }
     }
+    
+    public int getPuntajeGlobal() {
+        if (fontanero != null && fontanero.getPuntaje() != null) {
+            return fontanero.getPuntaje().getPuntajeGlobal();
+        }
+        return 0;  
+    }
+
 }

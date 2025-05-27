@@ -18,16 +18,15 @@ public class Puntaje {
      */
     private int puntajeActual;
     
-    /**
-     * Nombre del jugador.
-     */
-    private String nombreJugador;
+    private int puntajeGlobal;
+   
 
     /**
      * Constructor de la clase Puntaje.
      */
     public Puntaje() {
         this.puntajeActual = 0;
+         this.puntajeGlobal = 0;
     }
 
     /**
@@ -51,7 +50,7 @@ public class Puntaje {
     /**
      * Reinicia el puntaje a cero.
      */
-    public void reiniciarPuntaje() {
+    public void reiniciarPuntajeActual() {
         this.puntajeActual = 0;
     }
 
@@ -81,18 +80,29 @@ public class Puntaje {
     public void aumentarPuntajePorLlaveInglesa() {
         this.puntajeActual += 2;
     }
-    
-    /**
-     * Obtiene el nombre del jugador.
-     * 
-     * @return Retorna el nombre del jugador.
-     */
-    public String getNombreJugador() {
-        return nombreJugador;
+
+    public int getPuntajeGlobal() {
+        return puntajeGlobal;
     }
 
-    public void setNombreJugador(String nombreJugador) {
-        this.nombreJugador = nombreJugador;
+    public void setPuntajeGlobal(int puntajeGlobal) {
+        this.puntajeGlobal = puntajeGlobal;
     }
     
+    /**
+     * Acumula el puntaje actual al puntaje global.
+     * Usar cuando termina una partida o nivel.
+     */
+    public void acumularPuntajeGlobal() {
+        this.puntajeGlobal += this.puntajeActual;
+        reiniciarPuntajeActual(); 
+    }
+    /**
+    * Reinicia tanto el puntaje actual como el global.
+    */
+   public void reiniciarTodo() {
+       this.puntajeActual = 0;
+       this.puntajeGlobal = 0;
+   }
+
 }
