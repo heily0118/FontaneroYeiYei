@@ -161,7 +161,7 @@ public class Casa {
         }
 
         if (fontaneroMalo != null) {
-            fontaneroMalo.detener();
+          
             fontaneroMalo.paint(g);
         }
     }
@@ -194,7 +194,11 @@ public class Casa {
      * Elimina al fontanero malo.
      */
     public void eliminarFontaneroMalo() {
-        this.fontaneroMalo = null;        
+         if (fontaneroMalo != null) {
+            fontaneroMalo.detener(); 
+            
+             fontaneroMalo = null;
+        }
     }
 
     /**
@@ -233,14 +237,7 @@ public class Casa {
         return tubosReparados;
     }
 
-    /**
-     * Retorna la cantidad de tubos reparados hasta ahora.
-     * 
-     * @return Cantidad de tubos reparados
-     */
-    public int getTubo() {
-        return tubosReparados; 
-    }
+    
 
     /**
      * Retorna la cantidad máxima de tubos a reparar en este nivel.
@@ -271,4 +268,99 @@ public class Casa {
     public void setFontaneroMalo(FontaneroMaldadoso fontaneroMalo) {
         this.fontaneroMalo = fontaneroMalo;
     }
+  public void reiniciar() {
+    // Reiniciar tubos reparados y limpiar tubos actuales
+    this.tubosReparados = 0;
+    this.tubos.clear();
+
+    // Detener hilos y limpiar servientes actuales
+    for (Serpiente s : servientes) {
+        s.detener();  // Método para indicarle al runnable detenerse
+    }
+    servientes.clear();
+
+    // Detener el fontanero malo actual y limpiar referencia
+    if (fontaneroMalo != null) {
+        fontaneroMalo.detener();
+        fontaneroMalo = null;
+    }
+
+    // Variables para configuración según nivel
+    int limiteIzquierdo = 0;
+    int limiteDerecho = width;
+
+    int[] posicionesY;
+    int tiempoEntreTubos;
+
+    switch (nivel) {
+        case 1:
+            posicionesY = new int[] {
+                height - 90,
+                height - 500
+            };
+            tiempoEntreTubos = 4000; // 4 segundos
+            this.maxTubos = 5;
+            break;
+        case 2:
+            posicionesY = new int[] {
+                height - 90,
+                height - 425
+            };
+            tiempoEntreTubos = 3000; // 3 segundos
+            this.maxTubos = 10;
+            break;
+        case 3:
+            posicionesY = new int[] {
+                height - 90,
+                height - 300,
+                height - 510
+            };
+            tiempoEntreTubos = 2000; // 2 segundos
+            this.maxTubos = 15;
+            break;
+        default:
+            posicionesY = new int[] {height - 160};
+            tiempoEntreTubos = 4000;
+            this.maxTubos = 10;
+    }
+
+    // Crear y arrancar nuevos servientes (serpientes)
+    for (int i = 0; i < posicionesY.length; i++) {
+        int x = 100 + i * 150;
+        int y = posicionesY[i];
+
+        Serpiente s = new Serpiente(x, y, 50, 50, limiteIzquierdo, limiteDerecho);
+        servientes.add(s);
+
+        Thread hiloServiente = new Thread(s);
+        hiloServiente.start();
+    }
+
+    // Lista de pisos para el fontanero malo
+    List<Integer> pisosY = new ArrayList<>();
+    for (int pos : posicionesY) {
+        pisosY.add(pos);
+    }
+
+    // Crear y arrancar nuevo fontanero malo
+    int fontaneroMaloAncho = 80;
+    int fontaneroMaloAlto = 80;
+
+    fontaneroMalo = new FontaneroMaldadoso(
+        0,
+        pisosY.get(0),
+        fontaneroMaloAncho,
+        fontaneroMaloAlto,
+        this,
+        pisosY,
+        null,
+        tiempoEntreTubos,
+        maxTubos
+    );
+    Thread hiloFontanero = new Thread(fontaneroMalo);
+    hiloFontanero.start();
+}
+
+
+
 }

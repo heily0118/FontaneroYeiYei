@@ -86,4 +86,11 @@ public class Serpiente extends SpriteMobile {
     public boolean colisionaCon(SpriteMobile otro) {
         return this.getBounds().intersects(otro.getBounds());
     }
+    
+    /**
+     * Detiene el hilo que mueve la serpiente.
+     */
+    public void detener() {
+        running = false;
+    }
 }

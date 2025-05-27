@@ -363,7 +363,6 @@ public class VentanaNivel1 extends javax.swing.JDialog {
     }
     
     private void perderJuego() {
-        
         if (dialogoMostrado) return;
         dialogoMostrado = true;
 
@@ -386,22 +385,23 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 );
 
                 if (seleccion == 0) {
-                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700, 1));
-                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
+                   
+                    juego.reiniciarNivelActual(); 
 
                     detenerSonido();
                     dispose();
-                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, nombreJugador);
-                   
+
+                    // Reabre la misma ventana con el mismo gestor y jugador
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, juego, nombreJugador);
                     nuevaVentana.setVisible(true);
+
                 } else {
                     detenerSonido();
                     dispose();
+
                     Frame miFrame = new Frame();
                     boolean esModal = true;
-
-                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true); 
+                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);
                 }
             }
         });
@@ -409,6 +409,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         timerGameOver.setRepeats(false);
         timerGameOver.start();
     }
+
     
     private void iniciarReloj() {
         timerReloj = new Timer(1000, new ActionListener() {

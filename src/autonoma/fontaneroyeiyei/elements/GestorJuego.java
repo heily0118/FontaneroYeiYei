@@ -199,7 +199,7 @@ public class GestorJuego {
             return false;
         }
 
-        int reparadosAntes = casaActual.getTubo();
+        int reparadosAntes = casaActual.getTubosReparados();
         int maxTubos = casaActual.getMaxTubos();
 
         // Intenta usar herramienta y repara tubos si es posible
@@ -208,10 +208,10 @@ public class GestorJuego {
         }
 
         // Verifica si aumentó el número de tubos reparados
-        if (casaActual.getTubo() > reparadosAntes) {
-            System.out.println("Tubos reparados: " + casaActual.getTubo() + " / " + maxTubos);
+        if (casaActual.getTubosReparados() > reparadosAntes) {
+            System.out.println("Tubos reparados: " + casaActual.getTubosReparados() + " / " + maxTubos);
 
-            if (casaActual.getTubo() >= maxTubos) {
+            if (casaActual.getTubosReparados() >= maxTubos) {
                 System.out.println("¡Nivel completado! Subiendo de nivel...");
                 subirNivel();
             }
@@ -282,5 +282,18 @@ public class GestorJuego {
      */
     public void setNombreJugador(String nombreJugador) {
         this.nombreJugador = nombreJugador;
+    }
+    
+    /**
+ * Reinicia la casa del nivel actual sin cambiar el progreso.
+ */
+    public void reiniciarNivelActual() {
+        int actual = nivel.getNumero();
+        if (actual > 0 && actual <= casas.size()) {
+            casas.get(actual - 1).reiniciar();
+            System.out.println("Reiniciaste el nivel " + actual);
+        } else {
+            System.out.println("No se puede reiniciar el nivel actual.");
+        }
     }
 }
