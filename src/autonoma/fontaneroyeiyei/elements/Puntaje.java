@@ -90,4 +90,9 @@ public class Puntaje {
     public String getNombreJugador() {
         return nombreJugador;
     }
+
+    public void setNombreJugador(String nombreJugador) {
+        this.nombreJugador = nombreJugador;
+    }
+    
 }

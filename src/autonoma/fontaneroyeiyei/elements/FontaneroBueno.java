@@ -24,134 +24,63 @@ import java.awt.event.ActionListener;
  */
 public class FontaneroBueno extends Sprite {
 
-    /**
-     * Tiempo en milisegundos del último golpe recibido para controlar la frecuencia de daño.
-     */
-    private long lastHitTime = 0;
+    private long lastHitTime = 0;      // Tiempo del último golpe recibido
+    private static final int HIT_DELAY = 1000; // Retardo entre golpes
 
-    /**
-     * Retardo mínimo entre golpes consecutivos que afectan la vida, en milisegundos.
-     */
-    private static final int HIT_DELAY = 1000;
-
-    /**
-     * Objeto Puntaje que lleva el registro del puntaje del jugador.
-     */
-    private Puntaje puntaje;
-
-    /**
-     * Nombre del jugador o personaje.
-     */
-    private String nombre;
-
-    /**
-     * Imagen que representa al jugador en pantalla.
-     */
-    private Image jugadorImage;
-
-    /**
-     * Cantidad de pasos (pixeles) que avanza el personaje con cada movimiento.
-     */
-    private int pasos = 20;
-
-    /**
-     * Indica si el personaje está actualmente saltando.
-     */
-    private boolean saltando;
-
-    /**
-     * Lista de HitBox con las que se verifica colisión para el jugador.
-     */
-    private ArrayList<HitBox> hitBoxs;
-
-    /**
-     * Herramienta actualmente seleccionada o usada por el fontanero.
-     */
-    private Herramienta herramientaSeleccionada;
-
-    /**
-     * Vida actual del fontanero, que representa la cantidad de golpes que puede recibir.
-     */
-    private int vida = 3;
-
-    /**
-     * HitBox actual del fontanero para detección de colisiones.
-     */
-    private HitBox hitBox;
+    private Puntaje puntaje;            // Puntaje del jugador
+    private String nombre;               // Nombre del jugador
+    private Image jugadorImage;          // Imagen del jugador
+    private int pasos = 20;              // Pasos de movimiento
+    private boolean saltando;            // Estado de salto
+    private ArrayList<HitBox> hitBoxs;  // Lista de hitboxes
+    private Herramienta herramientaSeleccionada; // Herramienta seleccionada
+    private int vida = 3;                // Vida del jugador
+    private HitBox hitBox;               // Hitbox del jugador
 
     /**
      * Constructor de la clase FontaneroBueno.
-     * @param nombre Es el nombre del jugador.
+     * 
+     * @param nombre Nombre del jugador
      */
     public FontaneroBueno(String nombre) {
         super(0, 0, 90, 90);
         this.puntaje = new Puntaje();
         this.nombre = nombre;
+        this.puntaje.setNombreJugador(nombre);
         jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"))
                 .getImage()
                 .getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
-    /**
-     * Establece el puntaje actual del fontanero.
-     * 
-     * @param puntaje Es el objeto Puntaje que se asignará al fontanero.
-     */
     public void setPuntaje(Puntaje puntaje) {
         this.puntaje = puntaje;
     }
 
-    /**
-     * Establece el nombre del fontanero.
-     * 
-     * @param nombre Es el nombre que se asignará al fontanero.
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Establece la lista de hitboxes con las que el fontanero puede colisionar.
-     * 
-     * @param hitBoxs Es la lista de objetos HitBox que representan las áreas de colisión.
-     */
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
 
-    /**
-     * Obtiene el puntaje actual del fontanero.
-     * 
-     * @return Retorna el objeto Puntaje asociado al fontanero.
-     */
     public Puntaje getPuntaje() {
         return puntaje;
     }
 
-    /**
-     * Obtiene el nombre del fontanero.
-     * 
-     * @return Retorna el nombre del fontanero.
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Obtiene la cantidad de vida actual del fontanero.
-     * 
-     * @return Retorna la vida restante del fontanero.
-     */
     public int getVida() {
         return vida;
     }
-    
+
     /**
-     * Mueve al fontanero en la dirección indicada, verificando colisiones y límites del mapa.
+     * Mueve al fontanero en la dirección dada.
      * 
-     * @param direccion Es la dirección del movimiento, basada en las constantes KeyEvent (UP, DOWN, LEFT, RIGHT).
-     * @throws IOException Se lanza cuando ocurra un error relacionado con entrada/salida durante el movimiento.
-     * 
+     * @param direccion Dirección del movimiento (tecla presionada)
+     * @throws IOException Si ocurre un error de entrada/salida
      */
     public void move(int direccion) throws IOException {
         int nx = x;
@@ -166,54 +95,27 @@ public class FontaneroBueno extends Sprite {
 
         boolean hayColision = false;
 
-<<<<<<< HEAD
-    if (!saltando) {
-        HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
-        for (HitBox h : hitBoxs) {
-            if (hitBoxFuturo.intersects(h)) {
-                hayColision = true;
-//                System.out.println("Colision con " + h.getClass().getSimpleName() + "!");
-                return;
-=======
         if (!saltando) {
             HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
             for (HitBox h : hitBoxs) {
                 if (hitBoxFuturo.intersects(h)) {
                     hayColision = true;
-                    System.out.println("¡Colision con " + h.getClass().getSimpleName() + "!");
                     return;
                 }
->>>>>>> 58911f8da5108a860a8f09072bf113082f7584b4
             }
         }
 
         if (!hayColision && limiteDeMapa(nx, ny)) {
             this.x = nx;
             this.y = ny;
-        } else {
-            System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los límites"));
         }
     }
 
-<<<<<<< HEAD
-    if (!hayColision && limiteDeMapa(nx, ny)) {
-        this.x = nx;
-        this.y = ny;
-    } else {
-//        System.out.println("Movimiento no permitido: " + (hayColision ? "hay colision" : "fuera de los límites"));
-    }
-}
-
-
-
-=======
     /**
-     * Realiza un salto o movimiento especial según la dirección indicada.
+     * Hace que el fontanero salte.
      * 
-     * @param direccion Es la dirección del salto o movimiento, basada en constantes KeyEvent.
-     *                  
+     * @param direccion Dirección del salto
      */
->>>>>>> 58911f8da5108a860a8f09072bf113082f7584b4
     public void saltar(int direccion) {
         int nx = x;
         int ny = y;
@@ -237,9 +139,9 @@ public class FontaneroBueno extends Sprite {
     }
 
     /**
-     * Simula una caída lenta del personaje hasta una posición Y original dada.
+     * Hace que el fontanero caiga lentamente.
      * 
-     * @param posicionOriginalY Es la coordenada Y a la que debe caer lentamente el personaje.
+     * @param posicionOriginalY Posición original en Y antes del salto
      */
     public void caerLento(int posicionOriginalY) {
         Timer timer = new Timer(20, new ActionListener() {
@@ -258,24 +160,23 @@ public class FontaneroBueno extends Sprite {
     }
 
     /**
-     * Verifica si las coordenadas (nx, ny) están dentro de los límites permitidos del mapa.
+     * Verifica si el movimiento está dentro de los límites del mapa.
      * 
-     * @param nx Es la nueva posición en el eje X que se desea validar.
-     * @param ny Es la nueva posición en el eje Y que se desea validar.
-     * @return Retorna true si (nx, ny) está dentro del área válida del mapa o false si está fuera de los límites.
+     * @param nx Nueva posición en X
+     * @param ny Nueva posición en Y
+     * @return true si está dentro de los límites, false en caso contrario
      */
     public boolean limiteDeMapa(int nx, int ny) {
         return !(nx < 0 || nx > 700 - width || ny < 0 || ny > 670 - height);
     }
 
     /**
-     * Verifica si un rectángulo (representado por las coordenadas nx, ny y el ancho y alto
-     * del objeto actual) colisiona con otro HitBox h.
+     * Verifica si colisiona con una hitbox específica.
      * 
-     * @param h Es el HitBox con la que se verifica la colisión.
-     * @param nx Es la posición X del rectángulo a comprobar.
-     * @param ny Es la posición Y del rectángulo a comprobar.
-     * @return Retorna true si hay colisión o false en caso contrario.
+     * @param h Hitbox a verificar
+     * @param nx Nueva posición en X
+     * @param ny Nueva posición en Y
+     * @return true si colisiona, false en caso contrario
      */
     public boolean colisionaConhHitbox(HitBox h, int nx, int ny) {
         return nx < h.getX() + h.getWidth() &&
@@ -285,10 +186,10 @@ public class FontaneroBueno extends Sprite {
     }
 
     /**
-     * Verifica si el objeto actual colisiona con alguna serpiente de la lista.
+     * Verifica si el fontanero toca a alguna serpiente.
      * 
-     * @param serpientes Es la lista de objetos Serpiente con los que se verifica colisión.
-     * @return Retorna true si hubo una colisión que afectó la vida o false si no hubo colisión o no pasó el tiempo suficiente.
+     * @param serpientes Lista de serpientes
+     * @return true si toca a alguna serpiente, false en caso contrario
      */
     public boolean TocoSerpiente(List<Serpiente> serpientes) {
         long currentTime = System.currentTimeMillis();
@@ -305,20 +206,19 @@ public class FontaneroBueno extends Sprite {
         }
         return false;
     }
-    
+
     /**
-     * Intenta usar una herramienta específica, identificada por una tecla, 
-     * para reparar una lista de tubos.
-     *
-     * @param tecla Es el carácter que representa la herramienta a usar.
-     * @param tubos Es la lista de tubos sobre los cuales se intentará usar la herramienta.
-     * @return Retorna true si al menos un tubo fue reparado exitosamente o false si no se pudo usar ninguna herramienta o no se reparó ningún tubo.
+     * Usa una herramienta en los tubos.
+     * 
+     * @param tecla Tecla presionada para seleccionar la herramienta
+     * @param tubos Lista de tubos
+     * @return true si se repara algún tubo, false en caso contrario
      */
     public boolean usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
         Herramienta herramienta = crearHerramienta(tecla);
         if (herramienta == null) {
-            System.out.println("no hay erramientas"); 
-        return false ;
+            System.out.println("no hay herramientas"); 
+            return false;
         }
         boolean reparoAlguno = intentarRepararTubosConHerramienta(herramienta, tubos);
 
@@ -331,10 +231,10 @@ public class FontaneroBueno extends Sprite {
     }
 
     /**
-     * Crea una instancia de Herramienta según la tecla proporcionada.
-     *
-     * @param tecla Es el carácter que representa la herramienta a crear.
-     * @return Retorna una instancia de Herramienta correspondiente a la tecla, o null si no es válida.
+     * Crea una herramienta según la tecla presionada.
+     * 
+     * @param tecla Tecla presionada
+     * @return Herramienta creada o null si no es válida
      */
     private Herramienta crearHerramienta(char tecla) {
         return switch (Character.toLowerCase(tecla)) {
@@ -345,11 +245,11 @@ public class FontaneroBueno extends Sprite {
     }
 
     /**
-     * Intenta reparar los tubos con fuga cercanos al fontanero usando la herramienta proporcionada.
-     *
-     * @param herramienta Es la herramienta que se usará para intentar reparar los tubos.
-     * @param tubos Es la lista de tubos que pueden tener fugas.
-     * @return Rettorna true si al menos un tubo fue reparado con éxito o false en caso contrario.
+     * Intenta reparar tubos usando la herramienta seleccionada.
+     * 
+     * @param herramienta Herramienta utilizada
+     * @param tubos Lista de tubos
+     * @return true si se repara algún tubo, false en caso contrario
      */
     public boolean intentarRepararTubosConHerramienta(Herramienta herramienta, List<Tubo> tubos) {
         boolean reparoAlguno = false;
@@ -370,7 +270,6 @@ public class FontaneroBueno extends Sprite {
                             actualizarPuntajePorHerramienta(herramienta);
                             reparoAlguno = true;
 
-
                         } else if (antesReparada) {
                             System.out.println("Esta fuga ya estaba reparada");
                         }
@@ -385,9 +284,9 @@ public class FontaneroBueno extends Sprite {
     }
 
     /**
-     * Actualiza el puntaje según el tipo de herramienta usada para reparar un tubo.
-     *
-     * @param herramienta Es la herramienta utilizada para la reparación.
+     * Actualiza el puntaje del jugador según la herramienta utilizada.
+     * 
+     * @param herramienta Herramienta utilizada
      */
     private void actualizarPuntajePorHerramienta(Herramienta herramienta) {
         if (herramienta instanceof LlaveIglesa) {
@@ -396,46 +295,40 @@ public class FontaneroBueno extends Sprite {
             puntaje.aumentarPuntajePorSellador();
         }
     }
-    
+
     /**
-     * Calcula la distancia euclidiana entre los centros de dos rectángulos.
-     *
-     * @param fontaneroX Es la coordenada X del fontanero.
-     * @param fontaneroY Es la coordenada Y del fontanero.
-     * @param fontaneroW Es el ancho del fontanero.
-     * @param fontaneroH Es el alto del fontanero.
-     * @param tuboX Es la coordenada X del tubo.
-     * @param tuboY Es la coordenada Y del tubo.
-     * @param tuboW Es el ancho del tubo.
-     * @param tuboH Es el alto del tubo.
-     * @return Retorna la distancia entre los centros del fontanero y el tubo.
+     * Calcula la distancia entre el fontanero y un tubo.
+     * 
+     * @param fontaneroX Posición X del fontanero
+     * @param fontaneroY Posición Y del fontanero
+     * @param fontaneroW Ancho del fontanero
+     * @param fontaneroH Alto del fontanero
+     * @param tuboX Posición X del tubo
+     * @param tuboY Posición Y del tubo
+     * @param tuboW Ancho del tubo
+     * @param tuboH Alto del tubo
+     * @return Distancia entre el fontanero y el tubo
      */
     private int calcularDistancia(int fontaneroX, int fontaneroY, int fontaneroW, int fontaneroH, 
-                                int tuboX, int tuboY, int tuboW, int tuboH) {
+                                   int tuboX, int tuboY, int tuboW, int tuboH) {
         int centroFontaneroX = fontaneroX + fontaneroW / 2;
         int centroFontaneroY = fontaneroY + fontaneroH / 2;
         int centroTuboX = tuboX + tuboW / 2;
         int centroTuboY = tuboY + tuboH / 2;
 
         return (int) Math.sqrt(Math.pow(centroFontaneroX - centroTuboX, 2) + 
-                              Math.pow(centroFontaneroY - centroTuboY, 2));
+                               Math.pow(centroFontaneroY - centroTuboY, 2));
     }
-    
+
     /**
-     * Obtiene el rectángulo de colisión (hitbox) actual del objeto.
-     *
-     * @return Retorna un objeto HitBox que representa la zona de colisión basada en la posición (x, y) 
-     *         y las dimensiones (width, height) actuales.
+     * Obtiene la hitbox del fontanero.
+     * 
+     * @return HitBox del fontanero
      */
     public HitBox getHitBox() {
         return new HitBox(this.x, this.y, this.width, this.height);
     }
-    
-    /**
-     * Dibuja el jugador en la pantalla con una imagen escalada y suavizada.
-     *
-     * @param g Es el objeto Graphics que se utiliza para dibujar en el componente.
-     */
+
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -444,9 +337,6 @@ public class FontaneroBueno extends Sprite {
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        
-//        System.out.println("se pinta en ("+ x +","+ y+")");
         g.drawImage(jugadorImage, x, y, width, height, null);
     }
-    
 }

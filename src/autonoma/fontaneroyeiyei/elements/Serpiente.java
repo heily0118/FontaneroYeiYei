@@ -1,15 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.fontaneroyeiyei.elements;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
+ * Clase que representa una serpiente móvil en el sistema.
  * 
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250516
@@ -23,6 +19,16 @@ public class Serpiente extends SpriteMobile {
     private int limiteDerecho;
     private int velocidad = 2; 
 
+    /**
+     * Constructor de la clase Serpiente.
+     * 
+     * @param x La coordenada X inicial
+     * @param y La coordenada Y inicial
+     * @param ancho El ancho de la serpiente
+     * @param alto La altura de la serpiente
+     * @param limiteIzquierdo El límite izquierdo del movimiento
+     * @param limiteDerecho El límite derecho del movimiento
+     */
     public Serpiente(int x, int y, int ancho, int alto, int limiteIzquierdo, int limiteDerecho) {
         super(x, y, ancho, alto);
         servienteImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Serviente.png")).getImage();
@@ -30,18 +36,19 @@ public class Serpiente extends SpriteMobile {
         this.limiteDerecho = limiteDerecho;
     }
 
+    /**
+     * Dibuja la serpiente en el contexto gráfico proporcionado.
+     * 
+     * @param g El contexto gráfico en el que se dibuja la serpiente
+     */
     @Override
     public void paint(Graphics g) {
-        
-        //          HIT bOXS
-//        this.setColor(Color.GREEN);
-//        g.setColor(color);
-//        g.fillRect(x,y, height, width);
-        
-        
         g.drawImage(servienteImage, getX(), getY(), getWidth(), getHeight(), null);
     }
 
+    /**
+     * Método que ejecuta el movimiento de la serpiente en un bucle.
+     */
     @Override
     public void run() {
         while (true) {
@@ -55,6 +62,9 @@ public class Serpiente extends SpriteMobile {
         }
     }
 
+    /**
+     * Mueve la serpiente dentro de los límites establecidos.
+     */
     public void mover() {
         setX(getX() + direccionMovimiento * velocidad);
 
@@ -67,6 +77,12 @@ public class Serpiente extends SpriteMobile {
         }
     }
 
+    /**
+     * Verifica si la serpiente colisiona con otro objeto móvil.
+     * 
+     * @param otro El otro objeto móvil a verificar
+     * @return true si hay colisión, false en caso contrario
+     */
     public boolean colisionaCon(SpriteMobile otro) {
         return this.getBounds().intersects(otro.getBounds());
     }
