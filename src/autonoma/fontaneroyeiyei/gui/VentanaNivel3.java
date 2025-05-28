@@ -59,15 +59,17 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     private boolean dialogoMostrado = false;
     private String nombreJugador;
     
-    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador ) {
+    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, FontaneroBueno fontanero ) {
         super(parent, modal);
         initComponents();
          reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
         
-        this.nombreJugador = nombreJugador;
-        this.f = new FontaneroBueno("nombreJugador");
+
+        this.f =  fontanero;
         
+        this.juego.getCasaNivel3().setTubosReparados(0);
+        this.f.setVida(3);
         Casa casaNivel3= juego.getCasaNivel3(); 
         setTitle("FontaneroYeiYei Nivel 3");
         setLocationRelativeTo(null);
@@ -278,6 +280,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                         int x = (getWidth() - fm.stringWidth(mensaje)) / 2;
                         int y = getHeight() / 2;
                         g3d.drawString(mensaje, x, y);
+                        
                     }
                 }
             };
@@ -422,12 +425,12 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     detenerSonido();
                     dispose();
 
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego, nombreJugador);
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego, f);
                   
                     nuevaVentana.setVisible(true); 
                 } else {
                     detenerSonido();
-                    dispose();
+                    dispose(); 
                     Frame miFrame = new Frame();
                     boolean esModal = true;
 

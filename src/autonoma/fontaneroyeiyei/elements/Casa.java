@@ -271,4 +271,11 @@ public class Casa {
     public void setFontaneroMalo(FontaneroMaldadoso fontaneroMalo) {
         this.fontaneroMalo = fontaneroMalo;
     }
+
+    public void setTubosReparados(int tubosReparados) {
+        this.tubosReparados = tubosReparados;
+    }
+    
+    
+    
 }

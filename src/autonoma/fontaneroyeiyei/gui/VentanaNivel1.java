@@ -67,18 +67,18 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
 
 
-    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador) {
+    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego juego, FontaneroBueno fontanero) {
         super(parent, modal);
         initComponents();
 
          reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
-        this.nombreJugador = nombreJugador;
         
         ///se va indicar la siguientes posiciones para ej jugador
        
-        this.f = new FontaneroBueno(nombreJugador);
-
+        this.f = fontanero;
+        this.juego.getCasaNivel1().setTubosReparados(0);
+        this.f.setVida(3);
         
         
         // se pone el fontanero en el lado de la izquierda
@@ -392,12 +392,12 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
                     detenerSonido();
                     dispose();
-                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, nombreJugador);
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, f);
                    
                     nuevaVentana.setVisible(true);
                 } else {
                     detenerSonido();
-                    dispose();
+                    dispose(); 
                     Frame miFrame = new Frame();
                     boolean esModal = true;
 
@@ -480,7 +480,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
            
             dispose(); 
            
-            new VentanaNivel2(null, true, juego, nombreJugador).setVisible(true);
+            new VentanaNivel2(null, true, juego, f).setVisible(true);
         } else {
             dispose(); 
             new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);

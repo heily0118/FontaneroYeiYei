@@ -52,6 +52,12 @@ public class FontaneroBueno extends Sprite {
                 .getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    
+    
     public void setPuntaje(Puntaje puntaje) {
         this.puntaje = puntaje;
     }
@@ -75,6 +81,7 @@ public class FontaneroBueno extends Sprite {
     public int getVida() {
         return vida;
     }
+    
 
     /**
      * Mueve al fontanero en la dirección dada.
@@ -95,10 +102,6 @@ public class FontaneroBueno extends Sprite {
 
         boolean hayColision = false;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 903983f6b6cec12ee2a8e07cb26d13e0e9039b42
         if (!saltando) {
             HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
             for (HitBox h : hitBoxs) {
@@ -106,10 +109,7 @@ public class FontaneroBueno extends Sprite {
                     hayColision = true;
                     return;
                 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 903983f6b6cec12ee2a8e07cb26d13e0e9039b42
             }
         }
 
@@ -119,19 +119,13 @@ public class FontaneroBueno extends Sprite {
         }
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 903983f6b6cec12ee2a8e07cb26d13e0e9039b42
     /**
      * Hace que el fontanero salte.
      * 
      * @param direccion Dirección del salto
      */
-<<<<<<< HEAD
-=======
 
->>>>>>> 903983f6b6cec12ee2a8e07cb26d13e0e9039b42
     public void saltar(int direccion) {
         int nx = x;
         int ny = y;

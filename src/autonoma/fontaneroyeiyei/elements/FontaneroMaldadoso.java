@@ -151,7 +151,7 @@ public class FontaneroMaldadoso extends SpriteMobile {
      */
     public void setRecorridos(ArrayList<Recorrido> recorridos) {
         
-        System.out.println("sse ingresa los recorridos");
+//        System.out.println("sse ingresa los recorridos");
         this.recorridos = recorridos;
     }
     
