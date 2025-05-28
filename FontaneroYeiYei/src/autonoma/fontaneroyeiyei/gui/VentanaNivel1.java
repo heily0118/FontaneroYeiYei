@@ -6,18 +6,20 @@ package autonoma.fontaneroyeiyei.gui;
 
 import autonoma.fontaneroyeiyei.elements.Casa;
 import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
+import autonoma.fontaneroyeiyei.elements.FontaneroMaldadoso;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
+import autonoma.fontaneroyeiyei.elements.Tubo;
 import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Frame;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +27,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -36,6 +39,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  *
@@ -44,35 +48,79 @@ import javax.swing.Timer;
  * @since 20250501
  * @see autonoma.fontaneroyeiyei.gui
  */
-public class VentanaNivel3 extends javax.swing.JDialog {
-
+public class VentanaNivel1 extends javax.swing.JDialog {
 
     private GestorJuego juego;
     private ImageIcon fondo;
+    private FontaneroBueno f;
     private BufferedImage buffer; 
     private boolean timerGameOverStarted;
     private Clip clip;
     private ArrayList<HitBox> hitBoxs = new ArrayList<>();
-    private FontaneroBueno f;
     private boolean juegoTerminado;
-    private int tiempoRestante = 120;
     private Timer timerReloj;
+    private int tiempoRestante = 360;
     private boolean dialogoMostrado = false;
     private String nombreJugador;
+ 
     
-    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, FontaneroBueno fontanero ) {
+
+
+
+
+    public VentanaNivel1(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador) {
         super(parent, modal);
         initComponents();
+
          reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
+        this.nombreJugador = nombreJugador;
         
+        ///se va indicar la siguientes posiciones para ej jugador
+       
+        this.f = new FontaneroBueno(nombreJugador);
 
-        this.f =  fontanero;
         
-        this.juego.getCasaNivel3().setTubosReparados(0);
-        this.f.setVida(3);
-        Casa casaNivel3= juego.getCasaNivel3(); 
-        setTitle("FontaneroYeiYei Nivel 3");
+        
+        // se pone el fontanero en el lado de la izquierda
+        f.setY(160);
+        f.setX(0);
+        
+        //se crea la hit box del nivel 
+
+                    
+        // Segundo Piso HITBOX
+        HitBox SegundoPiso = new HitBox(180, 250, 530, 325);//325 530
+        HitBox techoSegundoPiso = new HitBox(0, 0,700 , 150);//0,150 700
+        hitBoxs.add(techoSegundoPiso);
+        hitBoxs.add(SegundoPiso);
+        //escalas HITBOX
+        HitBox escalas = new HitBox(180, 250, 30, 250);//30 2550
+        HitBox escalas2 = new HitBox(0, 250, 60, 300);
+        hitBoxs.add(escalas2);
+        hitBoxs.add(escalas);
+        
+        f.setHitBoxs(hitBoxs);
+        juego.getCasaNivel1().getFontaneroMalo().setHitBoxs(hitBoxs);
+        
+        
+        ArrayList<Recorrido> recorridos = new ArrayList<>();
+        
+        Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 600,160);
+        Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,580);
+        
+        recorridos.add(recoridoSegundoPiso);
+        recorridos.add(recoridoPrimerPiso);
+        
+        juego.getCasaNivel1().getFontaneroMalo().setRecorridos(recorridos);
+        
+        Thread hiloFontanero = new Thread(juego.getCasaNivel1().getFontaneroMalo());
+        hiloFontanero.start();
+        
+        Casa casaNivel1 = juego.getCasaNivel1(); 
+     
+
+        setTitle("FontaneroYeiYei Nivel 1");
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -83,102 +131,34 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         
         try{ 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/Logo.jpeg")).getImage());
-            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa3.jpg"));
+            fondo = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/casa1.jpg"));
         }catch(NullPointerException e){
             System.out.println("Imagen no encontrada");
             
         }
-        
-        
-        
-        ///se va indicar la siguientes posiciones para ej jugador
-       
-        
-        
-        // se pone el fontanero en el lado de la izquierda
-        f.setY(150);
-        f.setX(0);
-        
-        //SEGUNDO PISO HITBOX
-        HitBox techoSegundoPiso2 = new HitBox(0, 0,700,150);//150,700
-        HitBox SegundoPiso = new HitBox(0, 240,300,100);//100, 300
-        HitBox SegundoPiso2 = new HitBox(450, 240,450,100);//100, 450
-        
-        hitBoxs.add(techoSegundoPiso2);
-        hitBoxs.add(SegundoPiso);
-        hitBoxs.add(SegundoPiso2);
-        
-        //ESCALAS SEGUNDO PISO HITBOX
-        HitBox escalasSegundoPiso1 = new HitBox(300, 240, 30, 100);//100,30
-        HitBox escalasSegundoPiso2 = new HitBox(450, 240, 30, 100);
-        
-        hitBoxs.add(escalasSegundoPiso1);
-        hitBoxs.add(escalasSegundoPiso2);
-        
-        
-        //PRIMER PISO HITBOX
-        HitBox primerPiso = new HitBox(0, 450,350,120);//120,350
-        HitBox primerPiso2 = new HitBox(450, 450,450,120);
 
-
-        hitBoxs.add(primerPiso);
-        hitBoxs.add(primerPiso2);
-        
-        f.setHitBoxs(hitBoxs);
-        
-        ////PONER RECORRDOS AL MALO
-        ///
-        ///
-        ArrayList<Recorrido> recorridos = new ArrayList<>();
-        
-        Recorrido recoridoPrimerPiso = new Recorrido("segundo piso recoridos", 0,350);
-
-        Recorrido sotano = new Recorrido("segundo piso recoridos", 600,570);
-        Recorrido recoridoSegundoPiso = new Recorrido("segundo piso recoridos", 0,150);
-        recorridos.add(recoridoPrimerPiso);
-        
-        
-        
-        recorridos.add(sotano);
-        recorridos.add(recoridoSegundoPiso);
-        juego.getCasaNivel3().getFontaneroMalo().setRecorridos(recorridos);
-        
-        System.out.println("----------nivel 3---------");
-        System.out.println("----------casa en analisis---------");
-        System.out.println(juego.getCasaNivel3().getNivel());
-        
-        Thread hiloFontanero = new Thread(juego.getCasaNivel3().getFontaneroMalo());
-        hiloFontanero.start();
-        
-        
-        
-        
-        
-        
         JPanel panelFondo = new JPanel() {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-                    ///codigo temporar
-                    
-                     f.paint(g);
-                     casaNivel3.paint(g); 
-//                    Para pintar el los bloques de hitboxs
-//                    for(HitBox h : hitBoxs){                
+
+//                     Pinta elementos que están dentro de Casa
+                    casaNivel1.paint(g); 
+//                    for(HitBox h : hitBoxs){
+//                        
 //                        h.paint(g);
 //                    
 //                    }
-
+                    // Pinta al fontanero bueno
+                    f.paint(g);
+                    
                     //Cantidad de Tubos a reparar
-                    Casa casaActual = juego.getCasaNivel3(); 
+                    Casa casaActual = juego.getCasaNivel1(); // O el nivel que toque
                     int reparados = casaActual.getTubosReparados();
-                    int max = casaActual.getMaxTubos();
-                    
-//                    System.out.println("------nivel 3 ------");
+//                    System.out.println("------nivel 1  ------");
 //                    System.out.println("cantidad de reparados"+ reparados);
-                    
-                    
+                    int max = casaActual.getMaxTubos();
 
                     // Dibuja la barra de progreso (por ejemplo, una barra horizontal)
                     int anchoBarra = 200;   // ancho total de la barra
@@ -198,7 +178,9 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     // Texto del progreso
                     g.setColor(Color.WHITE);
                     g.drawString("Tubos reparados: " + reparados + " / " + max, xBarra, yBarra - 10);
-                   
+
+
+                  
                     // Tiempo
                     int minutos = tiempoRestante / 60;
                     int segundos = tiempoRestante % 60;
@@ -220,7 +202,6 @@ public class VentanaNivel3 extends javax.swing.JDialog {
 
                   
                     String textoPuntaje = "Puntaje: " + f.getPuntaje().getPuntajeActual();
-
                     Font fuentePuntaje = new Font("Comic Sans MS", Font.BOLD, 28);
                     g3d.setFont(fuentePuntaje);
                     FontMetrics fmP = g3d.getFontMetrics();
@@ -232,8 +213,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     g3d.drawString(textoPuntaje, xP + 2, yP + 2);
                     g3d.setColor(Color.YELLOW);
                     g3d.drawString(textoPuntaje, xP, yP);
-                    
-                    
+
+                                        
                     String textoVidas = "Vidas: " + f.getVida();
                     Font fuenteVidas = new Font("Comic Sans MS", Font.BOLD, 28);
                     g3d.setFont(fuenteVidas);
@@ -247,7 +228,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     g3d.drawString(textoVidas, xV, yV);
                     
                     
-                    if (f.TocoSerpiente(casaNivel3.getServientes())) {
+                    if (f.TocoSerpiente(casaNivel1.getServientes())) {
 
                         FontMetrics fm = g3d.getFontMetrics();
                         String mensaje = "¡Fue golpeado!";
@@ -256,23 +237,18 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                         g3d.drawString(mensaje, x, y);
 
                     }
-                    
-                    
-                    
 
                     // Mensaje de Game Over
-                    if (juegoTerminado  || f.getVida()<=0) {
+                    if (juegoTerminado || f.getVida()<=0) {
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
                         g3d.setColor(Color.BLACK);
                         g3d.fillRect(0, 0, getWidth(), getHeight());
-
                         
                         if (!dialogoMostrado) {
-                            reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoPerdido.wav");
+                             reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoPerdido.wav");
                             perderJuego();
                         }
-                        
-                        
+
                         g3d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
                         g3d.setColor(Color.RED);
                         g3d.setFont(new Font("Arial", Font.BOLD, 60));
@@ -282,11 +258,16 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                         int y = getHeight() / 2;
                         g3d.drawString(mensaje, x, y);
                         
+                        
                     }
                 }
             };
+
         
+        
+        //  agrega panel al JFrame y lanza el hilo
         setContentPane(panelFondo);
+
         Timer timer = new Timer(30, e -> panelFondo.repaint());
         timer.start();
         
@@ -305,8 +286,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                 }  
             }
         });
-
-     }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -361,33 +341,32 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         }
 
         // Reparar la fuga
-       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-               evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
 
-                juego.setFontanero(f);
+             juego.setFontanero(f);
 
-                try {
-                    boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+             try {
+                 boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-                    if (reparo) {
-                        juego.getCasaNivel1().repararTubo();
-                        if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
-                            reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
-                            nivelCompletado();
-                        }
-                    }
-                } catch (HerramientaInvalidaException ex) {
-                   
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+                 if (reparo) {
+                     juego.getCasaNivel1().repararTubo();
+                     if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
+                         nivelCompletado();
+                     }
+                 }
+             } catch (HerramientaInvalidaException ex) {
+               
+                  JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
+             }
+         }
 
 
     this.repaint();
         
-        
-    }//GEN-LAST:event_formKeyPressed
-
+    }
+    
     private void perderJuego() {
         if (dialogoMostrado) return;
         dialogoMostrado = true;
@@ -400,8 +379,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
                 Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
                 int seleccion = JOptionPane.showOptionDialog(
-                        VentanaNivel3.this,
-                        "¡El juego terminó antes de tiempo! ¿Qué deseas hacer?",
+                        VentanaNivel1.this,
+                        "¡El juego terminó ! ¿Qué deseas hacer?",
                         "Fin del Juego",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,
@@ -417,14 +396,14 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     detenerSonido();
                     dispose();
 
-
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, f);
-                  
+                    // Reabre la misma ventana con el mismo gestor y jugador
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, juego, nombreJugador);
                     nuevaVentana.setVisible(true);
 
                 } else {
                     detenerSonido();
                     dispose();
+
                     Frame miFrame = new Frame();
                     boolean esModal = true;
                     new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);
@@ -455,8 +434,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         timerReloj.start();
     }
 
-    
-    public void reproducirSonido(String ruta) {
+
+   private void reproducirSonido(String ruta) {
          try {
            
             if (clip != null && clip.isRunning()) {
@@ -471,33 +450,54 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             System.err.println("Error al reproducir el sonido: " + e.getMessage());
         }
     }
-    
+
     
     
     public void detenerSonido() {
-        if (clip != null) {
+         if (clip != null) {
+            if (clip.isRunning()) {
                 clip.stop();
-                clip.close();
             }
-        }
-
-    private void nivelCompletado() {
-           int opcion = JOptionPane.showOptionDialog(this,
-            "¡Felicidades! Has completado el Nivel 3 ! \nEres un verdadero Fontanero Yei Yei.",
-            "Nivel Completado",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.INFORMATION_MESSAGE,
-            null,
-            new Object[]{"Aceptar"},
-            "Aceptar");
-
-        if (opcion == 0) {
-            this.dispose(); 
-           new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);
+            clip.close();
+            clip = null;
         }
     }
+    
+    
+    private void nivelCompletado() {
+        if (dialogoMostrado) return;
+        dialogoMostrado = true;
+        detenerSonido();
+        timerReloj.stop();
+
+        Object[] opciones = {"Siguiente Nivel", "Volver al Menú"};
+        int seleccion = JOptionPane.showOptionDialog(
+                this,
+                "¡Nivel 1 completado! ¿Qué deseas hacer?",
+                "¡Felicidades!",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        if (seleccion == 0) {
+           
+            dispose(); 
+           
+            new VentanaNivel2(null, true, juego, nombreJugador).setVisible(true);
+        } else {
+            dispose(); 
+            new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);
+        }
+    }
+
+    
+        
+    }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
+

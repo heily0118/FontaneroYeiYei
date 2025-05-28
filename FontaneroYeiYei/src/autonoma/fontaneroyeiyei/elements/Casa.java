@@ -268,15 +268,6 @@ public class Casa {
     public void setFontaneroMalo(FontaneroMaldadoso fontaneroMalo) {
         this.fontaneroMalo = fontaneroMalo;
     }
-<<<<<<< HEAD
-
-    public void setTubosReparados(int tubosReparados) {
-        this.tubosReparados = tubosReparados;
-    }
-    
-    
-    
-=======
   public void reiniciar() {
     // Reiniciar tubos reparados y limpiar tubos actuales
     this.tubosReparados = 0;
@@ -372,5 +363,4 @@ public class Casa {
 
 
 
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
 }

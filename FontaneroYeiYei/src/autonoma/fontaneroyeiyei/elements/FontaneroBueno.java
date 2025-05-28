@@ -98,14 +98,6 @@ public class FontaneroBueno extends Sprite {
 
     }
 
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
-
-    
-    
-
     /**
      * Establece el puntaje actual del fontanero.
      * 
@@ -159,7 +151,6 @@ public class FontaneroBueno extends Sprite {
     public int getVida() {
         return vida;
     }
-    
 
     /**
      * Mueve al fontanero en la dirección dada.
@@ -179,6 +170,7 @@ public class FontaneroBueno extends Sprite {
         }
 
         boolean hayColision = false;
+
 
         if (!saltando) {
             HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
@@ -531,7 +523,9 @@ public class FontaneroBueno extends Sprite {
      * 
      * @param vida Es la nueva cantidad de vida.
      */
-   
+    public void setVida(int vida) {
+        this.vida = vida;
+    }    
     
 }
 

@@ -60,16 +60,16 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     private boolean dialogoMostrado = false;
     private String nombreJugador;
     
-    public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego, FontaneroBueno fontanero ) {
+    public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador ) {
         super(parent, modal);
         initComponents();
         
         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
+        this.nombreJugador = nombreJugador;
         
-        this.f = fontanero;
-        this.juego.getCasaNivel2().setTubosReparados(0);
-        this.f.setVida(3);
+        this.f = new FontaneroBueno("teo");
+        
         Casa casaNivel2 = juego.getCasaNivel2(); 
         setTitle("FontaneroYeiYei Nivel 2");
         setLocationRelativeTo(null);
@@ -124,6 +124,8 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         
         
         System.out.println("----------nivel 2---------");
+        System.out.println("----------malo tamanio---------");
+        System.out.println(juego.getCasaNivel2().getFontaneroMalo().getWidth());
         juego.getCasaNivel2().getFontaneroMalo().setRecorridos(recorridos);
         
         Thread hiloFontanero = new Thread(juego.getCasaNivel2().getFontaneroMalo());
@@ -341,10 +343,6 @@ public class VentanaNivel2 extends javax.swing.JDialog {
              try {
                  boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-            
-//            System.out.println("-----------nivel 2-----");
-//            System.out.println(" arreglar tubo   " + reparo);
-
                  if (reparo) {
                      juego.getCasaNivel1().repararTubo();
                      if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
@@ -357,7 +355,6 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                  JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
              }
          }
-
 
 
     this.repaint();
@@ -395,9 +392,8 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                     dispose();
 
                     // Reabre la misma ventana con el mismo gestor y jugador
-                    VentanaNivel2 nuevaVentana = new VentanaNivel2(null, true, juego, f);
+                    VentanaNivel2 nuevaVentana = new VentanaNivel2(null, true, juego, nombreJugador);
                     nuevaVentana.setVisible(true);
-
 
                 } else {
                     detenerSonido();
@@ -483,7 +479,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
            
             dispose(); 
            
-            new VentanaNivel3(null, true, juego, f).setVisible(true);
+            new VentanaNivel3(null, true, juego, nombreJugador).setVisible(true);
         } else {
             dispose(); 
             new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);
