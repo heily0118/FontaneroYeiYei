@@ -75,7 +75,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
            
             // Inicializar labelInfoJugador 
             String nombreJugador = juego.getNombreJugador();
-            int puntajeGlobal = juego.getPuntajeGlobal();
+            int puntajeGlobal = juego.getPuntaje().getPuntajeGlobal();
 
             labelInfoJugador = new JLabel("Jugador: " + nombreJugador + "  |  Puntaje global: " + puntajeGlobal);
             labelInfoJugador.setFont(new Font("Arial", Font.BOLD, 18));

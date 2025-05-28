@@ -326,7 +326,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
             try {
                 f.move(evt.getKeyCode());
             } catch (IOException ex) {
-                Logger.getLogger(VentanaNivel1.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VentanaNivel2.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -341,11 +341,11 @@ public class VentanaNivel2 extends javax.swing.JDialog {
              juego.setFontanero(f);
 
              try {
-                 boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+                 boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel2().getTubos());
 
                  if (reparo) {
-                     juego.getCasaNivel1().repararTubo();
-                     if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                     juego.getCasaNivel2().repararTubo();
+                     if (juego.getCasaNivel2().getTubosReparados() == juego.getCasaNivel2().getMaxTubos()) {
                          reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
                          nivelCompletado();
                      }

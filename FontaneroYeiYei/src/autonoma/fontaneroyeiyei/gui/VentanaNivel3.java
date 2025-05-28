@@ -364,11 +364,11 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                 juego.setFontanero(f);
 
                 try {
-                    boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+                    boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel3().getTubos());
 
                     if (reparo) {
-                        juego.getCasaNivel1().repararTubo();
-                        if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                        juego.getCasaNivel3().repararTubo();
+                        if (juego.getCasaNivel3().getTubosReparados() == juego.getCasaNivel3().getMaxTubos()) {
                             reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
                             nivelCompletado();
                         }
