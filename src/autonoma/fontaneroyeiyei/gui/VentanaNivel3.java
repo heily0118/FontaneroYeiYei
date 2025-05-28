@@ -9,6 +9,7 @@ import autonoma.fontaneroyeiyei.elements.FontaneroBueno;
 import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -360,28 +361,27 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         }
 
         // Reparar la fuga
-        if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+       if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
+               evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
 
-            juego.setFontanero(f);
+                juego.setFontanero(f);
 
+                try {
+                    boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel3().getTubos());
-
-//            System.out.println("-----------nivel 3-----");
-//            System.out.println(" arreglar tubo" + reparo);
-
-            
-            if (reparo) {
-                System.out.println("fue repardo");
-                juego.getCasaNivel3().repararTubo();
-                 if (juego.getCasaNivel3().getTubosReparados() == juego.getCasaNivel3().getMaxTubos()) {
-                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
-                  nivelCompletado();
-                 }
-
+                    if (reparo) {
+                        juego.getCasaNivel1().repararTubo();
+                        if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                            reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
+                            nivelCompletado();
+                        }
+                    }
+                } catch (HerramientaInvalidaException ex) {
+                   
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
+                }
             }
-    }
+
 
     this.repaint();
         
@@ -389,13 +389,8 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     }//GEN-LAST:event_formKeyPressed
 
     private void perderJuego() {
-        
-        
         if (dialogoMostrado) return;
         dialogoMostrado = true;
-        
-        
-        System.out.println("Se acabó el tiempo, perdiste una vida!");
 
         juegoTerminado = true;
         repaint();
@@ -404,37 +399,44 @@ public class VentanaNivel3 extends javax.swing.JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
-                int seleccion = javax.swing.JOptionPane.showOptionDialog(
+                int seleccion = JOptionPane.showOptionDialog(
                         VentanaNivel3.this,
-                        "¡Tiempo terminado, has perdido! ¿Qué deseas hacer?",
+                        "¡El juego terminó antes de tiempo! ¿Qué deseas hacer?",
                         "Fin del Juego",
-                        javax.swing.JOptionPane.DEFAULT_OPTION,
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE,
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
                         null,
                         opciones,
                         opciones[0]
                 );
 
                 if (seleccion == 0) {
-                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700,3)); 
-                    nuevaListaCasas.add(new Casa(700, 700,3));
-                    nuevaListaCasas.add(new Casa(700, 700,3)); 
-                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
-                    
+                   
+                    juego.reiniciarNivelActual(); 
+
                     detenerSonido();
                     dispose();
 
+<<<<<<< HEAD
                     VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego, f);
                   
                     nuevaVentana.setVisible(true); 
                 } else {
                     detenerSonido();
                     dispose(); 
+=======
+                    // Reabre la misma ventana con el mismo gestor y jugador
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, nombreJugador);
+                    nuevaVentana.setVisible(true);
+
+                } else {
+                    detenerSonido();
+                    dispose();
+
+>>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
                     Frame miFrame = new Frame();
                     boolean esModal = true;
-
-                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true); 
+                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);
                 }
             }
         });
@@ -442,6 +444,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
         timerGameOver.setRepeats(false);
         timerGameOver.start();
     }
+
     
     private void iniciarReloj() {
         timerReloj = new Timer(1000, new ActionListener() {

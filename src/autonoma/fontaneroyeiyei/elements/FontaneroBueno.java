@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 
 /**
  * Representa al personaje principal del juego: el fontanero bueno.
@@ -24,18 +25,60 @@ import java.awt.event.ActionListener;
  */
 public class FontaneroBueno extends Sprite {
 
-    private long lastHitTime = 0;      // Tiempo del último golpe recibido
-    private static final int HIT_DELAY = 1000; // Retardo entre golpes
+    /**
+     * Tiempo en milisegundos del último golpe recibido para controlar la frecuencia de daño.
+     */
+    private long lastHitTime = 0;
 
-    private Puntaje puntaje;            // Puntaje del jugador
-    private String nombre;               // Nombre del jugador
-    private Image jugadorImage;          // Imagen del jugador
-    private int pasos = 20;              // Pasos de movimiento
-    private boolean saltando;            // Estado de salto
-    private ArrayList<HitBox> hitBoxs;  // Lista de hitboxes
-    private Herramienta herramientaSeleccionada; // Herramienta seleccionada
-    private int vida = 3;                // Vida del jugador
-    private HitBox hitBox;               // Hitbox del jugador
+    /**
+     * Retardo mínimo entre golpes consecutivos que afectan la vida, en milisegundos.
+     */
+    private static final int HIT_DELAY = 1000;
+
+    /**
+     * Objeto Puntaje que lleva el registro del puntaje del jugador.
+     */
+    private Puntaje puntaje;
+
+    /**
+     * Nombre del jugador o personaje.
+     */
+    private String nombre;
+
+    /**
+     * Imagen que representa al jugador en pantalla.
+     */
+    private Image jugadorImage;
+
+    /**
+     * Cantidad de pasos (pixeles) que avanza el personaje con cada movimiento.
+     */
+    private int pasos = 20;
+
+    /**
+     * Indica si el personaje está actualmente saltando.
+     */
+    private boolean saltando;
+
+    /**
+     * Lista de HitBox con las que se verifica colisión para el jugador.
+     */
+    private ArrayList<HitBox> hitBoxs;
+
+    /**
+     * Herramienta actualmente seleccionada o usada por el fontanero.
+     */
+    private Herramienta herramientaSeleccionada;
+
+    /**
+     * Vida actual del fontanero, que representa la cantidad de golpes que puede recibir.
+     */
+    private int vida = 3;
+
+    /**
+     * HitBox actual del fontanero para detección de colisiones.
+     */
+    private HitBox hitBox;            
 
     /**
      * Constructor de la clase FontaneroBueno.
@@ -46,38 +89,74 @@ public class FontaneroBueno extends Sprite {
         super(0, 0, 90, 90);
         this.puntaje = new Puntaje();
         this.nombre = nombre;
-        this.puntaje.setNombreJugador(nombre);
-        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/FontaneroYeiYei/images/FontaneroBueno.png"))
-                .getImage()
+
+        jugadorImage = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/FontaneroBueno.png"))
+                  .getImage()
                 .getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        
+
+
     }
 
+<<<<<<< HEAD
     public void setVida(int vida) {
         this.vida = vida;
     }
 
     
     
+=======
+    /**
+     * Establece el puntaje actual del fontanero.
+     * 
+     * @param puntaje Es el objeto Puntaje que se asignará al fontanero.
+     */
+>>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
     public void setPuntaje(Puntaje puntaje) {
         this.puntaje = puntaje;
     }
 
+    /**
+     * Establece el nombre del fontanero.
+     * 
+     * @param nombre Es el nombre que se asignará al fontanero.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Establece la lista de hitboxes con las que el fontanero puede colisionar.
+     * 
+     * @param hitBoxs Es la lista de objetos HitBox que representan las áreas de colisión.
+     */
     public void setHitBoxs(ArrayList<HitBox> hitBoxs) {
         this.hitBoxs = hitBoxs;
     }
 
+    /**
+     * Obtiene el puntaje actual del fontanero.
+     * 
+     * @return Retorna el objeto Puntaje asociado al fontanero.
+     */
     public Puntaje getPuntaje() {
         return puntaje;
     }
 
+    /**
+     * Obtiene el nombre del fontanero.
+     * 
+     * @return Retorna el nombre del fontanero.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Obtiene la cantidad de vida actual del fontanero.
+     * 
+     * @return Retorna la vida restante del fontanero.
+     */
     public int getVida() {
         return vida;
     }
@@ -102,6 +181,10 @@ public class FontaneroBueno extends Sprite {
 
         boolean hayColision = false;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
         if (!saltando) {
             HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
             for (HitBox h : hitBoxs) {
@@ -224,21 +307,23 @@ public class FontaneroBueno extends Sprite {
      * @param tubos Lista de tubos
      * @return true si se repara algún tubo, false en caso contrario
      */
-    public boolean usarHerramientaEnTubos(char tecla, List<Tubo> tubos) {
+
+
+    public boolean usarHerramientaEnTubos(char tecla, List<Tubo> tubos) throws HerramientaInvalidaException {
         Herramienta herramienta = crearHerramienta(tecla);
         if (herramienta == null) {
-            System.out.println("no hay herramientas"); 
-            return false;
+            throw new HerramientaInvalidaException();
         }
         boolean reparoAlguno = intentarRepararTubosConHerramienta(herramienta, tubos);
 
         if (!reparoAlguno) {
-            System.out.println("no se pudo reparar");
+            System.out.println("No se pudo reparar ningún tubo con la herramienta " + herramienta.getNombre());
             return false;
         }
-        
+
         return reparoAlguno;
     }
+
 
     /**
      * Crea una herramienta según la tecla presionada.
@@ -339,6 +424,11 @@ public class FontaneroBueno extends Sprite {
         return new HitBox(this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Dibuja el jugador en la pantalla con una imagen escalada y suavizada.
+     *
+     * @param g Es el objeto Graphics que se utiliza para dibujar en el componente.
+     */
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -349,4 +439,106 @@ public class FontaneroBueno extends Sprite {
 
         g.drawImage(jugadorImage, x, y, width, height, null);
     }
+
+
+    /**
+     * Obtiene el tiempo del último golpe recibido por el jugador.
+     * 
+     * @return Retorna tiempo del último golpe en milisegundos.
+     */
+    public long getLastHitTime() {
+        return lastHitTime;
+    }
+
+    /**
+     * Establece el tiempo del último golpe recibido por el jugador.
+     * 
+     * @param lastHitTime Es el nuevo tiempo del último golpe en milisegundos.
+     */
+    public void setLastHitTime(long lastHitTime) {
+        this.lastHitTime = lastHitTime;
+    }
+
+    /**
+     * Obtiene la imagen asociada al jugador.
+     * 
+     * @return Retorna la imagen del jugador.
+     */
+    public Image getJugadorImage() {
+        return jugadorImage;
+    }
+
+    /**
+     * Establece la imagen del jugador.
+     * 
+     * @param jugadorImage Es la nueva imagen del jugador.
+     */
+    public void setJugadorImage(Image jugadorImage) {
+        this.jugadorImage = jugadorImage;
+    }
+
+    /**
+     * Obtiene la cantidad de pasos dados por el jugador.
+     * 
+     * @return Retorna el número de pasos.
+     */
+    public int getPasos() {
+        return pasos;
+    }
+
+    /**
+     * Establece la cantidad de pasos dados por el jugador.
+     * 
+     * @param pasos Es el nuevo número de pasos.
+     */
+    public void setPasos(int pasos) {
+        this.pasos = pasos;
+    }
+
+    /**
+     * Indica si el jugador está actualmente saltando.
+     * 
+     * @return Retorna true si el jugador está saltando o false en caso contrario.
+     */
+    public boolean isSaltando() {
+        return saltando;
+    }
+
+    /**
+     * Establece el estado de salto del jugador.
+     * 
+     * @param saltando Retorna true si el jugador está saltando o false en caso contrario.
+     */
+    public void setSaltando(boolean saltando) {
+        this.saltando = saltando;
+    }
+
+    /**
+     * Obtiene la herramienta actualmente seleccionada por el jugador.
+     * 
+     * @return Retorna la herramienta seleccionada.
+     */
+    public Herramienta getHerramientaSeleccionada() {
+        return herramientaSeleccionada;
+    }
+
+    /**
+     * Establece la herramienta seleccionada por el jugador.
+     * 
+     * @param herramientaSeleccionada Es la nueva herramienta seleccionada.
+     */
+    public void setHerramientaSeleccionada(Herramienta herramientaSeleccionada) {
+        this.herramientaSeleccionada = herramientaSeleccionada;
+    }
+
+    /**
+     * Establece la cantidad de vida del jugador.
+     * 
+     * @param vida Es la nueva cantidad de vida.
+     */
+    public void setVida(int vida) {
+        this.vida = vida;
+    }    
+    
 }
+

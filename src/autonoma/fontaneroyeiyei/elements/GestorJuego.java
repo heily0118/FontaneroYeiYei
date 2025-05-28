@@ -1,5 +1,6 @@
 package autonoma.fontaneroyeiyei.elements;
 
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,8 @@ public class GestorJuego {
     private LectorArchivoTextoPlano lector; // Lector de archivos
     private EscritorArchivoTextoPlano escritor; // Escritor de archivos
     private final String archivoProgreso = "progreso.txt"; // Archivo de progreso
-    private String nombreJugador;        // Nombre del jugador
+    private String nombreJugador; // Nombre del jugador
+    private Puntaje puntaje;
 
     /**
      * Constructor de la clase GestorJuego.
@@ -29,6 +31,7 @@ public class GestorJuego {
      */
     public GestorJuego(ArrayList<Casa> casas) {
         this.casas = casas;
+        this.puntaje = new Puntaje ();
         this.lector = new LectorArchivoTextoPlano();
         this.escritor = new EscritorArchivoTextoPlano(archivoProgreso);
         cargarNivel();
@@ -183,7 +186,7 @@ public class GestorJuego {
      * @param tubosCasaActual Lista de tubos de la casa actual
      * @return true si se reparó un tubo, false en caso contrario
      */
-    public boolean manejarTecla(char tecla, List<Tubo> tubosCasaActual) {
+    public boolean manejarTecla(char tecla, List<Tubo> tubosCasaActual) throws HerramientaInvalidaException {
         if (fontanero == null) {
             System.out.println("Fontanero no inicializado, ingresa el nombre primero.");
             return false;
@@ -199,7 +202,7 @@ public class GestorJuego {
             return false;
         }
 
-        int reparadosAntes = casaActual.getTubo();
+        int reparadosAntes = casaActual.getTubosReparados();
         int maxTubos = casaActual.getMaxTubos();
 
         // Intenta usar herramienta y repara tubos si es posible
@@ -208,11 +211,17 @@ public class GestorJuego {
         }
 
         // Verifica si aumentó el número de tubos reparados
-        if (casaActual.getTubo() > reparadosAntes) {
-            System.out.println("Tubos reparados: " + casaActual.getTubo() + " / " + maxTubos);
+        if (casaActual.getTubosReparados() > reparadosAntes) {
+            System.out.println("Tubos reparados: " + casaActual.getTubosReparados() + " / " + maxTubos);
 
-            if (casaActual.getTubo() >= maxTubos) {
+            if (casaActual.getTubosReparados() >= maxTubos) {
                 System.out.println("¡Nivel completado! Subiendo de nivel...");
+
+                 if (fontanero != null && fontanero.getPuntaje() != null) {
+                        fontanero.getPuntaje().acumularPuntajeGlobal();
+                  }
+
+
                 subirNivel();
             }
             return true;  // Se reparó un tubo
@@ -283,4 +292,36 @@ public class GestorJuego {
     public void setNombreJugador(String nombreJugador) {
         this.nombreJugador = nombreJugador;
     }
+    
+    /**
+ * Reinicia la casa del nivel actual sin cambiar el progreso.
+ */
+    public void reiniciarNivelActual() {
+        int actual = nivel.getNumero();
+        if (actual > 0 && actual <= casas.size()) {
+            casas.get(actual - 1).reiniciar();
+            System.out.println("Reiniciaste el nivel " + actual);
+        } else {    
+            System.out.println("No se puede reiniciar el nivel actual.");
+        }
+    }
+
+    
+    public int getPuntajeGlobal() {
+        if (fontanero != null && fontanero.getPuntaje() != null) {
+            return fontanero.getPuntaje().getPuntajeGlobal();
+        }
+        return 0;  
+    }
+
+
+    public Puntaje getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Puntaje puntaje) {
+        this.puntaje = puntaje;
+    }
+    
+
 }

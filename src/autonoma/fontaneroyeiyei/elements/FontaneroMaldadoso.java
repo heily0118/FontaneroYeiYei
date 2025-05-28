@@ -197,8 +197,8 @@ public class FontaneroMaldadoso extends SpriteMobile {
             y = recorridos.get(numeroRecorrido).getInicioY();
             System.out.println("se mueve");
 
-            // Ciclo principal: colocar 10 tubos
-            while (tubosColocados < 15) {
+            // Ciclo principal: colocar cantidad
+            while (tubosColocados <  maxTubos) {
 
                 // Verifica si se ha salido del limite de la lista y reinicia
                 if (numeroRecorrido >= recorridos.size()) {

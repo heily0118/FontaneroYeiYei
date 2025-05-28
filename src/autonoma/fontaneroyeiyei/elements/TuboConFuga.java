@@ -14,6 +14,9 @@ public class TuboConFuga extends Tubo {
     
     private Fuga fuga;
 
+    private ImageIcon imagenFugaTuerca;
+    private ImageIcon imagenFugaGrieta;
+
     /**
      * Constructor de la clase TuboConFuga.
      * 
@@ -27,8 +30,16 @@ public class TuboConFuga extends Tubo {
     public TuboConFuga(String estado, int x, int y, int width, int height, Fuga fuga) {
         super(estado, x, y, width, height);
         this.fuga = fuga;
-        ImageIcon icono = new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMalo.png"));
-        this.setImage(icono); 
+       
+        if (fuga != null) {
+                if ("tuerca".equalsIgnoreCase(fuga.getTipo())) {
+                    this.setImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMaloTuerca.png")));
+                } else if ("grieta".equalsIgnoreCase(fuga.getTipo())) {
+                    this.setImage(new ImageIcon(getClass().getResource("/autonoma/fontaneroyeiyei/images/TuboMaloGrieta.png")));
+                } else {
+                    System.out.println("No existe ese tipo de fuga");
+            }
+        }
     }
 
     /**

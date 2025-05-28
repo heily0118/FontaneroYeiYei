@@ -11,6 +11,7 @@ import autonoma.fontaneroyeiyei.elements.GestorJuego;
 import autonoma.fontaneroyeiyei.elements.HitBox;
 import autonoma.fontaneroyeiyei.elements.Recorrido;
 import autonoma.fontaneroyeiyei.elements.Tubo;
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -341,29 +342,32 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
         // Reparar la fuga
         if(evt.getKeyChar() == 'l' || evt.getKeyChar() == 'L' ||
-           evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
+            evt.getKeyChar() == 's' || evt.getKeyChar() == 'S') {
 
-            juego.setFontanero(f);
+             juego.setFontanero(f);
 
+             try {
+                 boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
 
-            boolean reparo = juego.manejarTecla(evt.getKeyChar(), juego.getCasaNivel1().getTubos());
+                 if (reparo) {
+                     juego.getCasaNivel1().repararTubo();
+                     if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
+                         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
+                         nivelCompletado();
+                     }
+                 }
+             } catch (HerramientaInvalidaException ex) {
+               
+                  JOptionPane.showMessageDialog(null, ex.getMessage(), "Herramienta Inválida", JOptionPane.ERROR_MESSAGE);
+             }
+         }
 
-            if (reparo) {
-                juego.getCasaNivel1().repararTubo();
-                 if (juego.getCasaNivel1().getTubosReparados() == juego.getCasaNivel1().getMaxTubos()) {
-                  reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoGanado.wav");
-                  nivelCompletado();
-                }
-
-            }
-    }
 
     this.repaint();
         
     }
     
     private void perderJuego() {
-        
         if (dialogoMostrado) return;
         dialogoMostrado = true;
 
@@ -376,7 +380,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 Object[] opciones = {"Volver a Intentar", "Volver al Menú"};
                 int seleccion = JOptionPane.showOptionDialog(
                         VentanaNivel1.this,
-                        "¡El juego terminó antes de tiempo! ¿Qué deseas hacer?",
+                        "¡El juego terminó ! ¿Qué deseas hacer?",
                         "Fin del Juego",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,
@@ -386,22 +390,32 @@ public class VentanaNivel1 extends javax.swing.JDialog {
                 );
 
                 if (seleccion == 0) {
-                    ArrayList<Casa> nuevaListaCasas = new ArrayList<>();
-                    nuevaListaCasas.add(new Casa(700, 700, 1));
-                    GestorJuego nuevoJuego = new GestorJuego(nuevaListaCasas);
+                   
+                    juego.reiniciarNivelActual(); 
 
                     detenerSonido();
                     dispose();
+<<<<<<< HEAD
                     VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, f);
                    
+=======
+
+                    // Reabre la misma ventana con el mismo gestor y jugador
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, juego, nombreJugador);
+>>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
                     nuevaVentana.setVisible(true);
+
                 } else {
                     detenerSonido();
+<<<<<<< HEAD
                     dispose(); 
+=======
+                    dispose();
+
+>>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
                     Frame miFrame = new Frame();
                     boolean esModal = true;
-
-                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true); 
+                    new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);
                 }
             }
         });
@@ -409,6 +423,7 @@ public class VentanaNivel1 extends javax.swing.JDialog {
         timerGameOver.setRepeats(false);
         timerGameOver.start();
     }
+
     
     private void iniciarReloj() {
         timerReloj = new Timer(1000, new ActionListener() {

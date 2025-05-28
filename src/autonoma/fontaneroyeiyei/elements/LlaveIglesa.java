@@ -1,5 +1,6 @@
 package autonoma.fontaneroyeiyei.elements;
 
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,8 +21,9 @@ public class LlaveIglesa extends Herramienta {
     @Override
     public void usarEn(Tubo tubo) {
         if (!(tubo instanceof TuboConFuga)) {
-            System.out.println("La llave inglesa solo funciona en tubos con fuga");
-            return;
+            throw new HerramientaInvalidaException("La llave inglesa solo funciona en tubos con fuga");
+    
+    
         }
         
         TuboConFuga tuboConFuga = (TuboConFuga) tubo;
@@ -41,7 +43,8 @@ public class LlaveIglesa extends Herramienta {
                 // Cambiar imagen del tubo a reparado
                 cambiarImagenTuboReparado(tuboConFuga);
             } else {
-                System.out.println("La llave inglesa no puede reparar " + fuga.getTipo() + ". Necesitas sellador.");
+               throw new HerramientaInvalidaException("La llave inglesa no puede reparar " + fuga.getTipo() + ". Necesitas sellador.");
+
             }
         }
     }

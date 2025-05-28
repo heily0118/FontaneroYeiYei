@@ -4,6 +4,7 @@
  */
 package autonoma.fontaneroyeiyei.elements;
 
+import autonoma.fontaneroyeiyei.exceptions.HerramientaInvalidaException;
 import javax.swing.ImageIcon;
 
 /**
@@ -23,8 +24,8 @@ public class Sellador extends Herramienta {
     @Override
     public void usarEn(Tubo tubo) {
         if (!(tubo instanceof TuboConFuga)) {
-            System.out.println("El sellador solo funciona en tubos con fuga");
-            return;
+             throw new HerramientaInvalidaException();
+        
         }
         
         TuboConFuga tuboConFuga = (TuboConFuga) tubo;
@@ -44,7 +45,8 @@ public class Sellador extends Herramienta {
                 // Cambiar imagen del tubo a reparado
                 cambiarImagenTuboReparado(tuboConFuga);
             } else {
-                System.out.println("El sellador no puede reparar " + fuga.getTipo() + ". Necesitas llave inglesa.");
+                throw new HerramientaInvalidaException("El sellador no puede reparar " + fuga.getTipo() + ". Necesitas llave inglesa.");
+        
             }
         }
     }
