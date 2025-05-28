@@ -75,15 +75,15 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
            
             // Inicializar labelInfoJugador 
             String nombreJugador = juego.getNombreJugador();
-            int puntajeGlobal = juego.getPuntaje().getPuntajeGlobal();
 
-            labelInfoJugador = new JLabel("Jugador: " + nombreJugador + "  |  Puntaje global: " + puntajeGlobal);
+
+            labelInfoJugador = new JLabel("Jugador: " + nombreJugador );
             labelInfoJugador.setFont(new Font("Arial", Font.BOLD, 18));
             labelInfoJugador.setForeground(Color.WHITE);
             labelInfoJugador.setBorder(new LineBorder(Color.WHITE, 2));
             labelInfoJugador.setOpaque(true);
             labelInfoJugador.setBackground(new Color(0, 0, 0, 150));  // Fondo negro semitransparente
-            labelInfoJugador.setBounds(280, 10, 320, 30);
+            labelInfoJugador.setBounds(280, 10,200 , 30);
 
 
 
@@ -219,15 +219,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-      /**
-     * Método para actualizar el puntaje global mostrado en el JLabel
-     */
-    public void actualizarPuntajeGlobal() {
-        String nombreJugador = juego.getNombreJugador();
-        int puntajeGlobal = juego.getPuntajeGlobal();
 
-        labelInfoJugador.setText("Jugador: " + nombreJugador + "  |  Puntaje global: " + puntajeGlobal);
-    }
     
     public void detenerSonido() {
         if (clip != null) {
