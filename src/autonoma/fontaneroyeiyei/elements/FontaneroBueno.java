@@ -98,20 +98,19 @@ public class FontaneroBueno extends Sprite {
 
     }
 
-<<<<<<< HEAD
+
     public void setVida(int vida) {
         this.vida = vida;
     }
 
     
     
-=======
+
     /**
      * Establece el puntaje actual del fontanero.
      * 
      * @param puntaje Es el objeto Puntaje que se asignará al fontanero.
      */
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
     public void setPuntaje(Puntaje puntaje) {
         this.puntaje = puntaje;
     }
@@ -181,10 +180,6 @@ public class FontaneroBueno extends Sprite {
 
         boolean hayColision = false;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
         if (!saltando) {
             HitBox hitBoxFuturo = new HitBox(nx, ny, this.width, this.height);
             for (HitBox h : hitBoxs) {
@@ -536,9 +531,7 @@ public class FontaneroBueno extends Sprite {
      * 
      * @param vida Es la nueva cantidad de vida.
      */
-    public void setVida(int vida) {
-        this.vida = vida;
-    }    
+   
     
 }
 

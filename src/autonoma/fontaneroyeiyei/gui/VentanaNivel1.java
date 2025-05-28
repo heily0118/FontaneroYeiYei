@@ -395,24 +395,17 @@ public class VentanaNivel1 extends javax.swing.JDialog {
 
                     detenerSonido();
                     dispose();
-<<<<<<< HEAD
-                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, nuevoJuego, f);
-                   
-=======
+                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, juego, f);
+
 
                     // Reabre la misma ventana con el mismo gestor y jugador
-                    VentanaNivel1 nuevaVentana = new VentanaNivel1(null, true, juego, nombreJugador);
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
+
                     nuevaVentana.setVisible(true);
 
                 } else {
                     detenerSonido();
-<<<<<<< HEAD
                     dispose(); 
-=======
-                    dispose();
 
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
                     Frame miFrame = new Frame();
                     boolean esModal = true;
                     new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);

@@ -417,23 +417,14 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     detenerSonido();
                     dispose();
 
-<<<<<<< HEAD
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, nuevoJuego, f);
+
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, f);
                   
-                    nuevaVentana.setVisible(true); 
-                } else {
-                    detenerSonido();
-                    dispose(); 
-=======
-                    // Reabre la misma ventana con el mismo gestor y jugador
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, nombreJugador);
                     nuevaVentana.setVisible(true);
 
                 } else {
                     detenerSonido();
                     dispose();
-
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
                     Frame miFrame = new Frame();
                     boolean esModal = true;
                     new VentanaInformacionJuego(miFrame, esModal, juego).setVisible(true);

@@ -154,10 +154,7 @@ public class VentanaInformacionJuego extends javax.swing.JDialog {
             botonNivel2.setEnabled(nivelActual >= 2);
             botonNivel3.setEnabled(nivelActual >= 3);
 
-<<<<<<< HEAD
-=======
-           
->>>>>>> 9627bfbb0336a7324be57defc127e6db116b43ec
+
            // Acciones botones con sonido detenido
             botonNivel1.addActionListener(e -> {
                 detenerSonido();  
