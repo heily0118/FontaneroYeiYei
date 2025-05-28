@@ -60,19 +60,18 @@ public class VentanaNivel3 extends javax.swing.JDialog {
     private boolean dialogoMostrado = false;
     private String nombreJugador;
     
-    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador ) {
+    public VentanaNivel3(java.awt.Frame parent, boolean modal, GestorJuego juego, FontaneroBueno fontanero) {
         super(parent, modal);
         initComponents();
+
          reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
         
-        this.nombreJugador = nombreJugador;
-        this.f = new FontaneroBueno("nombreJugador");
-        
-        Casa casaNivel3= juego.getCasaNivel3(); 
-        setTitle("FontaneroYeiYei Nivel 3");
-        setLocationRelativeTo(null);
-        setResizable(false);
+        ///se va indicar la siguientes posiciones para ej jugador
+       
+        this.f = fontanero;
+        this.juego.getCasaNivel2().setTubosReparados(0);
+        this.f.setVida(3);
 
 
         this.setSize(700,700);
@@ -161,7 +160,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     ///codigo temporar
                     
                      f.paint(g);
-                     casaNivel3.paint(g); 
+                     juego.getCasaNivel3().paint(g); 
 //                    Para pintar el los bloques de hitboxs
 //                    for(HitBox h : hitBoxs){                
 //                        h.paint(g);
@@ -245,7 +244,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     g3d.drawString(textoVidas, xV, yV);
                     
                     
-                    if (f.TocoSerpiente(casaNivel3.getServientes())) {
+                    if (f.TocoSerpiente(juego.getCasaNivel3().getServientes())) {
 
                         FontMetrics fm = g3d.getFontMetrics();
                         String mensaje = "¡Fue golpeado!";
@@ -415,7 +414,7 @@ public class VentanaNivel3 extends javax.swing.JDialog {
                     dispose();
 
                     // Reabre la misma ventana con el mismo gestor y jugador
-                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, nombreJugador);
+                    VentanaNivel3 nuevaVentana = new VentanaNivel3(null, true, juego, juego.getFontanero());
                     nuevaVentana.setVisible(true);
 
                 } else {

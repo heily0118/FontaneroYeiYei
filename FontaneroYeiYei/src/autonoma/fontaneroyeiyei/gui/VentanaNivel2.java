@@ -60,15 +60,19 @@ public class VentanaNivel2 extends javax.swing.JDialog {
     private boolean dialogoMostrado = false;
     private String nombreJugador;
     
-    public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego, String nombreJugador ) {
+        public VentanaNivel2(java.awt.Frame parent, boolean modal, GestorJuego juego, FontaneroBueno fontanero) {
         super(parent, modal);
         initComponents();
-        
-        reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
+
+         reproducirSonido("/autonoma/fontaneroyeiyei/sounds/sonidoJuego.wav");
         this.juego = juego;
-        this.nombreJugador = nombreJugador;
         
-        this.f = new FontaneroBueno("teo");
+        ///se va indicar la siguientes posiciones para ej jugador
+       
+        this.f = fontanero;
+        this.juego.getCasaNivel2().setTubosReparados(0);
+            
+        this.f.setVida(3);
         
         Casa casaNivel2 = juego.getCasaNivel2(); 
         setTitle("FontaneroYeiYei Nivel 2");
@@ -124,8 +128,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
         
         
         System.out.println("----------nivel 2---------");
-        System.out.println("----------malo tamanio---------");
-        System.out.println(juego.getCasaNivel2().getFontaneroMalo().getWidth());
+        System.out.println("cantidad de tubos buenos "+ juego.getCasaNivel2().getTubosReparados());
         juego.getCasaNivel2().getFontaneroMalo().setRecorridos(recorridos);
         
         Thread hiloFontanero = new Thread(juego.getCasaNivel2().getFontaneroMalo());
@@ -392,7 +395,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
                     dispose();
 
                     // Reabre la misma ventana con el mismo gestor y jugador
-                    VentanaNivel2 nuevaVentana = new VentanaNivel2(null, true, juego, nombreJugador);
+                    VentanaNivel2 nuevaVentana = new VentanaNivel2(null, true, juego, juego.getFontanero());
                     nuevaVentana.setVisible(true);
 
                 } else {
@@ -479,7 +482,7 @@ public class VentanaNivel2 extends javax.swing.JDialog {
            
             dispose(); 
            
-            new VentanaNivel3(null, true, juego, nombreJugador).setVisible(true);
+            new VentanaNivel3(null, true, juego, juego.getFontanero()).setVisible(true);
         } else {
             dispose(); 
             new VentanaInformacionJuego(new Frame(), true, juego).setVisible(true);
