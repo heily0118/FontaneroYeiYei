@@ -361,6 +361,11 @@ public class Casa {
     hiloFontanero.start();
 }
 
+    public void setTubosReparados(int tubosReparados) {
+        this.tubosReparados = tubosReparados;
+    }
+
+  
 
 
 }
