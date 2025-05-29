@@ -57,7 +57,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             };
             panelFondo.setLayout(null);
             JButton botonJugar = new JButton("JUGAR");
-            botonJugar.setBounds(300, 375, 150, 50);
+            botonJugar.setBounds(275, 500, 150, 50);
             estiloBoton(botonJugar);  //  Aplicar estilo
             botonJugar.addActionListener(e -> {
                 
@@ -137,6 +137,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
      
       boton.setFocusPainted(false);
+      
+      
   }
 
 
@@ -160,6 +162,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             clip.close();
         }
     }
+    
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
